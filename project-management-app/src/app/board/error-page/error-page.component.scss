@@ -11,26 +11,25 @@
   justify-content: center;
   align-items: center;
 
-      &__btn-home {
-      width: 5rem;
-      margin: 2rem 0 5rem 0;
-      }
+  &__btn-home {
+    width: 5rem;
+    margin: 2rem 0 5rem 0;
+  }
 
-     &__icon-home  {
+  &__icon-home {
     color: yellow;
     font-size: 2rem;
+  }
 
+  &__content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
 
-    }
+  }
 
-    &__content {
-      display: flex;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-
-    }
-  &__icon{
+  &__icon {
     color: yellow;
   }
 
@@ -39,15 +38,14 @@
     font-size: 2rem;
     line-height: 2.5rem;
 
-    &_error{
+    &_error {
       margin-bottom: 1rem;
     }
 
   }
 
 }
+
 .mat-focus-indicator {
   margin-bottom: 7rem;
 }
-
-
