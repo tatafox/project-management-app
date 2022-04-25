@@ -9,6 +9,6 @@ import { BoardRoutingModule } from './board-routing.module';
 @NgModule({
   declarations: [MainPageComponent, ErrorPageComponent, BoardsPageComponent],
   imports: [CommonModule, BoardRoutingModule, MaterialModule],
-  exports: [MainPageComponent],
+  exports: [],
 })
 export class BoardModule {}
