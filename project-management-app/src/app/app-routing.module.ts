@@ -5,7 +5,7 @@ import { ErrorPageComponent } from './board/pages/error-page/error-page.componen
 const routes: Routes = [
   { path: '', redirectTo: '/main', pathMatch: 'full' },
   {
-    path: 'auth',
+    path: 'admin',
     loadChildren: () => import('./auth/auth.module').then((m) => m.AuthModule),
   },
   {

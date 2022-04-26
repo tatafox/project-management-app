@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { NgForm } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { IUserSignUp } from 'src/app/shared/user-models';
-import { UserAuthServiceService } from '../../services/user-auth-service.service';
+import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +18,7 @@ export class SignUpComponent implements OnInit {
     password: 'Password',
     submit: 'Sign up',
   };
+  /*---------------------*/
 
   public user: IUserSignUp = {
     name: '',
@@ -25,23 +26,38 @@ export class SignUpComponent implements OnInit {
     password: '',
   };
 
-  receivedUser: IUserSignUp | undefined; // полученный пользователь
+  public hide: boolean = false;
 
-  done: boolean = false;
+  receivedUser: IUserSignUp | undefined; // полученный пользователь
+  /*-------------------------*/
+
+  private isSignup: boolean = true;
+
+  public formSignUp: FormGroup;
 
   constructor(private authService: UserAuthServiceService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.formSignUp = new FormGroup({
+      name: new FormControl('', [Validators.required, Validators.minLength(2)]),
+      login: new FormControl('', [
+        Validators.required,
+        Validators.minLength(4),
+      ]),
+      password: new FormControl('', [Validators.required]),
+    });
+  }
 
-  submitNewUser(form: NgForm) {
-    console.log(form);
+  submitNewUser() {
+    this.isSignup = true;
+    console.log(this.formSignUp.value, this.isSignup);
   }
 
   submit(user: IUserSignUp) {
     this.authService.postDataUser(user).subscribe(
       (data: any) => {
         this.receivedUser = data;
-        this.done = true;
+        this.isSignup = true;
       },
       (error) => console.log(error),
     );

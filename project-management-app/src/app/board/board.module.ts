@@ -13,8 +13,6 @@ import { ColumnItemComponent } from './components/board/column-item/column-item.
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
 
-function BoardsComponent() {}
-
 @NgModule({
   declarations: [
     MainPageComponent,
