@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { IUserSignUp } from 'src/app/shared/interfaces';
+import { IUserSignUp } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/user-auth-service.service';
 
 @Component({
@@ -15,12 +15,13 @@ export class SignUpComponent implements OnInit {
     name: 'Name',
     login: 'Login',
     password: 'Password',
+    submit: 'Sign up',
   };
 
   public user: IUserSignUp = {
-    name: 'Vasya',
-    login: 'user001',
-    password: 'userpass@123',
+    name: '',
+    login: '',
+    password: '',
   };
 
   receivedUser: IUserSignUp | undefined; // полученный пользователь
