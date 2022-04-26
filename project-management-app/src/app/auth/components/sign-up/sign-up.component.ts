@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { NgForm } from '@angular/forms';
 import { IUserSignUp } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/user-auth-service.service';
 
@@ -31,6 +32,10 @@ export class SignUpComponent implements OnInit {
   constructor(private authService: UserAuthServiceService) {}
 
   ngOnInit(): void {}
+
+  submitNewUser(form: NgForm) {
+    console.log(form);
+  }
 
   submit(user: IUserSignUp) {
     this.authService.postDataUser(user).subscribe(

@@ -2,22 +2,23 @@
 <div class="signup-box">
 
   <p class="sugnup-box__info">{{titles.describe}}</p>
-  <form class="signup-form">
+  <form class="signup-form" #formNewUser="ngForm" (ngSubmit)="submitNewUser(formNewUser)">
     <mat-form-field appearance="fill">
       <mat-label>{{titles.name}}</mat-label>
-      <input matInput>
+      <input matInput ngModel name="name" required="">
       <mat-error></mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>{{titles.login}}</mat-label>
-      <input matInput>
+      <input matInput ngModel name="login" required="" email>
       <mat-error></mat-error>
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>{{titles.password}}</mat-label>
-      <input matInput>
+      <input matInput ngModel name="password" required="" type="password">
       <mat-error></mat-error>
     </mat-form-field>
-    <button class="signup-form__btn" mat-raised-button color="000000">{{titles.submit}}</button>
+    <button class="signup-form__btn" mat-raised-button color="000000" type="submit"
+      [disabled]="!formNewUser.valid">{{titles.submit}}</button>
   </form>
 </div>
