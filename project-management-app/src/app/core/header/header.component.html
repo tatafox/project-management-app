@@ -1,0 +1,25 @@
+<section class="header">
+  <div class="wrapper">
+    <div class="header-box">
+      <ul class="header-content">
+        <li class="header-content__search">
+          <mat-form-field class="example-full-width" appearance="fill">
+            <mat-label>Search board</mat-label>
+            <input class="header-content__input" matInput placeholder="..." autocomplete="off">
+          </mat-form-field>
+        </li>
+        <li class="header-content__btn">
+          <button class="header-content__btn_btn" mat-stroked-button>Create new board</button>
+        </li>
+      </ul>
+      <div class="header-menu">
+        <button mat-button [matMenuTriggerFor]="menu">Profile</button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>edit profile</button>
+          <button mat-menu-item>logout</button>
+        </mat-menu>
+        <img class="header-content__menu_icon" src="../../../assets/icons/icon.svg" alt="user icon">
+      </div>
+    </div>
+  </div>
+</section>

@@ -8,6 +8,7 @@ import { MatButtonToggleModule } from '@angular/material/button-toggle';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 
 const modules = [
   MatInputModule,
@@ -18,6 +19,7 @@ const modules = [
   MatCardModule,
   MatProgressBarModule,
   MatDividerModule,
+  MatMenuModule,
 ];
 
 @NgModule({

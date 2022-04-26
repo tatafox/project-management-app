@@ -1,12 +1,21 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MaterialModule } from '../material/material.module';
+import { AdminPageComponent } from './admin-page/admin-page.component';
 
-
+const routes: Routes = [{ path: '', component: AdminPageComponent }];
 
 @NgModule({
-  declarations: [],
+  declarations: [AdminPageComponent],
   imports: [
-    CommonModule
-  ]
+    CommonModule,
+    FormsModule,
+    MaterialModule,
+    ReactiveFormsModule,
+    RouterModule.forChild(routes),
+  ],
+  exports: [AdminPageComponent, RouterModule],
 })
-export class AuthModule { }
+export class AuthModule {}
