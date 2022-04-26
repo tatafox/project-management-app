@@ -14,7 +14,7 @@
       <mat-label>{{titles.password}}</mat-label>
       <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
         pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$">
-      <mat-icon style="width: 0em;margin-left: -1rem;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+      <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
         'visibility'}}</mat-icon>
       <mat-error *ngIf="formLogIn.controls['password'].errors?.['required']">Please, enter a password</mat-error>
       <mat-error *ngIf="formLogIn.controls['password'].invalid">
