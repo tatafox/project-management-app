@@ -76,7 +76,9 @@
             },
             "development": {
               "browserTarget": "project-management-app:build:development"
-            }
+            },
+            "options":{"proxyConfig": "proxy.conf.json"}
+
           },
           "defaultConfiguration": "development"
         },

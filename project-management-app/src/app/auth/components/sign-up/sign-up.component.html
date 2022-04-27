@@ -4,7 +4,7 @@
     <h2 class="signup-box__title">{{titles.headTitle}}</h2>
     <mat-form-field appearance="fill">
       <mat-label>{{titles.name}}</mat-label>
-      <input matInput required formControlName="name" name="name" id="name">
+      <input matInput required formControlName="name">
       <mat-error *ngIf="formSignUp.controls['name'].hasError('required')">
         Please, enter your name
       </mat-error>
@@ -22,9 +22,11 @@
     </mat-form-field>
     <mat-form-field appearance="fill">
       <mat-label>{{titles.password}}</mat-label>
-      <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
-        pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$">
-      <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off' :
+      <input matInput formControlName="password" required type="password" [type]="hidePassword ? 'password' : 'text'"
+        pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
+        autocomplete="on">
+      <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hidePassword = !hidePassword">{{hidePassword
+        ? 'visibility_off' :
         'visibility'}}</mat-icon>
       <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']">Please, enter a password</mat-error>
       <mat-error *ngIf="formSignUp.controls['password'].invalid">
@@ -37,4 +39,5 @@
     <button class=" signup-form__btn" mat-raised-button color="000000" type="submit"
       [disabled]="!formSignUp.valid">{{titles.submit}}</button>
   </form>
+  <button (click)="getUsers()">click</button>
 </div>
