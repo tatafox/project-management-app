@@ -18,6 +18,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
     name: 'Name',
     login: 'Login',
     password: 'Password',
+    repeat: 'Repeat the password',
     submit: 'Sign up',
   };
 
