@@ -13,3 +13,11 @@ body {
   margin: 0 auto;
   padding: 0 1rem;
 }
+
+button.mat-flat-button {
+  &.btn_dark {
+    &:hover {
+      background: #000000;
+    }
+  }
+}

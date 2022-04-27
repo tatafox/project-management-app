@@ -1,7 +1,10 @@
+@import "../../../../styles";
+
 .footer {
-  background-color: black;
+  background-color: $accent-color;
   padding: 20px 0;
 }
+
 .footer-content {
   display: flex;
   flex-direction: row;
@@ -20,7 +23,6 @@
       }
     }
   }
-
 }
 
 .list-dev {
@@ -28,8 +30,11 @@
   flex-direction: row;
   gap: 1.5rem;
 
-
   &__link{
     color: white;
+
+    &:hover {
+      opacity: .6;
+    }
   }
 }
