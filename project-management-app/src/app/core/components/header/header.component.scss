@@ -3,20 +3,25 @@
 .header {
   height: 120px;
   padding: 0.5rem;
-  background: linear-gradient($primary-color, #ffedb4);
+  background: $primary-color;
 }
 
 .header-box {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 1rem;
+  gap: 6rem;
   height: 100%;
+}
+
+mat-form-field {
+  margin-top: 20px;
 }
 
 .header-content{
   display: flex;
   align-items: center;
+  justify-content: space-between;
   width: 70%;
   gap: 1rem;
 
@@ -28,6 +33,7 @@
   &__menu_icon {
     width: 2rem;
     height: 2rem;
+    margin-left: 10px;
   }
 
   &__btn_btn{
