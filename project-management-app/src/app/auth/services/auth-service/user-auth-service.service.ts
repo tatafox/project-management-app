@@ -1,5 +1,4 @@
-import { HttpClient } from '@angular/common/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
 import { catchError, map, Observable, tap } from 'rxjs';
@@ -53,7 +52,7 @@ export class UserAuthServiceService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        authorization: 'Bearer ' + this.token,
+        authorization: `Bearer ${this.token}`,
       }),
     };
     console.log(httpOptions);

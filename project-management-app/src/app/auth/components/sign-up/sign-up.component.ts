@@ -68,7 +68,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
       .subscribe(
         () => {
           console.log('ok - user SignUp');
-          // this.router.navigate(['/main']);
+          this.router.navigate(['/login']);
         },
         (error) => console.log(error),
       );

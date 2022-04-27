@@ -9,7 +9,11 @@ import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserAuthServiceService } from './services/auth-service/user-auth-service.service';
 
-const routes: Routes = [{ path: '', component: AdminPageComponent }];
+const routes: Routes = [
+  { path: '', component: AdminPageComponent },
+  { path: 'signup', component: SignUpComponent },
+  { path: 'login', component: LoginComponent },
+];
 
 @NgModule({
   declarations: [AdminPageComponent, LoginComponent, SignUpComponent],
@@ -21,7 +25,7 @@ const routes: Routes = [{ path: '', component: AdminPageComponent }];
     RouterModule.forChild(routes),
     HttpClientModule,
   ],
-  exports: [AdminPageComponent, RouterModule],
+  exports: [RouterModule, AdminPageComponent, SignUpComponent, LoginComponent],
   providers: [UserAuthServiceService],
 })
 export class AuthModule {}

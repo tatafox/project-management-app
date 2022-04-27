@@ -1,4 +1,16 @@
 @import './../../../../styles.scss';
+.auth-page {
+  display: flex;
+  flex-direction: column;
+  height: 77vh;
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+}
 
 .signup-box {
   display: flex;

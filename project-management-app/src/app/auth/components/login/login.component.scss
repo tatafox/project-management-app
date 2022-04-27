@@ -1,5 +1,18 @@
 @import './../../../../styles.scss';
 
+.login-page {
+  display: flex;
+  flex-direction: column;
+  height: 77vh;
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+}
+
 .login-box {
   display: flex;
   flex-direction: column;

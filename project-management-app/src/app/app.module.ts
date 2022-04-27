@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { BoardModule } from './board/board.module';
 import { MaterialModule } from './material/material.module';
+import { AuthModule } from './auth/auth.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,6 +19,7 @@ import { MaterialModule } from './material/material.module';
     CoreModule,
     BoardModule,
     HttpClientModule,
+    AuthModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
