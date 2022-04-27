@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -21,7 +22,7 @@ export class LoginComponent implements OnInit {
 
   public hide: boolean = false;
 
-  constructor() {}
+  constructor(private router: Router) {}
 
   ngOnInit(): void {
     this.formLogIn = new FormGroup({
@@ -34,6 +35,7 @@ export class LoginComponent implements OnInit {
   }
 
   logInUser() {
+    this.router.navigate(['/main']);
     console.log(this.formLogIn);
   }
 }
