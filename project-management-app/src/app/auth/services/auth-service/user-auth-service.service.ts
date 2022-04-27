@@ -1,14 +1,15 @@
 import { HttpClient } from '@angular/common/http';
+import { HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
 import { catchError, map, Observable, tap } from 'rxjs';
-import { IUserSignUp } from 'src/app/shared/user-models';
+import { IUserSignIn, IUserSignUp } from 'src/app/shared/user-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserAuthServiceService {
-  private URL = 'http://localhost:4200/api';
+  private URL = '/api';
 
   private errorMessage = '';
 
@@ -18,9 +19,18 @@ export class UserAuthServiceService {
 
   postDataUser(user: IUserSignUp): Observable<any> {
     return this.http.post(`${this.URL}/signup`, user).pipe(
-      tap(() => {
-        localStorage.setItem('reg-token', this.token);
-        this.setToken(this.token);
+      tap((data: any) => {
+        localStorage.setItem('token', data.token);
+        this.setToken(data.token);
+      }),
+    );
+  }
+
+  signInUser(user: IUserSignIn): Observable<any> {
+    return this.http.post(`${this.URL}/signin`, user).pipe(
+      tap((data: any) => {
+        localStorage.setItem('token', data.token);
+        this.setToken(data.token);
       }),
     );
   }
@@ -40,7 +50,14 @@ export class UserAuthServiceService {
 
   /*------*/
   getUsers(): Observable<any> {
-    return this.http.get(`${this.URL}/users`).pipe(
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        authorization: 'Bearer ' + this.token,
+      }),
+    };
+    console.log(httpOptions);
+    return this.http.get(`${this.URL}/users`, httpOptions).pipe(
       map((data: any) => {
         const usersList = data;
         console.log(usersList);
