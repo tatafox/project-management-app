@@ -1,10 +1,10 @@
 <div class="auth-page section">
   <div class="wrapper">
     <div class="signup-box">
-      <p class="signup-box__info">{{titles.describe}}</p>
       <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="submitNewUser()">
         <h2 class="signup-box__title">{{titles.headTitle}}</h2>
-        <mat-form-field appearance="fill">
+        <p class="signup-box__info">{{titles.describe}}</p>
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>{{titles.name}}</mat-label>
           <input matInput required formControlName="name">
           <mat-error *ngIf="formSignUp.controls['name'].hasError('required')">
@@ -14,7 +14,7 @@
             Your name must have min 2 elements
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>{{titles.login}}</mat-label>
           <input matInput required formControlName="login">
           <mat-error *ngIf="formSignUp.controls['login'].errors?.['required']">Please, enter your login</mat-error>
@@ -22,7 +22,7 @@
             Your login must have min 4 elements
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>{{titles.password}}</mat-label>
           <input matInput formControlName="password" required type="password"
             [type]="!hidePassword ? 'password' : 'text'"
@@ -40,7 +40,7 @@
             numbers
           </mat-error>
         </mat-form-field>
-        <mat-form-field appearance="fill">
+        <mat-form-field appearance="outline" color="accent">
           <mat-label>{{titles.repeat}}</mat-label>
           <input matInput formControlName="password" required type="password"
             [type]="hidePassword ? 'password' : 'text'"
@@ -58,8 +58,7 @@
             numbers
           </mat-error>
         </mat-form-field>
-        <button class=" signup-form__btn" mat-raised-button color="000000" type="submit" [disabled]="!formSignUp.valid"
-          routerLink="">{{titles.submit}}</button>
+        <button class=" signup-form__btn" mat-raised-button color="accent" type="submit" [disabled]="!formSignUp.valid">{{titles.submit}}</button>
       </form>
       <button (click)="getUsers()">click</button>
     </div>

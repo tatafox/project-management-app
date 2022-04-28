@@ -27,9 +27,10 @@ export class BoardsListComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    this.boardService.fetchBoardsList();
+    /*this.boardService.fetchBoardsList();
     this.subscription.push(
       this.boardService.boardList$.subscribe((boards) => {
+      //сохраняем в стор список бордов и убираем ошибку (на случай если она  была до)
         this.store.dispatch(setBoardsList({ boards }));
         const error = null;
         this.store.dispatch(clearError({ error }));
@@ -40,7 +41,7 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         this.store.dispatch(addError({ error }));
         console.log(error);
       }),
-    );
+    );*/
   }
 
   addBoard() {
