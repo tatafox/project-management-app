@@ -19,8 +19,9 @@ export class UserAuthServiceService {
   postDataUser(user: IUserSignUp): Observable<any> {
     return this.http.post(`${this.URL}/signup`, user).pipe(
       tap((data: any) => {
-        localStorage.setItem('token', data.token);
-        this.setToken(data.token);
+        console.log(data);
+        localStorage.setItem('id', data.id);
+        // this.setToken(data.token);
       }),
     );
   }

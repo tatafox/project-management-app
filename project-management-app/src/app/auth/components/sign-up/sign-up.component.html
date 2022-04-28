@@ -25,7 +25,7 @@
         <mat-form-field appearance="fill">
           <mat-label>{{titles.password}}</mat-label>
           <input matInput formControlName="password" required type="password"
-            [type]="!hidePassword ? 'password' : 'text'"
+            [type]="hidePassword ? 'password' : 'text'"
             pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
             autocomplete="on">
           <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hidePassword = !hidePassword">
@@ -42,7 +42,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill">
           <mat-label>{{titles.repeat}}</mat-label>
-          <input matInput formControlName="password" required type="password"
+          <input matInput formControlName="repeatPass" required type="password"
             [type]="hidePassword ? 'password' : 'text'"
             pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
             autocomplete="on">
@@ -50,16 +50,12 @@
             {{hidePassword
             ? 'visibility_off' :
             'visibility'}}</mat-icon>
-          <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']">Please, enter a password</mat-error>
-          <mat-error *ngIf="formSignUp.controls['password'].invalid">
-            You password must have lower
-            case, upper case, symbols
-            and
-            numbers
-          </mat-error>
+          <mat-error
+            *ngIf="(formSignUp.controls['password'].errors?.['required']) || (formSignUp.controls['repeatPass']!==formSignUp.controls['password'])">
+            Please, enter a correct password</mat-error>
         </mat-form-field>
-        <button class=" signup-form__btn" mat-raised-button color="000000" type="submit" [disabled]="!formSignUp.valid"
-          routerLink="">{{titles.submit}}</button>
+        <button class=" signup-form__btn" mat-raised-button color="000000" type="submit"
+          [disabled]="!formSignUp.valid">{{titles.submit}}</button>
       </form>
       <button (click)="getUsers()">click</button>
     </div>

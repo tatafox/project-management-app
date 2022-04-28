@@ -30,7 +30,13 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   public formSignUp: FormGroup;
 
-  private users: IUserSignUp[];
+  private users: IUserSignUp[] = [];
+
+  private formForPost: IUserSignUp = {
+    name: '',
+    login: '',
+    password: '',
+  };
 
   constructor(
     private authService: UserAuthServiceService,
@@ -46,6 +52,7 @@ export class SignUpComponent implements OnInit, OnDestroy {
         Validators.minLength(4),
       ]),
       password: new FormControl('', [Validators.required]),
+      repeatPass: new FormControl('', [Validators.required]),
     });
 
     this.route.queryParams.subscribe((params: Params) => {
@@ -63,23 +70,26 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   submitNewUser() {
     this.formSignUp.disable();
+    this.formForPost = {
+      name: this.formSignUp.value.name,
+      login: this.formSignUp.value.login,
+      password: this.formSignUp.value.password,
+    };
     this.isSignup = true;
-    this.subscribe = this.authService
-      .postDataUser(this.formSignUp.value)
-      .subscribe(
-        () => {
-          console.log('ok - user SignUp');
-          this.router.navigate(['/login']);
-        },
-        (error) => console.log(error),
-      );
+    this.subscribe = this.authService.postDataUser(this.formForPost).subscribe(
+      (response: IUserSignUp) => {
+        console.log(response);
+        // this.router.navigate(['/login']);
+      },
+      (error) => console.log(error),
+    );
   }
 
   getUsers() {
-    this.authService.getUsers().subscribe((data: any) => {
-      console.log(data);
-      this.users = data;
-      console.log(this.users);
+    this.authService.getUsers().subscribe((users: IUserSignUp[]) => {
+      console.log(users);
+      this.users = users;
+      console.log(users);
     });
   }
 }
