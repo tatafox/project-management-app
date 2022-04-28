@@ -1,15 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import {
+  addError,
+  clearError,
+  setBoardsList,
+} from '../../../redux/actions/board.actions';
+import { HttpClient } from '@angular/common/http';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../redux/state.models';
+import { BoardService } from '../../services/board.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-boards-list',
   templateUrl: './boards-list.component.html',
-  styleUrls: ['./boards-list.component.scss']
+  styleUrls: ['./boards-list.component.scss'],
 })
-export class BoardsListComponent implements OnInit {
+export class BoardsListComponent implements OnInit, OnDestroy {
+  private subscription: Subscription[] = [];
 
-  constructor() { }
+  constructor(
+    private http: HttpClient,
+    private store: Store<AppState>,
+    private readonly boardService: BoardService,
+  ) {}
 
   ngOnInit(): void {
+    this.boardService.fetchBoardsList();
+    this.subscription.push(
+      this.boardService.boardList$.subscribe((boards) => {
+        this.store.dispatch(setBoardsList({ boards }));
+        const error = null;
+        this.store.dispatch(clearError({ error }));
+      }),
+    );
+    this.subscription.push(
+      this.boardService.error$.subscribe((error) => {
+        this.store.dispatch(addError({ error }));
+        console.log(error);
+      }),
+    );
   }
 
+  ngOnDestroy(): void {
+    this.subscription.forEach((subscribe) => subscribe.unsubscribe());
+  }
 }
