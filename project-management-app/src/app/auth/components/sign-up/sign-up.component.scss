@@ -2,7 +2,7 @@
 .auth-page {
   display: flex;
   flex-direction: column;
-  height: 77vh;
+  padding: 50px 0;
 }
 
 .wrapper {
@@ -17,7 +17,10 @@
   flex-direction: column;
   text-align: start;
   padding: 2rem;
-  background-color: #ffedb4;
+  background-color: #ffffff;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  border-right: 10px solid $primary-color;
+  border-bottom: 9px solid #d19f08;
   border-radius: 1rem;
 
   &__info {

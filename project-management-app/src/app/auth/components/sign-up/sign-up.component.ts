@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserSignUp } from 'src/app/shared/user-models';
+import { IUserSignIn, IUserSignUp } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 
 @Component({
@@ -62,17 +62,16 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   submitNewUser() {
+    console.log(this.formSignUp, this.formSignUp.value);
     this.formSignUp.disable();
     this.isSignup = true;
-    this.subscribe = this.authService
-      .postDataUser(this.formSignUp.value)
-      .subscribe(
-        () => {
-          console.log('ok - user SignUp');
-          this.router.navigate(['/login']);
-        },
-        (error) => console.log(error),
-      );
+    this.authService.fetchRegistration(this.formSignUp.value);
+    this.authService.user$.subscribe((user) => {
+      //тут мы получили юзера, с токеном и т.д.
+      //возможно надо добавить проверку что токен есть
+      console.log(user);
+      this.router.navigate(['/main']);
+    });
   }
 
   getUsers() {

@@ -1,8 +1,9 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
-import { catchError, map, Observable, tap } from 'rxjs';
-import { IUserSignIn, IUserSignUp } from 'src/app/shared/user-models';
+import { catchError, map, Observable, Subject, tap } from 'rxjs';
+import { IUserSignIn, IUserSignUp, IUser } from 'src/app/shared/user-models';
+import { IBoardDetail } from '../../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',
@@ -14,15 +15,15 @@ export class UserAuthServiceService {
 
   private token: string = 'signup';
 
+  public user: IUser;
+  public user$ = new Subject<IUser>();
+
   constructor(private http: HttpClient) {}
 
   postDataUser(user: IUserSignUp): Observable<any> {
-    return this.http.post(`${this.URL}/signup`, user).pipe(
-      tap((data: any) => {
-        localStorage.setItem('token', data.token);
-        this.setToken(data.token);
-      }),
-    );
+    return this.http
+      .post(`${this.URL}/signup`, user)
+      .pipe(tap((data: any) => data));
   }
 
   signInUser(user: IUserSignIn): Observable<any> {
@@ -31,6 +32,31 @@ export class UserAuthServiceService {
         localStorage.setItem('token', data.token);
         this.setToken(data.token);
       }),
+    );
+  }
+
+  fetchRegistration(user: IUserSignUp) {
+    this.postDataUser(user).subscribe(
+      (responce) => {
+        this.user = { ...responce };
+        const userSignIn: IUserSignIn = {
+          login: user.login,
+          password: user.password,
+        };
+        this.signInUser(userSignIn).subscribe(
+          (responce) => {
+            this.user.token = responce.token;
+            this.user$.next(this.user);
+          },
+          (error) => {
+            return error;
+          },
+        );
+        return responce;
+      },
+      (error) => {
+        return error;
+      },
     );
   }
 

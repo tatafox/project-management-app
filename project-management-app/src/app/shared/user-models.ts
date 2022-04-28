@@ -8,3 +8,10 @@ export interface IUserSignIn {
   login: string;
   password: string;
 }
+
+export interface IUser {
+  name: string;
+  login: string;
+  id: string;
+  token: string;
+}
