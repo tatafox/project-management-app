@@ -28,7 +28,7 @@ export class BoardService {
 
   constructor(private http: HttpClient) {}
 
-  public getBoardsList(): Observable<any> {
+  private getBoardsList(): Observable<any> {
     return this.http.get(`/api/boards`, this.httpOptions).pipe(
       // @ts-ignore
       map((data: IBoard[]) => {
@@ -44,9 +44,27 @@ export class BoardService {
     );
   }
 
-  getBoardById(id: string): Observable<IBoardDetail> {
+  private getBoardById(id: string): Observable<IBoardDetail> {
     return this.http
       .get(`/api/boards/${id}`, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public postBoard(title: object): Observable<IBoard> {
+    return this.http
+      .post(`/api/boards`, title, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public deleteBoard(id: string): Observable<IBoard> {
+    return this.http
+      .delete(`/api/boards${id}`, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public updateBoard(board: IBoard): Observable<IBoard> {
+    return this.http
+      .put(`/api/boards/${board.id}`, board.title, this.httpOptions)
       .pipe(map((responce: any) => responce));
   }
 

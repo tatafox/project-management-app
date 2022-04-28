@@ -4,7 +4,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 export const addBoard = createAction(
   'CREATE BOARD',
-  props<{ board: IBoard }>(),
+  props<{ board: IBoardDetail }>(),
 );
 
 export const setBoardsList = createAction(
@@ -17,9 +17,9 @@ export const deleteBoard = createAction(
   props<{ id: string }>(),
 );
 
-export const changeBoard = createAction(
-  'CHANGE BOARD',
-  props<{ board: IBoard }>(),
+export const updateBoard = createAction(
+  'UPDATE BOARD',
+  props<{ board: IBoardDetail }>(),
 );
 
 export const addError = createAction(

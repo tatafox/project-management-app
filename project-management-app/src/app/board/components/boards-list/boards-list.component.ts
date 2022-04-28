@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import {
+  addBoard,
   addError,
   clearError,
   setBoardsList,
@@ -9,6 +10,7 @@ import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
 import { Subscription } from 'rxjs';
+import { IBoardDetail } from '../../../shared/models/board.model';
 
 @Component({
   selector: 'app-boards-list',
@@ -39,6 +41,20 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         console.log(error);
       }),
     );
+  }
+
+  addBoard() {
+    this.boardService
+      .postBoard({ title: 'New board add 9' })
+      .subscribe((response) => {
+        const board: IBoardDetail = {
+          ...response,
+          // @ts-ignore
+          columns: [],
+        };
+        this.store.dispatch(addBoard({ board }));
+        console.log(response, board);
+      });
   }
 
   ngOnDestroy(): void {

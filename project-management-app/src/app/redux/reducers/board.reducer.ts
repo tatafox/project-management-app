@@ -4,17 +4,28 @@ import { BoardState, initialBoardState } from '../state.models';
 
 const reducer = createReducer(
   initialBoardState,
-  on(boardActions.addBoard, (state) => {
-    return { ...state };
+  on(boardActions.addBoard, (state, { board }) => {
+    return { ...state, boards: [...state.boards, board] };
   }),
   on(boardActions.setBoardsList, (state, { boards }) => {
     return { ...state, boards };
   }),
-  on(boardActions.deleteBoard, (state) => {
-    return { ...state };
+  on(boardActions.deleteBoard, (state, { id }) => {
+    return {
+      ...state,
+      boards: state.boards.filter((oldBoard) => {
+        oldBoard.id !== id;
+      }),
+    };
   }),
-  on(boardActions.changeBoard, (state) => {
-    return { ...state };
+  // @ts-ignore
+  on(boardActions.updateBoard, (state, { board }) => {
+    return {
+      ...state,
+      boards: state.boards.map((oldBoard) => {
+        oldBoard.id === board.id ? board : oldBoard;
+      }),
+    };
   }),
   on(boardActions.addError, (state, { error }) => {
     return { ...state, error };
