@@ -12,8 +12,8 @@ import { TaskModalComponent } from './components/modal/task-modal/task-modal.com
 import { ColumnItemComponent } from './components/board/column-item/column-item.component';
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
+import { HttpClientModule } from '@angular/common/http';
 
-function BoardsComponent() {}
 
 @NgModule({
   declarations: [
@@ -28,7 +28,7 @@ function BoardsComponent() {}
     TaskModalComponent,
     BoardsListComponent,
   ],
-  imports: [CommonModule, BoardRoutingModule, MaterialModule],
+  imports: [CommonModule, BoardRoutingModule, MaterialModule, HttpClientModule],
   exports: [],
 })
 export class BoardModule {}

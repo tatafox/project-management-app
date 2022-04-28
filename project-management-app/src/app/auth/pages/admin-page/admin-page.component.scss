@@ -1,73 +1,37 @@
+@import './../../../../styles.scss';
 .auth-page {
   display: flex;
   flex-direction: column;
-  height: 80vh;
 }
+
 .wrapper {
-  display: flex;
-  flex: 1 1 auto;
-  justify-content: center;
-  align-items: center;
-
-
-}
-
-.content {
-  &__title {
-    margin-bottom: 1rem;
-    border-radius: 00.5rem;
-    text-align: center;
-    font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-  }
-}
-
-.auth-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
-  height: 22rem;
-  width: 25rem;
   padding: 2rem;
-  background-color: #F2F2F2;
-
-  &__title {
-    font-size: 2rem;
-    align-self: start;
-
-   }
-
-  &__input {
-    padding: 0.5rem;
-    border-radius: 0.5rem;
-    color:#828282;
-    border: 0.2rem solid #828282a3;
-  }
-
-  &__name,
-  &__password {
-    display: flex;
-    flex-direction: column;
-    margin-left: 0.5rem;
-    margin-bottom: 1rem;
-    color: #828282;
-    font-size: 10px;
-    line-height: 12px;
-  }
-
-  &__btn {
-    align-self: end;
-    width: 6rem;
-    padding: 1rem;
-    margin-top: 2rem;
-    border-radius: 0.5rem;
-    background-color: yellow;
-    color: aliceblue;
-
-  }
-
 }
 
-.auth-form__btn:disabled{
-  background-color:  #2e7de870;
+.buttons {
+  display: flex;
+  margin-left: auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  &__btn{
+    border-radius: 0.5rem;
+    background-color: $accent-color;
+    color: $primary-color;
+  }
 }
+
+.describe {
+  display: flex;
+  flex-direction: column;
+align-items: center;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: 900;
+}
+

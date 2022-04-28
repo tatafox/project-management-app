@@ -1,0 +1,35 @@
+<div class="login-page section">
+  <div class="wrapper">
+    <div class="login-box">
+      <p class="login-box__info">{{titles.describe}}</p>
+      <form class="login-form" [formGroup]="formLogIn" (ngSubmit)="logInUser()">
+        <h2 class="login-box__title">{{titles.headTitle}}</h2>
+        <mat-form-field appearance="fill">
+          <mat-label>{{titles.login}}</mat-label>
+          <input matInput required formControlName="login">
+          <mat-error *ngIf="formLogIn.controls['login'].errors?.['required']">Please, enter your login</mat-error>
+          <mat-error *ngIf="formLogIn.controls['login'].errors?.['minlength']">
+            Your login must have min 4 elements
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+          <mat-label>{{titles.password}}</mat-label>
+          <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
+            pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$">
+          <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">{{hide ? 'visibility_off'
+            :
+            'visibility'}}</mat-icon>
+          <mat-error *ngIf="formLogIn.controls['password'].errors?.['required']">Please, enter a password</mat-error>
+          <mat-error *ngIf="formLogIn.controls['password'].invalid">
+            You password must have lower
+            case, upper case, symbols
+            and
+            numbers
+          </mat-error>
+        </mat-form-field>
+        <button class=" login-form__btn" mat-raised-button color="000000" type="submit"
+          [disabled]="!formLogIn.valid">{{titles.submit}}</button>
+      </form>
+    </div>
+  </div>
+</div>
