@@ -60,7 +60,7 @@ export class UserAuthServiceService {
         return responce;
       },
       (response: Response) => {
-        console.log(response, response.status);
+        console.log(response);
         this.statusError$.next(response.status);
       },
     );
