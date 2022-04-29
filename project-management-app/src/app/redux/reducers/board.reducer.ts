@@ -11,11 +11,15 @@ const reducer = createReducer(
     return { ...state, boards };
   }),
   on(boardActions.deleteBoard, (state, { id }) => {
+    const result = [];
+    for (const board of state.boards) {
+      if (board.id !== id) {
+        result.push(board);
+      }
+    }
     return {
       ...state,
-      boards: state.boards.filter((oldBoard) => {
-        oldBoard.id !== id;
-      }),
+      boards: result,
     };
   }),
   // @ts-ignore

@@ -2,7 +2,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserSignIn, IUserSignUp } from 'src/app/shared/user-models';
+import { IUserSignIn, IUserSignUp } from 'src/app/shared/models/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 
 @Component({

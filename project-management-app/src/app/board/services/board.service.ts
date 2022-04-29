@@ -13,7 +13,6 @@ import { IBoard, IBoardDetail } from '../../shared/models/board.model';
 export class BoardService {
   private httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type': 'application/json',
       authorization:
         'Bearer ' +
         'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mMjgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-DfryVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0',
@@ -44,7 +43,7 @@ export class BoardService {
     );
   }
 
-  private getBoardById(id: string): Observable<IBoardDetail> {
+  public getBoardById(id: string): Observable<IBoardDetail> {
     return this.http
       .get(`/api/boards/${id}`, this.httpOptions)
       .pipe(map((responce: any) => responce));
@@ -58,7 +57,7 @@ export class BoardService {
 
   public deleteBoard(id: string): Observable<IBoard> {
     return this.http
-      .delete(`/api/boards${id}`, this.httpOptions)
+      .delete(`/api/boards/${id}`, this.httpOptions)
       .pipe(map((responce: any) => responce));
   }
 

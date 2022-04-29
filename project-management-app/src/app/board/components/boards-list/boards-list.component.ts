@@ -3,14 +3,18 @@ import {
   addBoard,
   addError,
   clearError,
+  deleteBoard,
   setBoardsList,
 } from '../../../redux/actions/board.actions';
 import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
-import { Subscription } from 'rxjs';
-import { IBoardDetail } from '../../../shared/models/board.model';
+import { Observable, Subscription } from 'rxjs';
+import { IBoard, IBoardDetail } from '../../../shared/models/board.model';
+import { MatDialog } from '@angular/material/dialog';
+import { IConfirmDialog } from '../../../shared/models/general.models';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-boards-list',
@@ -19,18 +23,25 @@ import { IBoardDetail } from '../../../shared/models/board.model';
 })
 export class BoardsListComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
+  public boardsList: IBoardDetail[];
 
   constructor(
     private http: HttpClient,
     private store: Store<AppState>,
     private readonly boardService: BoardService,
+    public dialog: MatDialog,
   ) {}
 
   ngOnInit(): void {
-    /*this.boardService.fetchBoardsList();
+    this.subscription.push(
+      this.store
+        .select((state) => state.boardState.boards)
+        .subscribe((boards) => (this.boardsList = boards)),
+    );
+    this.boardService.fetchBoardsList();
     this.subscription.push(
       this.boardService.boardList$.subscribe((boards) => {
-      //сохраняем в стор список бордов и убираем ошибку (на случай если она  была до)
+        //сохраняем в стор список бордов и убираем ошибку (на случай если она  была до)
         this.store.dispatch(setBoardsList({ boards }));
         const error = null;
         this.store.dispatch(clearError({ error }));
@@ -41,7 +52,7 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         this.store.dispatch(addError({ error }));
         console.log(error);
       }),
-    );*/
+    );
   }
 
   addBoard() {
@@ -60,5 +71,32 @@ export class BoardsListComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscription.forEach((subscribe) => subscribe.unsubscribe());
+  }
+
+  onBoardDetail(board: IBoard, event: MouseEvent) {
+    console.log(board, (event.target as HTMLElement).tagName === 'BUTTON');
+  }
+
+  onDeleteBoard(board: IBoard) {
+    const dialogData: IConfirmDialog = {
+      title: 'Delete board',
+      message:
+        'When you delete board, you also delete columns & tasks. Are you sure?',
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      const result = dialogResult;
+      console.log(result);
+      if (result) {
+        this.boardService.deleteBoard(board.id).subscribe((response) => {
+          this.store.dispatch(deleteBoard({ id: board.id }));
+        });
+      }
+    });
   }
 }
