@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute, Params, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserSignIn, IUserSignUp } from 'src/app/shared/user-models';
+import { IUserSignUp } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 
 @Component({
@@ -32,6 +32,8 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   private users: IUserSignUp[];
 
+  public statusError: number;
+
   constructor(
     private authService: UserAuthServiceService,
     private router: Router,
@@ -48,13 +50,13 @@ export class SignUpComponent implements OnInit, OnDestroy {
       password: new FormControl('', [Validators.required]),
     });
 
-    this.route.queryParams.subscribe((params: Params) => {
-      if (params['signup']) {
-        /* ok */
-      } else if (params['errorSignup']) {
-        // error signup
-      }
-    });
+    // this.route.queryParams.subscribe((params: Params) => {
+    //   if (params['signup']) {
+    //     /* ok */
+    //   } else if (params['errorSignup']) {
+    //     // error signup
+    //   }
+    // });
   }
 
   ngOnDestroy(): void {
@@ -62,19 +64,21 @@ export class SignUpComponent implements OnInit, OnDestroy {
   }
 
   submitNewUser() {
-    console.log(this.formSignUp, this.formSignUp.value);
     this.formSignUp.disable();
     this.isSignup = true;
     this.authService.fetchRegistration(this.formSignUp.value);
     this.authService.user$.subscribe((user) => {
-      //тут мы получили юзера, с токеном и т.д.
-      //возможно надо добавить проверку что токен есть
+      // тут мы получили юзера, с токеном и т.д.
+      // возможно надо добавить проверку что токен есть
       console.log(user);
       this.router.navigate(['/main']);
     });
+    this.authService.statusError$.subscribe((error) => {
+      this.statusError = error;
+    });
   }
 
-  getUsers() {
+  getListUsers() {
     this.authService.getUsers().subscribe((data: any) => {
       console.log(data);
       this.users = data;

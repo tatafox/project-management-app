@@ -58,9 +58,10 @@
             numbers
           </mat-error>
         </mat-form-field>
-        <button class=" signup-form__btn" mat-raised-button color="accent" type="submit" [disabled]="!formSignUp.valid">{{titles.submit}}</button>
+        <button class=" signup-form__btn" mat-raised-button color="accent" type="submit"
+          [disabled]="!formSignUp.valid">{{titles.submit}}</button>
       </form>
-      <button (click)="getUsers()">click</button>
+      <button (click)="getListUsers()">click</button>
     </div>
   </div>
 </div>

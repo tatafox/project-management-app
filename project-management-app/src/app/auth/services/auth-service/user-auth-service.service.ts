@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
 import { catchError, map, Observable, Subject, tap } from 'rxjs';
 import { IUserSignIn, IUserSignUp, IUser } from 'src/app/shared/user-models';
-import { IBoardDetail } from '../../../shared/models/board.model';
+// import { IBoardDetail } from '../../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',
@@ -16,6 +16,11 @@ export class UserAuthServiceService {
   private token: string = 'signup';
 
   public user: IUser;
+
+  public statusError$ = new Subject<number>();
+
+  private message: string = '';
+
   public user$ = new Subject<IUser>();
 
   constructor(private http: HttpClient) {}
@@ -29,8 +34,8 @@ export class UserAuthServiceService {
   signInUser(user: IUserSignIn): Observable<any> {
     return this.http.post(`${this.URL}/signin`, user).pipe(
       tap((data: any) => {
+        console.log(data.token);
         localStorage.setItem('token', data.token);
-        this.setToken(data.token);
       }),
     );
   }
@@ -44,34 +49,43 @@ export class UserAuthServiceService {
           password: user.password,
         };
         this.signInUser(userSignIn).subscribe(
-          (responce) => {
-            this.user.token = responce.token;
+          (data) => {
+            this.user.token = data.token;
             this.user$.next(this.user);
           },
-          (error) => {
-            return error;
+          (response: Response) => {
+            console.log(response);
           },
         );
         return responce;
       },
-      (error) => {
-        return error;
+      (response: Response) => {
+        console.log(response, response.status);
+        this.statusError$.next(response.status);
       },
     );
   }
 
-  setToken(token: string) {
-    this.token = token;
-  }
+  // setStatusError(status: number) {
+  //   this.statusError = status;
+  // }
 
-  getToken(): string {
-    return this.token;
-  }
+  // getStatusError(): number {
+  //   return this.statusError;
+  // }
 
-  logout() {
-    this.setToken('');
-    localStorage.clear();
-  }
+  // setToken(token: string) {
+  //   this.token = token;
+  // }
+
+  // getToken(): string {
+  //   return this.token;
+  // }
+
+  // logout() {
+  //   this.setToken('');
+  //   localStorage.clear();
+  // }
 
   /*------*/
   getUsers(): Observable<any> {
