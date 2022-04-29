@@ -4,11 +4,13 @@
   height: 120px;
   padding: 0.5rem;
   background: $primary-color;
+  position: sticky;
+  top: 0;
 }
 
 .header-box {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   align-items: center;
   gap: 6rem;
   height: 100%;

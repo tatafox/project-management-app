@@ -13,7 +13,7 @@ import { ColumnItemComponent } from './components/board/column-item/column-item.
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
 import { HttpClientModule } from '@angular/common/http';
-
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -28,7 +28,13 @@ import { HttpClientModule } from '@angular/common/http';
     TaskModalComponent,
     BoardsListComponent,
   ],
-  imports: [CommonModule, BoardRoutingModule, MaterialModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    BoardRoutingModule,
+    MaterialModule,
+    HttpClientModule,
+    SharedModule,
+  ],
   exports: [],
 })
 export class BoardModule {}

@@ -2,7 +2,11 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
 import { catchError, map, Observable, Subject, tap } from 'rxjs';
-import { IUserSignIn, IUserSignUp, IUser } from 'src/app/shared/user-models';
+import {
+  IUserSignIn,
+  IUserSignUp,
+  IUser,
+} from 'src/app/shared/models/user-models';
 import { IBoardDetail } from '../../../shared/models/board.model';
 
 @Injectable({

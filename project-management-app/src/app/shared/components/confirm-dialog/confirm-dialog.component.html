@@ -6,7 +6,7 @@
   <p>{{message}}</p>
 </div>
 
-<div mat-dialog-actions>
-  <button mat-button (click)="onDismiss()">No</button>
+<div class="button-wrapper" mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="onDismiss()">No</button>
   <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
 </div>

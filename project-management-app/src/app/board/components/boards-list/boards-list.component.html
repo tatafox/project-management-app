@@ -1,1 +1,11 @@
-<p>boards-list works!</p>
+<div class="main-page">
+  <h1 class="mat-headline">You’ve got
+    <span>4 board</span>
+    today </h1>
+  <ul class="boards-list" *ngFor="let board of boardsList">
+    <li (click)="onBoardDetail(board, $event)">
+      <span>{{board.title}}</span>
+      <button (click)="onDeleteBoard(board)"><mat-icon>delete</mat-icon></button>
+    </li>
+  </ul>
+</div>
