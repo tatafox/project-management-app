@@ -6,7 +6,6 @@ import {
   deleteBoard,
   setBoardsList,
 } from '../../../redux/actions/board.actions';
-import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
@@ -26,7 +25,6 @@ export class BoardsListComponent implements OnInit, OnDestroy {
   public boardsList: IBoardDetail[];
 
   constructor(
-    private http: HttpClient,
     private store: Store<AppState>,
     private readonly boardService: BoardService,
     public dialog: MatDialog,
@@ -53,20 +51,6 @@ export class BoardsListComponent implements OnInit, OnDestroy {
         console.log(error);
       }),
     );
-  }
-
-  addBoard() {
-    this.boardService
-      .postBoard({ title: 'New board add 9' })
-      .subscribe((response) => {
-        const board: IBoardDetail = {
-          ...response,
-          // @ts-ignore
-          columns: [],
-        };
-        this.store.dispatch(addBoard({ board }));
-        console.log(response, board);
-      });
   }
 
   ngOnDestroy(): void {

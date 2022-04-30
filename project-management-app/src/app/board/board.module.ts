@@ -14,6 +14,7 @@ import { TaskItemComponent } from './components/board/task-item/task-item.compon
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     HttpClientModule,
     SharedModule,
+    FormsModule,
   ],
   exports: [],
 })
