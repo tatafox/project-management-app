@@ -15,3 +15,9 @@ export interface IUser {
   id: string;
   token: string;
 }
+
+export interface IGetUser {
+  name: string;
+  login: string;
+  id: string;
+}
