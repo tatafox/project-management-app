@@ -24,11 +24,17 @@ const reducer = createReducer(
   }),
   // @ts-ignore
   on(boardActions.updateBoard, (state, { board }) => {
+    const result = [];
+    for (const item of state.boards) {
+      if (item.id !== board.id) {
+        result.push(item);
+      } else {
+        result.push(board);
+      }
+    }
     return {
       ...state,
-      boards: state.boards.map((oldBoard) => {
-        oldBoard.id === board.id ? board : oldBoard;
-      }),
+      boards: result,
     };
   }),
   on(boardActions.addError, (state, { error }) => {

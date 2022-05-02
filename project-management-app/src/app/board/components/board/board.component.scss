@@ -1,0 +1,33 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.column-list {
+  display: flex;
+  gap: 25px;
+}
+
+.column-item {
+  width: 25%;
+  border-bottom: 1px solid #b7b7b7;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 5px;
+
+    &:last-child {
+      flex-basis: 10%;
+    }
+  }
+
+  mat-icon {
+    margin-top: 5px;
+  }
+}
+
+button.add-column {
+  width: 100%;
+  padding: 5px;
+}

@@ -5,7 +5,7 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { catchError, forkJoin, map, Observable, Subject } from 'rxjs';
-import { IBoard, IBoardDetail } from '../../shared/models/board.model';
+import { IBoard, IBoardDetail, IColumn } from '../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',
@@ -64,6 +64,20 @@ export class BoardService {
   public updateBoard(board: IBoard): Observable<IBoard> {
     return this.http
       .put(`/api/boards/${board.id}`, board.title, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public postColumn(
+    id: string,
+    title: string,
+    order: number,
+  ): Observable<IColumn> {
+    const body = {
+      title: title,
+      order: order,
+    };
+    return this.http
+      .post(`/api/boards/${id}/columns`, body, this.httpOptions)
       .pipe(map((responce: any) => responce));
   }
 

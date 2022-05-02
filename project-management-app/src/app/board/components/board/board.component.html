@@ -1,1 +1,19 @@
-<p>boards works!</p>
+<div class="wrapper">
+  <div class="column-list">
+    <div class="column-item" *ngFor="let column of board.columns">
+      <div class="column-item__wrapper">
+        <span class="column-item__title">{{column.title}}</span>
+        <button mat-button>
+            <mat-icon>add_circle</mat-icon>
+        </button>
+      </div>
+    </div>
+    <div class="column-item">
+      <button mat-button class="add-column" (click)="onEditColumn()">
+        <div class="column-item__wrapper">
+        <span>Add new column</span>
+        <mat-icon>add_circle</mat-icon></div>
+      </button>
+    </div>
+  </div>
+</div>

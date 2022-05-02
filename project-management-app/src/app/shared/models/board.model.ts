@@ -6,7 +6,7 @@ export interface IBoard {
 export interface IBoardDetail {
   id: string;
   title: string;
-  columns: IColumnList;
+  columns: IColumnList[];
 }
 
 export interface IColumn {

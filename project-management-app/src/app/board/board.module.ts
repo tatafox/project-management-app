@@ -36,6 +36,7 @@ import { FormsModule } from '@angular/forms';
     HttpClientModule,
     SharedModule,
     FormsModule,
+    BoardRoutingModule,
   ],
   exports: [],
 })

@@ -14,6 +14,7 @@ import { IBoard, IBoardDetail } from '../../../shared/models/board.model';
 import { MatDialog } from '@angular/material/dialog';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boards-list',
@@ -28,6 +29,7 @@ export class BoardsListComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private readonly boardService: BoardService,
     public dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -58,7 +60,9 @@ export class BoardsListComponent implements OnInit, OnDestroy {
   }
 
   onBoardDetail(board: IBoard, event: MouseEvent) {
-    console.log(board, (event.target as HTMLElement).tagName === 'BUTTON');
+    if ((event.target as HTMLElement).tagName !== 'BUTTON') {
+      this.router.navigate(['main', 'board', board.id]);
+    }
   }
 
   onDeleteBoard(board: IBoard) {
@@ -75,7 +79,6 @@ export class BoardsListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       const result = dialogResult;
-      console.log(result);
       if (result) {
         this.boardService.deleteBoard(board.id).subscribe((response) => {
           this.store.dispatch(deleteBoard({ id: board.id }));
