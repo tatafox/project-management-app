@@ -3,12 +3,12 @@
     <div class="edit-box">
       <button class="edit-box__btn" (click)="adminPage()" mat-raised-button color="000000" type="submit">Home</button>
       <div class="edit-content">
-        <p class="edit-box__info">{{titles.describe}}</p>
+        <p class="edit-content__info">{{titles.describe}}</p>
         <form class="edit-form" [formGroup]="formEdit" (ngSubmit)="editUser()">
           <h2 class="edit-box__title">{{titles.headTitle}}</h2>
           <mat-form-field appearance="fill">
             <mat-label>{{titles.name}}</mat-label>
-            <input matInput required formControlName="name">
+            <input matInput required formControlName="name" [(ngModel)]="nameCurrent">
             <mat-error *ngIf="formEdit.controls['name'].errors?.['required']">Please, enter your name</mat-error>
             <mat-error *ngIf="formEdit.controls['name'].errors?.['minlength']">
               Your name must have min 2 elements
@@ -16,7 +16,7 @@
           </mat-form-field>
           <mat-form-field appearance="fill">
             <mat-label>{{titles.login}}</mat-label>
-            <input matInput required formControlName="login">
+            <input matInput required formControlName="login" [(ngModel)]="loginCurrent">
             <mat-error *ngIf="formEdit.controls['login'].errors?.['required']">Please, enter your login</mat-error>
             <mat-error *ngIf="formEdit.controls['login'].errors?.['minlength']">
               Your login must have min 4 elements
