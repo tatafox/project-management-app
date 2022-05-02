@@ -32,7 +32,7 @@ export class ProtectAuthPagesGuard implements CanActivate {
     if (!this.isIDInLS || !this.isTokenInLS) {
       return true;
     }
-    this.route.navigate(['/main']);
+    this.route.navigate(['/main'], { queryParams: { returnUrl: state.url } });
     return false;
   }
 }

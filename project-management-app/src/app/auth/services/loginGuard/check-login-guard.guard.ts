@@ -31,7 +31,9 @@ export class CheckLoginGuardGuard implements CanActivate {
     if (this.serviceLocSt.getLocalStorage('id', 'token')) {
       return true;
     }
-    this.routers.navigate(['/admin']);
+    this.routers.navigate(['/admin'], {
+      queryParams: { returnUrl: state.url },
+    });
     return false;
   }
 }

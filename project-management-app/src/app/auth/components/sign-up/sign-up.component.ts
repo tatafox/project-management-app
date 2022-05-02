@@ -47,7 +47,11 @@ export class SignUpComponent implements OnInit {
     private dialog: MatDialog,
     private header: HeaderNameService,
     private localSt: LocalStorageService,
-  ) {}
+  ) {
+    if (this.localSt.getLocalStorage('id', 'token')) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
     this.formSignUp = new FormGroup({

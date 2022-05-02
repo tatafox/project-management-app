@@ -15,6 +15,7 @@ import { SuccessRegistrComponent } from './components/modals/success-registr/suc
 import { ProtectAuthPagesGuard } from './services/mainGuard/protect-auth-pages.guard';
 import { GetUsersService } from './services/userList/get-users.service';
 import { UserNotFoundComponent } from './components/modals/user-not-found/user-not-found.component';
+import { EditComponent } from './components/edit/edit.component';
 
 const routes: Routes = [
   { path: '', component: AdminPageComponent },
@@ -31,6 +32,7 @@ const routes: Routes = [
     HaveToAuthComponent,
     SuccessRegistrComponent,
     UserNotFoundComponent,
+    EditComponent,
   ],
   imports: [
     CommonModule,

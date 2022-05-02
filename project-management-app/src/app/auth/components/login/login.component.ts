@@ -42,7 +42,11 @@ export class LoginComponent implements OnInit {
     private getService: GetUsersService,
     private localStorSErvice: LocalStorageService,
     private dialog: MatDialog,
-  ) {}
+  ) {
+    if (this.localStorSErvice.getLocalStorage('id', 'token')) {
+      this.router.navigate(['/']);
+    }
+  }
 
   ngOnInit(): void {
     this.formLogIn = new FormGroup({
@@ -92,6 +96,6 @@ export class LoginComponent implements OnInit {
   }
 
   signup() {
-    this.router.navigate(['/sugnup']);
+    this.router.navigate(['/signup']);
   }
 }

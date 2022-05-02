@@ -30,6 +30,10 @@ export class HeaderComponent implements OnInit {
     });
   }
 
+  editUser() {
+    this.router.navigate(['/edit']);
+  }
+
   logout() {
     this.localStorage.removeLocalStorage('id', 'token');
     this.userName = '';

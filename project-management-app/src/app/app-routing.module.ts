@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { EditComponent } from './auth/components/edit/edit.component';
 import { LoginComponent } from './auth/components/login/login.component';
 import { SignUpComponent } from './auth/components/sign-up/sign-up.component';
 import { CheckLoginGuardGuard } from './auth/services/loginGuard/check-login-guard.guard';
@@ -22,6 +23,11 @@ const routes: Routes = [
     path: 'login',
     component: LoginComponent,
     canActivate: [ProtectAuthPagesGuard],
+  },
+  {
+    path: 'edit',
+    component: EditComponent,
+    canActivate: [CheckLoginGuardGuard],
   },
   {
     path: 'main',
