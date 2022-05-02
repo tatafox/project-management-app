@@ -1,8 +1,36 @@
 @import './../../../../styles.scss';
-.auth-page {
+
+.signup-page {
+display: flex;
+gap: 1rem;
+padding:  50px 0 0 0;
+}
+
+.auth-box {
   display: flex;
   flex-direction: column;
-  padding: 50px 0;
+  align-items: center;
+  gap: 2rem;
+  padding:  50px 0 0 0;
+
+  &__button-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  &__btn{
+    width: 3rem;
+    color: #ffffff;
+    background-color: $accent-color;
+  }
+
+  &__title {
+    text-align: center;
+    align-self: center;
+    color: #FFC107;
+  }
 }
 
 .wrapper {
@@ -15,7 +43,9 @@
 .signup-box {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   text-align: start;
+  max-width: 30rem;
   padding: 2rem;
   background-color: #ffffff;
   box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;

@@ -8,19 +8,20 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
-import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { UserAuthServiceService } from '../auth-service/user-auth-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class CheckLoginGuardGuard implements CanActivate {
-  constructor(
-    private serviceLocSt: LocalStorageService,
-    private routers: Router,
-  ) {}
+export class ProtectAuthPagesGuard implements CanActivate {
+  private isTokenInLS = localStorage.getItem('token');
+
+  private isIDInLS = localStorage.getItem('id');
+
+  constructor(private service: UserAuthServiceService, private route: Router) {}
 
   canActivate(
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot,
   ):
@@ -28,10 +29,10 @@ export class CheckLoginGuardGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (this.serviceLocSt.getLocalStorage('id', 'token')) {
+    if (!this.isIDInLS || !this.isTokenInLS) {
       return true;
     }
-    this.routers.navigate(['/admin']);
+    this.route.navigate(['/main']);
     return false;
   }
 }

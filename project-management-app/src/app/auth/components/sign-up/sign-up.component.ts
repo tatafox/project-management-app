@@ -1,12 +1,16 @@
+/* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
-import { ActivatedRoute, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { IUserSignUp } from 'src/app/shared/user-models';
+import { HeaderNameService } from 'src/app/core/services/header-name.service';
+import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
+import { IUser } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
-import { PopupComponent } from '../popup/popup.component';
+import { PopupComponent } from '../modals/popup/popup.component';
+import { SuccessRegistrComponent } from '../modals/success-registr/success-registr.component';
 
 @Component({
   selector: 'app-sign-up',
@@ -14,7 +18,7 @@ import { PopupComponent } from '../popup/popup.component';
   styleUrls: ['./sign-up.component.scss'],
   providers: [UserAuthServiceService],
 })
-export class SignUpComponent implements OnInit, OnDestroy {
+export class SignUpComponent implements OnInit {
   public titles = {
     describe: "You have to sign up, if you haven't got an account",
     headTitle: 'Sign Up',
@@ -27,21 +31,22 @@ export class SignUpComponent implements OnInit, OnDestroy {
 
   subscribe: Subscription;
 
-  public hidePassword: boolean = false;
-
-  public isSignup: boolean = true;
+  public hide: boolean = true;
 
   public formSignUp: FormGroup;
 
-  private users: IUserSignUp[];
+  public user: IUser;
 
-  public statusError: number;
+  public statusError: string;
+
+  subscription: Subscription;
 
   constructor(
     private authService: UserAuthServiceService,
     private router: Router,
-    private route: ActivatedRoute,
     private dialog: MatDialog,
+    private header: HeaderNameService,
+    private localSt: LocalStorageService,
   ) {}
 
   ngOnInit(): void {
@@ -53,49 +58,42 @@ export class SignUpComponent implements OnInit, OnDestroy {
       ]),
       password: new FormControl('', [Validators.required]),
     });
-
-    // this.route.queryParams.subscribe((params: Params) => {
-    //   if (params['signup']) {
-    //     /* ok */
-    //   } else if (params['errorSignup']) {
-    //     // error signup
-    //   }
-    // });
   }
 
-  ngOnDestroy(): void {
-    if (this.subscribe) this.subscribe.unsubscribe();
+  login() {
+    this.router.navigate(['/login']);
+  }
+
+  adminPage() {
+    this.router.navigate(['/admin']);
   }
 
   openPopup() {
     this.dialog.open(PopupComponent);
   }
 
-  submitNewUser() {
-    this.isSignup = true;
-    this.authService.fetchRegistration(this.formSignUp.value);
-    this.authService.user$.subscribe((user) => {
-      // тут мы получили юзера, с токеном и т.д.
-      // возможно надо добавить проверку что токен есть
-      console.log(user);
-      // this.router.navigate(['/main']);
-    });
-    this.authService.statusError$.subscribe((error) => {
-      if (!error) {
-        this.formSignUp.disable();
-      }
-      this.statusError = error;
-      this.statusError === 409
-        ? this.openPopup()
-        : console.log(this.statusError);
-    });
+  openSuccessPopup() {
+    this.dialog.open(SuccessRegistrComponent);
   }
 
-  getListUsers() {
-    this.authService.getUsers().subscribe((data: any) => {
-      console.log(data);
-      this.users = data;
-      console.log(this.users);
+  submitNewUser() {
+    this.localSt.getLocalStorage('id', 'token')
+      ? this.formSignUp.disable()
+      : this.authService
+          .fetchRegistration(this.formSignUp.value)
+          .subscribe((user) => {
+            this.user = user;
+            this.formSignUp.disable();
+            this.header.sendName(this.user);
+            this.openSuccessPopup();
+            this.router.navigate(['/main']);
+          });
+    this.authService.statusError$.subscribe(() => {
+      console.log('User login already exists!');
+      this.openPopup();
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     });
   }
 }

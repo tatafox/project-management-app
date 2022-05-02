@@ -1,15 +1,16 @@
 import { Injectable } from '@angular/core';
 import { Observable, Subject } from 'rxjs';
+import { IGetUser } from 'src/app/shared/user-models';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HeaderNameService {
-  private name = new Subject<string>();
+  private name = new Subject<IGetUser>();
 
   constructor() {}
 
-  sendName(name: string) {
+  sendName(name: IGetUser) {
     this.name.next(name);
   }
 

@@ -14,6 +14,8 @@ import { Router } from '@angular/router';
   ],
 })
 export class AdminPageComponent implements OnInit {
+  private id: string | null;
+
   constructor(private router: Router) {}
 
   signUp() {

@@ -11,7 +11,7 @@ export class ErrorPageComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  goHome() {
-    this.router.navigate(['']);
+  goToMain() {
+    this.router.navigate(['/main']);
   }
 }

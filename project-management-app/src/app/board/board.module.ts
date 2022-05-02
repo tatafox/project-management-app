@@ -12,6 +12,8 @@ import { ColumnModalComponent } from './components/modal/column-modal/column-mod
 import { TaskModalComponent } from './components/modal/task-modal/task-modal.component';
 import { ColumnItemComponent } from './components/board/column-item/column-item.component';
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
+import { ProtectAuthPagesGuard } from '../auth/services/mainGuard/protect-auth-pages.guard';
+import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-guard.guard';
 // import { BoardsListComponent } from './components/boards-list/boards-list.component';
 
 @NgModule({
@@ -29,5 +31,6 @@ import { TaskItemComponent } from './components/board/task-item/task-item.compon
   ],
   imports: [CommonModule, BoardRoutingModule, MaterialModule, HttpClientModule],
   exports: [],
+  providers: [ProtectAuthPagesGuard, CheckLoginGuardGuard],
 })
 export class BoardModule {}

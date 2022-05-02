@@ -1,7 +1,8 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
-import { catchError, map, Observable, Subject, tap } from 'rxjs';
+import { catchError, Observable, Subject, tap } from 'rxjs';
+import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { IUserSignIn, IUserSignUp, IUser } from 'src/app/shared/user-models';
 // import { IBoardDetail } from '../../../shared/models/board.model';
 
@@ -17,30 +18,36 @@ export class UserAuthServiceService {
 
   public user: IUser;
 
-  public statusError$ = new Subject<number>();
+  public statusError$ = new Subject<string>();
 
-  private message: string = '';
+  public userObj = new Subject<IUser>();
 
-  public user$ = new Subject<IUser>();
-
-  constructor(private http: HttpClient) {}
+  constructor(
+    private http: HttpClient,
+    private localStorService: LocalStorageService,
+  ) {}
 
   postDataUser(user: IUserSignUp): Observable<any> {
-    return this.http
-      .post(`${this.URL}/signup`, user)
-      .pipe(tap((data: any) => data));
+    return this.http.post(`${this.URL}/signup`, user).pipe(
+      tap((data: any) => console.log(data)),
+      catchError((err) => {
+        this.errorMessage = err.message;
+        this.statusError$.next(this.errorMessage);
+        return [];
+      }),
+    );
   }
 
   signInUser(user: IUserSignIn): Observable<any> {
     return this.http.post(`${this.URL}/signin`, user).pipe(
       tap((data: any) => {
-        console.log(data.token);
         localStorage.setItem('token', data.token);
       }),
     );
   }
 
-  fetchRegistration(user: IUserSignUp) {
+  fetchRegistration(user: any): Observable<any> {
+    this.localStorService.removeLocalStorage('id', 'token');
     this.postDataUser(user).subscribe(
       (responce) => {
         this.user = { ...responce };
@@ -49,64 +56,17 @@ export class UserAuthServiceService {
           password: user.password,
         };
         this.signInUser(userSignIn).subscribe(
-          (data) => {
-            this.user.token = data.token;
-            this.user$.next(this.user);
+          (dataToken) => {
+            this.user.token = dataToken.token;
+            localStorage.setItem('id', this.user.id);
+            this.userObj.next(this.user);
           },
-          (response: Response) => {
-            console.log(response);
-          },
+          (error) => error,
         );
         return responce;
       },
-      (response: Response) => {
-        console.log(response);
-        this.statusError$.next(response.status);
-      },
+      (error) => error,
     );
-  }
-
-  // setStatusError(status: number) {
-  //   this.statusError = status;
-  // }
-
-  // getStatusError(): number {
-  //   return this.statusError;
-  // }
-
-  // setToken(token: string) {
-  //   this.token = token;
-  // }
-
-  // getToken(): string {
-  //   return this.token;
-  // }
-
-  // logout() {
-  //   this.setToken('');
-  //   localStorage.clear();
-  // }
-
-  /*------*/
-  getUsers(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${this.token}`,
-      }),
-    };
-    console.log(httpOptions);
-    return this.http.get(`${this.URL}/users`, httpOptions).pipe(
-      map((data: any) => {
-        const usersList = data;
-        console.log(usersList);
-        return usersList;
-      }),
-      catchError((err) => {
-        console.log(err);
-        this.errorMessage = err.message;
-        return [];
-      }),
-    );
+    return this.userObj;
   }
 }

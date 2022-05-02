@@ -8,6 +8,13 @@ import { AdminPageComponent } from './pages/admin-page/admin-page.component';
 import { LoginComponent } from './components/login/login.component';
 import { SignUpComponent } from './components/sign-up/sign-up.component';
 import { UserAuthServiceService } from './services/auth-service/user-auth-service.service';
+import { CheckLoginGuardGuard } from './services/loginGuard/check-login-guard.guard';
+import { PopupComponent } from './components/modals/popup/popup.component';
+import { HaveToAuthComponent } from './components/modals/have-to-auth/have-to-auth.component';
+import { SuccessRegistrComponent } from './components/modals/success-registr/success-registr.component';
+import { ProtectAuthPagesGuard } from './services/mainGuard/protect-auth-pages.guard';
+import { GetUsersService } from './services/userList/get-users.service';
+import { UserNotFoundComponent } from './components/modals/user-not-found/user-not-found.component';
 
 const routes: Routes = [
   { path: '', component: AdminPageComponent },
@@ -16,7 +23,15 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [AdminPageComponent, LoginComponent, SignUpComponent],
+  declarations: [
+    AdminPageComponent,
+    LoginComponent,
+    SignUpComponent,
+    PopupComponent,
+    HaveToAuthComponent,
+    SuccessRegistrComponent,
+    UserNotFoundComponent,
+  ],
   imports: [
     CommonModule,
     FormsModule,
@@ -26,6 +41,11 @@ const routes: Routes = [
     HttpClientModule,
   ],
   exports: [RouterModule, AdminPageComponent, SignUpComponent, LoginComponent],
-  providers: [UserAuthServiceService],
+  providers: [
+    UserAuthServiceService,
+    CheckLoginGuardGuard,
+    ProtectAuthPagesGuard,
+    GetUsersService,
+  ],
 })
 export class AuthModule {}
