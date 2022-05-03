@@ -1,10 +1,10 @@
 <div class="wrapper">
   <div class="column-list">
     <div class="column-item" *ngFor="let column of board.columns">
-      <div class="column-item__wrapper">
+      <div class="column-item__wrapper" (click)="onColumnClick($event, column.id)">
         <span class="column-item__title">{{column.title}}</span>
         <button mat-button>
-            <mat-icon>add_circle</mat-icon>
+            <mat-icon>delete</mat-icon>
         </button>
       </div>
     </div>

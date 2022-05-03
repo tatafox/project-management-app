@@ -5,9 +5,15 @@ import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
 import { MatDialog } from '@angular/material/dialog';
 import { Subscription } from 'rxjs';
-import { IBoardDetail, IColumnList } from '../../../shared/models/board.model';
+import {
+  IBoard,
+  IBoardDetail,
+  IColumnList,
+} from '../../../shared/models/board.model';
 import { BoardModalComponent } from '../modal/board-modal/board-modal.component';
-import { updateBoard } from '../../../redux/actions/board.actions';
+import { deleteBoard, updateBoard } from '../../../redux/actions/board.actions';
+import { IConfirmDialog } from '../../../shared/models/general.models';
+import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 
 @Component({
   selector: 'app-boards',
@@ -39,31 +45,6 @@ export class BoardComponent implements OnInit, OnDestroy {
           }
         }),
     );
-    /* this.subscription.push(
-      this.store
-        .select(
-          (state) =>
-            state.boardState.boards.filter((board) => board.id === this.id)[0],
-        )
-        .subscribe((boards) => {
-          this.board = boards;
-          if (!this.board) {
-            this.router.navigate(['/main']);
-          }
-        }),
-    );
-    this.subscription.push(
-      this.store
-        .select(
-          (state) =>
-            state.boardState.boards.filter((board) => board.id === this.id)[0]
-              .columns,
-        )
-        .subscribe((columns) => {
-          this.columns = columns;
-        }),
-    );
-  }*/
   }
 
   ngOnDestroy(): void {
@@ -77,8 +58,6 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      //this.title = result;
-      console.log(result);
       this.editColumn(result, id);
     });
   }
@@ -92,16 +71,50 @@ export class BoardComponent implements OnInit, OnDestroy {
           ...response,
           tasks: [],
         };
-        //const board = { ...this.board } as IBoardDetail;
         const board: IBoardDetail = {
           id: this.board.id,
           title: this.board.title,
           columns: [...this.board.columns, newColumn],
         };
-        console.log(board);
-        //board.columns.push(newColumn);
         this.store.dispatch(updateBoard({ board }));
-        console.log(response);
       });
+  }
+
+  onColumnClick(event: MouseEvent, id: string) {
+    console.log(event.target);
+    if ((event.target as HTMLElement).tagName === 'SPAN') {
+      // -- TO DO ---
+      //edit column
+    } else {
+      //delete column
+      this.deleteColumn(id);
+    }
+  }
+
+  deleteColumn(id: string) {
+    const dialogData: IConfirmDialog = {
+      title: 'Delete column',
+      message: 'When you delete column, you also delete tasks. Are you sure?',
+    };
+
+    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
+      maxWidth: '400px',
+      data: dialogData,
+    });
+
+    dialogRef.afterClosed().subscribe((dialogResult) => {
+      const result = dialogResult;
+      if (result) {
+        this.boardService.deleteColumn(this.id, id).subscribe((response) => {
+          const board: IBoardDetail = {
+            id: this.board.id,
+            title: this.board.title,
+            columns: [...this.board.columns.filter((item) => item.id !== id)],
+          };
+          console.log(board);
+          this.store.dispatch(updateBoard({ board }));
+        });
+      }
+    });
   }
 }

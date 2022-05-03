@@ -81,6 +81,12 @@ export class BoardService {
       .pipe(map((responce: any) => responce));
   }
 
+  public deleteColumn(idBoard: string, idColumn: string): Observable<IColumn> {
+    return this.http
+      .delete(`/api/boards/${idBoard}/columns/${idColumn}`, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
   public fetchBoardsList() {
     return this.getBoardsList().subscribe((response) => {
       // @ts-ignore
