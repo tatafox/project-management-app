@@ -9,11 +9,11 @@ import { BoardComponent } from './components/board/board.component';
 import { BoardModalComponent } from './components/modal/board-modal/board-modal.component';
 import { ColumnModalComponent } from './components/modal/column-modal/column-modal.component';
 import { TaskModalComponent } from './components/modal/task-modal/task-modal.component';
-import { ColumnItemComponent } from './components/board/column-item/column-item.component';
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
 import { HttpClientModule } from '@angular/common/http';
 import { SharedModule } from '../shared/shared.module';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -21,7 +21,6 @@ import { SharedModule } from '../shared/shared.module';
     ErrorPageComponent,
     BoardsPageComponent,
     BoardComponent,
-    ColumnItemComponent,
     TaskItemComponent,
     BoardModalComponent,
     ColumnModalComponent,
@@ -34,6 +33,8 @@ import { SharedModule } from '../shared/shared.module';
     MaterialModule,
     HttpClientModule,
     SharedModule,
+    FormsModule,
+    BoardRoutingModule,
   ],
   exports: [],
 })

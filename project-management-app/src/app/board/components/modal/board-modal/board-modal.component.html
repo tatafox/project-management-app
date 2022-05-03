@@ -1,1 +1,16 @@
-<p>board-modal works!</p>
+<h1 mat-dialog-title>
+  Add new board
+</h1>
+
+<div mat-dialog-content>
+  <p>Enter board title</p>
+  <mat-form-field appearance="fill">
+    <mat-label>Title</mat-label>
+    <input matInput [(ngModel)]="title">
+  </mat-form-field>
+</div>
+
+<div class="button-wrapper" mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="onCancel()">Cancel</button>
+  <button mat-raised-button color="primary"  [mat-dialog-close]="title">Add</button>
+</div>

@@ -6,7 +6,6 @@ import {
   deleteBoard,
   setBoardsList,
 } from '../../../redux/actions/board.actions';
-import { HttpClient } from '@angular/common/http';
 import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
@@ -15,6 +14,7 @@ import { IBoard, IBoardDetail } from '../../../shared/models/board.model';
 import { MatDialog } from '@angular/material/dialog';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boards-list',
@@ -26,10 +26,10 @@ export class BoardsListComponent implements OnInit, OnDestroy {
   public boardsList: IBoardDetail[];
 
   constructor(
-    private http: HttpClient,
     private store: Store<AppState>,
     private readonly boardService: BoardService,
     public dialog: MatDialog,
+    private router: Router,
   ) {}
 
   ngOnInit(): void {
@@ -55,26 +55,14 @@ export class BoardsListComponent implements OnInit, OnDestroy {
     );
   }
 
-  addBoard() {
-    this.boardService
-      .postBoard({ title: 'New board add 9' })
-      .subscribe((response) => {
-        const board: IBoardDetail = {
-          ...response,
-          // @ts-ignore
-          columns: [],
-        };
-        this.store.dispatch(addBoard({ board }));
-        console.log(response, board);
-      });
-  }
-
   ngOnDestroy(): void {
     this.subscription.forEach((subscribe) => subscribe.unsubscribe());
   }
 
   onBoardDetail(board: IBoard, event: MouseEvent) {
-    console.log(board, (event.target as HTMLElement).tagName === 'BUTTON');
+    if ((event.target as HTMLElement).tagName !== 'BUTTON') {
+      this.router.navigate(['main', 'board', board.id]);
+    }
   }
 
   onDeleteBoard(board: IBoard) {
@@ -91,7 +79,6 @@ export class BoardsListComponent implements OnInit, OnDestroy {
 
     dialogRef.afterClosed().subscribe((dialogResult) => {
       const result = dialogResult;
-      console.log(result);
       if (result) {
         this.boardService.deleteBoard(board.id).subscribe((response) => {
           this.store.dispatch(deleteBoard({ id: board.id }));

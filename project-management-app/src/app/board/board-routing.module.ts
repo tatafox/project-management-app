@@ -6,7 +6,7 @@ import { BoardsPageComponent } from './pages/boards-page/boards-page.component';
 
 const routes: Routes = [
   { path: '', component: MainPageComponent },
-  { path: 'boards', component: BoardsPageComponent },
+  { path: 'board/:id', component: BoardsPageComponent, pathMatch: 'full' },
 ];
 
 @NgModule({

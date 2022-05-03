@@ -5,17 +5,22 @@ import {
   HttpHeaders,
 } from '@angular/common/http';
 import { catchError, forkJoin, map, Observable, Subject } from 'rxjs';
-import { IBoard, IBoardDetail } from '../../shared/models/board.model';
+import {
+  IBoard,
+  IBoardDetail,
+  IColumn,
+  ITaskBody,
+} from '../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
+  public userToken =
+    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mMjgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-DfryVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
   private httpOptions = {
     headers: new HttpHeaders({
-      authorization:
-        'Bearer ' +
-        'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mMjgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-DfryVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0',
+      authorization: 'Bearer ' + this.userToken,
     }),
   };
 
@@ -64,6 +69,40 @@ export class BoardService {
   public updateBoard(board: IBoard): Observable<IBoard> {
     return this.http
       .put(`/api/boards/${board.id}`, board.title, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public postColumn(
+    id: string,
+    title: string,
+    order: number,
+  ): Observable<IColumn> {
+    const body = {
+      title: title,
+      order: order,
+    };
+    return this.http
+      .post(`/api/boards/${id}/columns`, body, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public deleteColumn(idBoard: string, idColumn: string): Observable<IColumn> {
+    return this.http
+      .delete(`/api/boards/${idBoard}/columns/${idColumn}`, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public postTask(
+    idBoard: string,
+    idColumn: string,
+    taskBody: ITaskBody,
+  ): Observable<IColumn> {
+    return this.http
+      .post(
+        `/api/boards/${idBoard}/columns/${idColumn}/tasks`,
+        taskBody,
+        this.httpOptions,
+      )
       .pipe(map((responce: any) => responce));
   }
 

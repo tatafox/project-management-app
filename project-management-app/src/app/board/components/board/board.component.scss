@@ -1,0 +1,57 @@
+.wrapper {
+  margin-top: 20px;
+}
+
+.column-list {
+  display: flex;
+  gap: 25px;
+}
+
+.column-item {
+  width: 25%;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    gap: 5px;
+    border-bottom: 1px solid #b7b7b7;
+    margin-bottom: 15px;
+
+    span {
+      align-self: flex-end;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      flex-basis: 10%;
+    }
+  }
+
+  mat-icon {
+    margin-top: 5px;
+  }
+}
+
+.task-item {
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 5px;
+    gap: 5px;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 5px;
+      background: #ffdb8d;
+    }
+  }
+}
+
+button.add-column {
+  width: 100%;
+  padding: 5px;
+}
