@@ -31,3 +31,15 @@ export interface ITask {
   boardId: string;
   columnId: string;
 }
+
+export interface ITaskBody {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+}
+
+export interface TaskDialogData {
+  title: string;
+  description: string;
+}

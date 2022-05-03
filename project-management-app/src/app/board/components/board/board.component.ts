@@ -9,11 +9,14 @@ import {
   IBoard,
   IBoardDetail,
   IColumnList,
+  ITaskBody,
 } from '../../../shared/models/board.model';
 import { BoardModalComponent } from '../modal/board-modal/board-modal.component';
 import { deleteBoard, updateBoard } from '../../../redux/actions/board.actions';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
+import { ColumnModalComponent } from '../modal/column-modal/column-modal.component';
+import { TaskModalComponent } from '../modal/task-modal/task-modal.component';
 
 @Component({
   selector: 'app-boards',
@@ -52,13 +55,13 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   public onEditColumn(id?: string) {
-    const dialogRef = this.dialog.open(BoardModalComponent, {
+    const dialogRef = this.dialog.open(ColumnModalComponent, {
       width: '450px',
       data: '',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.editColumn(result, id);
+      if (result) this.editColumn(result, id);
     });
   }
 
@@ -102,8 +105,7 @@ export class BoardComponent implements OnInit, OnDestroy {
       data: dialogData,
     });
 
-    dialogRef.afterClosed().subscribe((dialogResult) => {
-      const result = dialogResult;
+    dialogRef.afterClosed().subscribe((result) => {
       if (result) {
         this.boardService.deleteColumn(this.id, id).subscribe((response) => {
           const board: IBoardDetail = {
@@ -115,6 +117,41 @@ export class BoardComponent implements OnInit, OnDestroy {
           this.store.dispatch(updateBoard({ board }));
         });
       }
+    });
+  }
+
+  onAddTask(column: IColumnList) {
+    const dialogRef = this.dialog.open(TaskModalComponent, {
+      width: '450px',
+      data: {
+        title: '',
+        description: '',
+      },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      console.log(result);
+      if (result) {
+        const newTask: ITaskBody = {
+          title: result.title,
+          description: result.description,
+          order: column.tasks.length,
+          userId: this.boardService.userToken,
+        };
+        this.boardService
+          .postTask(this.id, column.id, newTask)
+          .subscribe((response) => {
+            console.log(response);
+            /*const board: IBoardDetail = {
+              id: this.board.id,
+              title: this.board.title,
+              columns: [...this.board.columns.filter((item) => item.id !== id)],
+            };
+            console.log(board);
+            this.store.dispatch(updateBoard({ board }));*/
+          });
+      }
+      //this.editColumn(result, id);
     });
   }
 }

@@ -7,12 +7,24 @@
             <mat-icon>delete</mat-icon>
         </button>
       </div>
+      <ul class="task-list">
+        <li class="task-item" *ngFor="let task of column.tasks">
+          <app-task-item></app-task-item>
+        </li>
+        <li class="task-item" (click)="onAddTask(column)">
+          <div class="task-item__wrapper">
+            <span>Add new task</span>
+            <mat-icon>add_circle</mat-icon>
+          </div>
+        </li>
+      </ul>
     </div>
     <div class="column-item">
       <button mat-button class="add-column" (click)="onEditColumn()">
         <div class="column-item__wrapper">
-        <span>Add new column</span>
-        <mat-icon>add_circle</mat-icon></div>
+          <span>Add new column</span>
+          <mat-icon>add_circle</mat-icon>
+        </div>
       </button>
     </div>
   </div>
