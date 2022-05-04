@@ -8,17 +8,18 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { UserAuthServiceService } from '../auth-service/user-auth-service.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProtectAuthPagesGuard implements CanActivate {
-  private isTokenInLS = localStorage.getItem('token');
-
-  private isIDInLS = localStorage.getItem('id');
-
-  constructor(private service: UserAuthServiceService, private route: Router) {}
+  constructor(
+    private service: UserAuthServiceService,
+    private route: Router,
+    private localService: LocalStorageService,
+  ) {}
 
   canActivate(
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,10 +30,10 @@ export class ProtectAuthPagesGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    if (!this.isIDInLS || !this.isTokenInLS) {
+    if (!this.localService.getLocalStorage('id', 'token')) {
       return true;
     }
-    this.route.navigate(['/main'], { queryParams: { returnUrl: state.url } });
+    this.route.navigate(['/main']);
     return false;
   }
 }

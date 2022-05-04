@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { UserEditService } from 'src/app/auth/services/user-edit.service';
+import { GetUsersService } from 'src/app/auth/services/userList/get-users.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
+import { IGetUser, IUser } from 'src/app/shared/user-models';
 import { PopupLogoutComponent } from '../../modals/popup-logout/popup-logout.component';
-import { HeaderNameService } from '../../services/header-name.service';
+import { UserInfoService } from '../../../auth/services/userInfo/user-info.service';
 
 @Component({
   selector: 'app-header',
@@ -11,13 +14,22 @@ import { HeaderNameService } from '../../services/header-name.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  userName: string;
+  public userName: string;
+
+  public user: IUser;
+
+  public token!: string | null;
+
+  public id: string = '';
+
+  public href: string = '';
 
   constructor(
-    private header: HeaderNameService,
-    private localStorage: LocalStorageService,
+    private localSt: LocalStorageService,
     private router: Router,
     private dialog: MatDialog,
+    private editService: UserEditService,
+    private serviceGet: GetUsersService,
   ) {}
 
   openPopup() {
@@ -25,9 +37,15 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.header.onMessage().subscribe((user) => {
-      this.userName = user.name;
+    this.serviceGet.onUser().subscribe((userInfo) => {
+      this.user = userInfo;
+      this.userName = this.user.name;
+      console.log(userInfo);
     });
+
+    if (this.token) {
+      // this.token = JSON.parse(token);
+    }
   }
 
   editUser() {
@@ -35,9 +53,19 @@ export class HeaderComponent implements OnInit {
   }
 
   logout() {
-    this.localStorage.removeLocalStorage('id', 'token');
+    this.localSt.removeLocalStorage('id', 'token');
     this.userName = '';
     this.router.navigate(['/admin']);
     this.openPopup();
+  }
+
+  deleteUser() {
+    const token = localStorage.getItem('token') || '{}';
+    this.editService.deleteUser(this.user.id, token).subscribe((data) => {
+      console.log(data);
+    });
+    this.localSt.removeLocalStorage('id', 'token');
+    this.userName = '';
+    this.router.navigate(['/admin']);
   }
 }

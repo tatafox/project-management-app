@@ -27,7 +27,6 @@ const routes: Routes = [
   {
     path: 'edit',
     component: EditComponent,
-    canActivate: [CheckLoginGuardGuard],
   },
   {
     path: 'main',

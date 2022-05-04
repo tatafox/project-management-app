@@ -1,13 +1,13 @@
 import { TestBed } from '@angular/core/testing';
 
-import { HeaderNameService } from './header-name.service';
+import { UserEditService } from './user-edit.service';
 
-describe('HeaderNameService', () => {
-  let service: HeaderNameService;
+describe('UserEditService', () => {
+  let service: UserEditService;
 
   beforeEach(() => {
     TestBed.configureTestingModule({});
-    service = TestBed.inject(HeaderNameService);
+    service = TestBed.inject(UserEditService);
   });
 
   it('should be created', () => {

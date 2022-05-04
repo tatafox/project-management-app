@@ -1,10 +1,11 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { HeaderNameService } from 'src/app/core/services/header-name.service';
+import { UserInfoService } from 'src/app/auth/services/userInfo/user-info.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IGetUser } from 'src/app/shared/user-models';
+import { IGetUser, IUser } from 'src/app/shared/user-models';
 import { GetUsersService } from '../../services/userList/get-users.service';
 import { UserNotFoundComponent } from '../modals/user-not-found/user-not-found.component';
 
@@ -27,17 +28,17 @@ export class EditComponent implements OnInit {
 
   public formEdit: FormGroup;
 
-  public user: IGetUser;
+  public user: IUser;
 
-  public nameCurrent: string = '';
+  public nameCurrent: string;
 
-  public loginCurrent: string = '';
+  public loginCurrent: string;
 
   constructor(
     private router: Router,
     private localStorSErvice: LocalStorageService,
     private getServ: GetUsersService,
-    private headerServ: HeaderNameService,
+    private userInfoServ: UserInfoService,
     private dialog: MatDialog,
   ) {
     if (this.localStorSErvice.getLocalStorage('id', 'token')) {
@@ -54,17 +55,16 @@ export class EditComponent implements OnInit {
       name: new FormControl('', [Validators.required, Validators.minLength(2)]),
       login: new FormControl('', [
         Validators.required,
-        Validators.minLength(4),
+        Validators.minLength(3),
       ]),
       password: new FormControl('', [Validators.required]),
     });
 
     if (this.localStorSErvice.getLocalStorage('id', 'token')) {
-      this.getServ.getUser().subscribe((data: IGetUser) => {
+      this.getServ.onUser().subscribe((data: IUser) => {
         this.user = data;
         this.nameCurrent = this.user.name;
         this.loginCurrent = this.user.login;
-        this.headerServ.sendName(this.user);
       });
     } else if (!this.localStorSErvice.getLocalStorage('id', 'token')) {
       console.log('You have to login/signup');

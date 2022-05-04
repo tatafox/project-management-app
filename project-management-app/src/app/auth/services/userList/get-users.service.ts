@@ -11,15 +11,15 @@ export class GetUsersService {
 
   public token: any;
 
-  public user = new Subject<IUser>();
+  private subject = new Subject<any>();
+
+  private userInfo: IUser;
 
   public userList = new Subject<IGetUser[]>();
 
   public id: any;
 
   public statusError$ = new Subject<any>();
-
-  private errorMessage = '';
 
   constructor(private http: HttpClient) {}
 
@@ -28,14 +28,15 @@ export class GetUsersService {
     this.token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': 'application/json',
+        'Content-Type': '/',
         authorization: `Bearer ${this.token}`,
       }),
     };
     return this.http.get(`${this.URL}/users/${this.id}`, httpOptions).pipe(
       map((data: any) => {
-        this.user = data;
-        return this.user;
+        this.userInfo = data;
+        this.sendUser(this.userInfo);
+        return this.userInfo;
       }),
       catchError((err) => {
         this.statusError$.next(err);
@@ -60,11 +61,19 @@ export class GetUsersService {
     );
   }
 
-  sendList(userList: IGetUser[]) {
-    this.userList.next(userList);
+  sendToken(token: string) {
+    this.subject.next(token);
   }
 
-  onMessage(): Observable<any> {
-    return this.userList.asObservable();
+  onToken(): Observable<string> {
+    return this.subject.asObservable();
+  }
+
+  sendUser(info: IUser) {
+    this.subject.next(info);
+  }
+
+  onUser(): Observable<IUser> {
+    return this.subject.asObservable();
   }
 }

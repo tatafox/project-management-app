@@ -6,7 +6,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IGetUser } from 'src/app/shared/user-models';
+import { IGetUser, IUser } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 import { GetUsersService } from '../../services/userList/get-users.service';
 import { SuccessRegistrComponent } from '../modals/success-registr/success-registr.component';
@@ -34,7 +34,11 @@ export class LoginComponent implements OnInit {
 
   public login: string = '';
 
-  public hide: boolean = false;
+  public hide: boolean = true;
+
+  public info: IUser;
+
+  public user: IUser;
 
   constructor(
     private router: Router,
@@ -77,12 +81,19 @@ export class LoginComponent implements OnInit {
           (data) => {
             this.token = data.token;
             this.getService.getUserList().subscribe((list) => {
+              console.log(list);
               this.login = this.formLogIn.value.login;
               // eslint-disable-next-line no-return-assign
-              const userCurrent = list.filter(
-                (item: IGetUser) => item.login === this.login,
-              );
-              localStorage.setItem('id', userCurrent[0].id);
+              const userCurrent = {
+                ...list.filter(
+                  (item: IGetUser) => item.login === this.login,
+                )[0],
+              };
+              userCurrent.token = this.token;
+              console.log(userCurrent);
+              this.getService.sendToken(this.token);
+              this.getService.sendUser(userCurrent);
+              localStorage.setItem('id', userCurrent.id);
               this.router.navigate(['/main']);
               this.openPopupSuccess();
             });

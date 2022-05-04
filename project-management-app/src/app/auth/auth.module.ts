@@ -16,6 +16,7 @@ import { ProtectAuthPagesGuard } from './services/mainGuard/protect-auth-pages.g
 import { GetUsersService } from './services/userList/get-users.service';
 import { UserNotFoundComponent } from './components/modals/user-not-found/user-not-found.component';
 import { EditComponent } from './components/edit/edit.component';
+import { UserEditService } from './services/user-edit.service';
 
 const routes: Routes = [
   { path: '', component: AdminPageComponent },
@@ -48,6 +49,7 @@ const routes: Routes = [
     CheckLoginGuardGuard,
     ProtectAuthPagesGuard,
     GetUsersService,
+    UserEditService,
   ],
 })
 export class AuthModule {}
