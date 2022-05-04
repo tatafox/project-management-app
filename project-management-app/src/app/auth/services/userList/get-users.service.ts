@@ -28,7 +28,7 @@ export class GetUsersService {
     this.token = localStorage.getItem('token');
     const httpOptions = {
       headers: new HttpHeaders({
-        'Content-Type': '/',
+        'Content-Type': 'application/json',
         authorization: `Bearer ${this.token}`,
       }),
     };
@@ -39,6 +39,7 @@ export class GetUsersService {
         return this.userInfo;
       }),
       catchError((err) => {
+        console.log(err);
         this.statusError$.next(err);
         return [];
       }),

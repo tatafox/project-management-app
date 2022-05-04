@@ -2,10 +2,9 @@
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { UserInfoService } from 'src/app/auth/services/userInfo/user-info.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { IUser } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
@@ -20,6 +19,8 @@ import { SuccessRegistrComponent } from '../modals/success-registr/success-regis
   providers: [UserAuthServiceService],
 })
 export class SignUpComponent implements OnInit {
+  dialogRef: MatDialogRef<SuccessRegistrComponent>;
+
   public titles = {
     describe: "You have to sign up, if you haven't got an account",
     headTitle: 'Sign Up',
@@ -77,10 +78,6 @@ export class SignUpComponent implements OnInit {
     this.dialog.open(PopupComponent);
   }
 
-  openSuccessPopup() {
-    this.dialog.open(SuccessRegistrComponent);
-  }
-
   submitNewUser() {
     this.localSt.getLocalStorage('id', 'token')
       ? this.formSignUp.disable()
@@ -90,7 +87,10 @@ export class SignUpComponent implements OnInit {
             this.user = user;
             this.formSignUp.disable();
             this.getService.sendUser(this.user);
-            this.openSuccessPopup();
+            this.dialogRef = this.dialog.open(SuccessRegistrComponent);
+            this.dialogRef.componentInstance.messageTitle = 'Success!';
+            this.dialogRef.componentInstance.messageDescribe =
+              'You have successfully sign up';
             this.router.navigate(['/main']);
           });
     this.authService.statusError$.subscribe(() => {

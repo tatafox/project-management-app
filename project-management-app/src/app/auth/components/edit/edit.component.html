@@ -39,8 +39,10 @@
               numbers
             </mat-error>
           </mat-form-field>
-          <button class=" edit-form__btn" mat-raised-button color="000000" type="submit"
+          <button class="edit-form__btn" mat-raised-button color="000000" type="submit"
             [disabled]="!formEdit.valid">{{titles.submit}}</button>
+          <button class="edit-form__btn" mat-raised-button color="000000" type="button"
+            (click)="adminPage()">Cancel</button>
         </form>
       </div>
     </div>

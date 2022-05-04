@@ -16,7 +16,8 @@ import { ProtectAuthPagesGuard } from './services/mainGuard/protect-auth-pages.g
 import { GetUsersService } from './services/userList/get-users.service';
 import { UserNotFoundComponent } from './components/modals/user-not-found/user-not-found.component';
 import { EditComponent } from './components/edit/edit.component';
-import { UserEditService } from './services/user-edit.service';
+import { UserEditService } from './services/user-edit/user-edit.service';
+import { UserIsExistComponent } from './components/modals/user-is-exist/user-is-exist.component';
 
 const routes: Routes = [
   { path: '', component: AdminPageComponent },
@@ -34,6 +35,7 @@ const routes: Routes = [
     SuccessRegistrComponent,
     UserNotFoundComponent,
     EditComponent,
+    UserIsExistComponent,
   ],
   imports: [
     CommonModule,

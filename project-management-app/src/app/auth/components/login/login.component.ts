@@ -3,7 +3,7 @@
 /* eslint-disable no-param-reassign */
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { IGetUser, IUser } from 'src/app/shared/user-models';
@@ -18,6 +18,8 @@ import { UserNotFoundComponent } from '../modals/user-not-found/user-not-found.c
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
+  dialogRef: MatDialogRef<SuccessRegistrComponent>;
+
   public titles = {
     describe: 'You have to login, if you have got an account',
     headTitle: 'Login ',
@@ -70,10 +72,6 @@ export class LoginComponent implements OnInit {
     this.dialog.open(UserNotFoundComponent);
   }
 
-  openPopupSuccess() {
-    this.dialog.open(SuccessRegistrComponent);
-  }
-
   logInUser() {
     this.localStorSErvice.getLocalStorage('id', 'token')
       ? this.formLogIn.disable()
@@ -92,8 +90,11 @@ export class LoginComponent implements OnInit {
               this.getService.sendToken(this.token);
               this.getService.sendUser(userCurrent);
               localStorage.setItem('id', userCurrent.id);
+              this.dialogRef = this.dialog.open(SuccessRegistrComponent);
+              this.dialogRef.componentInstance.messageTitle = 'Great!';
+              this.dialogRef.componentInstance.messageDescribe =
+                'You have successfully login';
               this.router.navigate(['/main']);
-              this.openPopupSuccess();
             });
           },
           (err) => {

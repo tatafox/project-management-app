@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
-import { UserEditService } from 'src/app/auth/services/user-edit.service';
+import { UserEditService } from 'src/app/auth/services/user-edit/user-edit.service';
 import { GetUsersService } from 'src/app/auth/services/userList/get-users.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { IUser } from 'src/app/shared/user-models';
@@ -32,7 +32,12 @@ export class HeaderComponent implements OnInit {
     private editService: UserEditService,
     private serviceGet: GetUsersService,
   ) {}
-
+  ngOnInit(): void {
+    this.serviceGet.onUser().subscribe((userInfo) => {
+      this.user = userInfo;
+      this.userName = this.user.name;
+    });
+  }
   openLogoutPopup() {
     this.dialog.open(PopupLogoutComponent);
   }
@@ -54,14 +59,8 @@ export class HeaderComponent implements OnInit {
         this.userName = '';
         this.router.navigate(['/admin']);
       } else {
+        this.router.navigate(['/main']);
       }
-    });
-  }
-
-  ngOnInit(): void {
-    this.serviceGet.onUser().subscribe((userInfo) => {
-      this.user = userInfo;
-      this.userName = this.user.name;
     });
   }
 
