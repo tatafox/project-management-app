@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserEditService } from 'src/app/auth/services/user-edit.service';
 import { GetUsersService } from 'src/app/auth/services/userList/get-users.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IGetUser, IUser } from 'src/app/shared/user-models';
+import { IUser } from 'src/app/shared/user-models';
 import { PopupLogoutComponent } from '../../modals/popup-logout/popup-logout.component';
-import { UserInfoService } from '../../../auth/services/userInfo/user-info.service';
+import { PopupDeleteComponent } from '../../modals/popup-delete/popup-delete.component';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +14,7 @@ import { UserInfoService } from '../../../auth/services/userInfo/user-info.servi
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
+  dialogRef: MatDialogRef<PopupDeleteComponent>;
   public userName: string;
 
   public user: IUser;
@@ -32,20 +33,36 @@ export class HeaderComponent implements OnInit {
     private serviceGet: GetUsersService,
   ) {}
 
-  openPopup() {
+  openLogoutPopup() {
     this.dialog.open(PopupLogoutComponent);
+  }
+
+  deleteUser() {
+    this.dialogRef = this.dialog.open(PopupDeleteComponent, {
+      disableClose: false,
+    });
+    this.dialogRef.componentInstance.confirmMessage =
+      'Are you sure you want to delete?';
+    this.dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        // do confirmation actions
+        const token = localStorage.getItem('token') || '{}';
+        this.editService.deleteUser(this.user.id, token).subscribe((data) => {
+          console.log(data);
+        });
+        this.localSt.removeLocalStorage('id', 'token');
+        this.userName = '';
+        this.router.navigate(['/admin']);
+      } else {
+      }
+    });
   }
 
   ngOnInit(): void {
     this.serviceGet.onUser().subscribe((userInfo) => {
       this.user = userInfo;
       this.userName = this.user.name;
-      console.log(userInfo);
     });
-
-    if (this.token) {
-      // this.token = JSON.parse(token);
-    }
   }
 
   editUser() {
@@ -56,16 +73,6 @@ export class HeaderComponent implements OnInit {
     this.localSt.removeLocalStorage('id', 'token');
     this.userName = '';
     this.router.navigate(['/admin']);
-    this.openPopup();
-  }
-
-  deleteUser() {
-    const token = localStorage.getItem('token') || '{}';
-    this.editService.deleteUser(this.user.id, token).subscribe((data) => {
-      console.log(data);
-    });
-    this.localSt.removeLocalStorage('id', 'token');
-    this.userName = '';
-    this.router.navigate(['/admin']);
+    this.openLogoutPopup();
   }
 }

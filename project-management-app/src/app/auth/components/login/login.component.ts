@@ -81,7 +81,6 @@ export class LoginComponent implements OnInit {
           (data) => {
             this.token = data.token;
             this.getService.getUserList().subscribe((list) => {
-              console.log(list);
               this.login = this.formLogIn.value.login;
               // eslint-disable-next-line no-return-assign
               const userCurrent = {
@@ -90,7 +89,6 @@ export class LoginComponent implements OnInit {
                 )[0],
               };
               userCurrent.token = this.token;
-              console.log(userCurrent);
               this.getService.sendToken(this.token);
               this.getService.sendUser(userCurrent);
               localStorage.setItem('id', userCurrent.id);
