@@ -15,7 +15,6 @@ import { PopupDeleteComponent } from '../../modals/popup-delete/popup-delete.com
 import { BoardModalComponent } from '../../../board/components/modal/board-modal/board-modal.component';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../../board/services/board.service';
-// import { addBoard } from '../../../redux/actions/board.actions';
 
 @Component({
   selector: 'app-header',

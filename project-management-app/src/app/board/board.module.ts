@@ -15,6 +15,7 @@ import { TaskItemComponent } from './components/board/task-item/task-item.compon
 import { ProtectAuthPagesGuard } from '../auth/services/mainGuard/protect-auth-pages.guard';
 import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-guard.guard';
 import { SharedModule } from '../shared/shared.module';
+import { BoardsListComponent } from './components/boards-list/boards-list.component';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,7 @@ import { SharedModule } from '../shared/shared.module';
     BoardModalComponent,
     ColumnModalComponent,
     TaskModalComponent,
-    // BoardsListComponent,
+    BoardsListComponent,
   ],
   imports: [
     CommonModule,
@@ -38,6 +39,6 @@ import { SharedModule } from '../shared/shared.module';
     BoardRoutingModule,
   ],
   exports: [],
-  providers: [ProtectAuthPagesGuard, CheckLoginGuardGuard],
+  providers: [ProtectAuthPagesGuard, CheckLoginGuardGuard, MaterialModule],
 })
 export class BoardModule {}

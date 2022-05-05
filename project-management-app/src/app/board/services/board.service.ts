@@ -16,8 +16,12 @@ import {
   providedIn: 'root',
 })
 export class BoardService {
-  public userToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mMjgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-DfryVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
+  // public userToken =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mM
+  // jgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-Dfr
+  // yVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
+
+  public userToken = localStorage.getItem('token') || '{}';
 
   private httpOptions = {
     headers: new HttpHeaders({
