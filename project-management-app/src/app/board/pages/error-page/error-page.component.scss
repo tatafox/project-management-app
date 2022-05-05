@@ -11,13 +11,7 @@
   align-items: center;
 
   &__btn-home {
-    width: 5rem;
     margin: 2rem 0 5rem 0;
-  }
-
-  &__icon-home {
-    color: yellow;
-    font-size: 2rem;
   }
 
   &__content {
@@ -25,11 +19,6 @@
     justify-content: center;
     flex-direction: column;
     text-align: center;
-
-  }
-
-  &__icon {
-    color: yellow;
   }
 
   &__text {
@@ -40,11 +29,17 @@
     &_error {
       margin-bottom: 1rem;
     }
-
   }
-
 }
 
 .mat-focus-indicator {
   margin-bottom: 7rem;
+}
+
+.error-img {
+  margin-bottom: 3rem;
+
+  img {
+    height: 18rem;
+  }
 }

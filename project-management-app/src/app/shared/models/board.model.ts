@@ -6,7 +6,7 @@ export interface IBoard {
 export interface IBoardDetail {
   id: string;
   title: string;
-  columns: IColumnList;
+  columns: IColumnList[];
 }
 
 export interface IColumn {
@@ -30,4 +30,16 @@ export interface ITask {
   userId: string;
   boardId: string;
   columnId: string;
+}
+
+export interface ITaskBody {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+}
+
+export interface TaskDialogData {
+  title: string;
+  description: string;
 }

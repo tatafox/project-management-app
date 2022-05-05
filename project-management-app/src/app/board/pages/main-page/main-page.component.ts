@@ -4,8 +4,8 @@ import { Router } from '@angular/router';
 import { HaveToAuthComponent } from 'src/app/auth/components/modals/have-to-auth/have-to-auth.component';
 import { UserEditService } from 'src/app/auth/services/user-edit/user-edit.service';
 import { GetUsersService } from 'src/app/auth/services/userList/get-users.service';
+import { IUser } from 'src/app/shared/models/user-models';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IUser } from 'src/app/shared/user-models';
 
 @Component({
   selector: 'app-main-page',
@@ -32,6 +32,7 @@ export class MainPageComponent implements OnInit {
     this.removeLS();
     this.router.navigate(['/admin']);
   }
+
   openPopup() {
     this.dialog.open(HaveToAuthComponent);
   }
@@ -43,7 +44,7 @@ export class MainPageComponent implements OnInit {
   ngOnInit(): void {
     this.isToken = this.local.getLocalStorage('id', 'token');
 
-    this.serviceGet.statusError$.subscribe((err) => {
+    this.serviceGet.statusError$.subscribe(() => {
       this.goToAdmin();
     });
     // this.editService.statusError$.subscribe((err) => {

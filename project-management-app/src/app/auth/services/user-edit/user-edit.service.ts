@@ -1,7 +1,11 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, Subject } from 'rxjs';
-import { IGetUser, IUser, IUserSignUp } from 'src/app/shared/user-models';
+import {
+  IGetUser,
+  IUser,
+  IUserSignUp,
+} from 'src/app/shared/models/user-models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,9 +31,7 @@ export class UserEditService {
       }),
     };
     return this.http.delete(`${this.URL}/users/${id}`, httpOptions).pipe(
-      map((data: any) => {
-        return data;
-      }),
+      map((data: any) => data),
       catchError((err) => {
         this.statusError$.next(err);
         return [];
@@ -48,9 +50,7 @@ export class UserEditService {
     return this.http
       .put<any>(`${this.URL}/users/${id}`, body, httpOptions)
       .pipe(
-        map((data: any) => {
-          return data;
-        }),
+        map((data: any) => data),
         catchError((err) => {
           this.statusError$.next(err);
           return [];

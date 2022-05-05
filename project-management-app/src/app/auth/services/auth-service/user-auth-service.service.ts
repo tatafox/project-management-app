@@ -2,9 +2,12 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
 import { catchError, Observable, Subject, tap } from 'rxjs';
+import {
+  IUserSignIn,
+  IUserSignUp,
+  IUser,
+} from 'src/app/shared/models/user-models';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IUserSignIn, IUserSignUp, IUser } from 'src/app/shared/user-models';
-// import { IBoardDetail } from '../../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',

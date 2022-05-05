@@ -4,7 +4,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IUser, IUserSignUp } from 'src/app/shared/user-models';
+import { IUser, IUserSignUp } from 'src/app/shared/models/user-models';
 import { UserEditService } from '../../services/user-edit/user-edit.service';
 import { GetUsersService } from '../../services/userList/get-users.service';
 import { SuccessRegistrComponent } from '../modals/success-registr/success-registr.component';
@@ -18,6 +18,7 @@ import { UserNotFoundComponent } from '../modals/user-not-found/user-not-found.c
 })
 export class EditComponent implements OnInit {
   dialogRef: MatDialogRef<SuccessRegistrComponent>;
+
   public titles = {
     describe: 'You can make changes to the profile here',
     headTitle: 'Edit profile ',
@@ -50,6 +51,7 @@ export class EditComponent implements OnInit {
       this.router.navigate(['/edit']);
     }
   }
+
   adminPage() {
     this.router.navigate(['/admin']);
   }
@@ -98,6 +100,7 @@ export class EditComponent implements OnInit {
         if (data) this.user = data;
         this.dialogRef = this.dialog.open(SuccessRegistrComponent);
         this.dialogRef.componentInstance.messageTitle = 'Success!';
+        // eslint-disable-next-line operator-linebreak
         this.dialogRef.componentInstance.messageDescribe =
           'Everything went well';
 

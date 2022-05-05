@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable @typescript-eslint/indent */
 /* eslint-disable @typescript-eslint/no-unused-expressions */
 /* eslint-disable no-param-reassign */
@@ -5,8 +6,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { IGetUser, IUser } from 'src/app/shared/models/user-models';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IGetUser, IUser } from 'src/app/shared/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 import { GetUsersService } from '../../services/userList/get-users.service';
 import { SuccessRegistrComponent } from '../modals/success-registr/success-registr.component';

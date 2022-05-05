@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, Subject } from 'rxjs';
-import { IGetUser, IUser } from 'src/app/shared/user-models';
+import { IGetUser, IUser } from 'src/app/shared/models/user-models';
 
 @Injectable({
   providedIn: 'root',

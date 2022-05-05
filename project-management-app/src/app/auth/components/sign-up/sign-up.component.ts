@@ -6,7 +6,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
-import { IUser } from 'src/app/shared/user-models';
+import { IUser } from 'src/app/shared/models/user-models';
 import { UserAuthServiceService } from '../../services/auth-service/user-auth-service.service';
 import { GetUsersService } from '../../services/userList/get-users.service';
 import { PopupComponent } from '../modals/popup/popup.component';
@@ -88,7 +88,7 @@ export class SignUpComponent implements OnInit {
             this.formSignUp.disable();
             this.getService.sendUser(this.user);
             this.dialogRef = this.dialog.open(SuccessRegistrComponent);
-            this.dialogRef.componentInstance.messageTitle = 'Success!';
+            this.dialogRef.componentInstance.messageTitle = 'Great!';
             this.dialogRef.componentInstance.messageDescribe =
               'You have successfully sign up';
             this.router.navigate(['/main']);

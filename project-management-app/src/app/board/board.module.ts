@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { MaterialModule } from '../material/material.module';
@@ -10,11 +11,10 @@ import { BoardComponent } from './components/board/board.component';
 import { BoardModalComponent } from './components/modal/board-modal/board-modal.component';
 import { ColumnModalComponent } from './components/modal/column-modal/column-modal.component';
 import { TaskModalComponent } from './components/modal/task-modal/task-modal.component';
-import { ColumnItemComponent } from './components/board/column-item/column-item.component';
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
 import { ProtectAuthPagesGuard } from '../auth/services/mainGuard/protect-auth-pages.guard';
 import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-guard.guard';
-// import { BoardsListComponent } from './components/boards-list/boards-list.component';
+import { SharedModule } from '../shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -22,14 +22,21 @@ import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-gu
     ErrorPageComponent,
     BoardsPageComponent,
     BoardComponent,
-    ColumnItemComponent,
     TaskItemComponent,
     BoardModalComponent,
     ColumnModalComponent,
     TaskModalComponent,
     // BoardsListComponent,
   ],
-  imports: [CommonModule, BoardRoutingModule, MaterialModule, HttpClientModule],
+  imports: [
+    CommonModule,
+    BoardRoutingModule,
+    MaterialModule,
+    HttpClientModule,
+    SharedModule,
+    FormsModule,
+    BoardRoutingModule,
+  ],
   exports: [],
   providers: [ProtectAuthPagesGuard, CheckLoginGuardGuard],
 })
