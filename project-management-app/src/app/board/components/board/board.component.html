@@ -1,4 +1,10 @@
 <div class="wrapper">
+  <div class="board-title">
+    <span class="mat-headline">{{board.title}}</span>
+    <a routerLink="" mat-raised-button color="accent">
+      Go to board list
+    </a>
+  </div>
   <div class="column-list">
     <div class="column-item" *ngFor="let column of board.columns">
       <div class="column-item__wrapper" (click)="onColumnClick($event, column.id)">
@@ -8,14 +14,14 @@
         </button>
       </div>
       <ul class="task-list">
-        <li class="task-item" *ngFor="let task of column.tasks">
-          <app-task-item></app-task-item>
-        </li>
         <li class="task-item" (click)="onAddTask(column)">
           <div class="task-item__wrapper">
             <span>Add new task</span>
             <mat-icon>add_circle</mat-icon>
           </div>
+        </li>
+        <li class="task-item" *ngFor="let task of column.tasks">
+          <app-task-item [task]="task"></app-task-item>
         </li>
       </ul>
     </div>

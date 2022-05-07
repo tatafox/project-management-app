@@ -9,6 +9,7 @@ import {
   IBoard,
   IBoardDetail,
   IColumn,
+  ITask,
   ITaskBody,
 } from '../../shared/models/board.model';
 
@@ -16,11 +17,6 @@ import {
   providedIn: 'root',
 })
 export class BoardService {
-  // public userToken =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mM
-  // jgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-Dfr
-  // yVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
-
   public userToken = localStorage.getItem('token') || '{}';
 
   private httpOptions = {
@@ -101,7 +97,7 @@ export class BoardService {
     idBoard: string,
     idColumn: string,
     taskBody: ITaskBody,
-  ): Observable<IColumn> {
+  ): Observable<ITask> {
     return this.http
       .post(
         `/api/boards/${idBoard}/columns/${idColumn}/tasks`,

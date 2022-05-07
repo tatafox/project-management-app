@@ -1,5 +1,12 @@
 .wrapper {
-  margin-top: 20px;
+  padding-top: 20px;
+}
+
+.board-title {
+  display: flex;
+  justify-content: space-between;
+  height: 35px;
+  margin-bottom: 20px;
 }
 
 .column-list {
@@ -9,6 +16,8 @@
 
 .column-item {
   width: 25%;
+  height: calc(100vh - 265px);
+  overflow-y: scroll;
 
   &__wrapper {
     width: 100%;
@@ -34,7 +43,12 @@
   }
 }
 
+.task-list {
+  padding: 0 10px;
+}
+
 .task-item {
+  margin: 20px 0;
   &__wrapper {
     width: 100%;
     display: flex;

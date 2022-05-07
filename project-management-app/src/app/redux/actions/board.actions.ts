@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IBoardDetail } from '../../shared/models/board.model';
+import { IBoardDetail, ITask } from '../../shared/models/board.model';
 
 export const addBoard = createAction(
   'CREATE BOARD',
@@ -22,9 +22,14 @@ export const updateBoard = createAction(
   props<{ board: IBoardDetail }>(),
 );
 
+export const updateTask = createAction(
+  'UPDATE TASK',
+  props<{ boardID: string; columnID: string; task: ITask }>(),
+);
+
 export const addError = createAction(
   'ADD ERROR',
   props<{ error: HttpErrorResponse }>(),
 );
 
-export const clearError = createAction('ADD ERROR', props<{ error: null }>());
+export const clearError = createAction('CLEAR ERROR', props<{ error: null }>());

@@ -13,7 +13,7 @@ import {
   IColumnList,
   ITaskBody,
 } from '../../../shared/models/board.model';
-import { updateBoard } from '../../../redux/actions/board.actions';
+import { updateBoard, updateTask } from '../../../redux/actions/board.actions';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ColumnModalComponent } from '../modal/column-modal/column-modal.component';
@@ -88,7 +88,6 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   onColumnClick(event: MouseEvent, id: string) {
-    console.log(event.target);
     if ((event.target as HTMLElement).tagName === 'SPAN') {
       // -- TO DO ---
       // edit column
@@ -134,28 +133,26 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      console.log(result);
+      const userID: string = localStorage.getItem('id') || '';
       if (result) {
         const newTask: ITaskBody = {
           title: result.title,
-          description: result.description,
           order: column.tasks.length,
-          userId: this.boardService.userToken,
+          description: result.description,
+          userId: userID,
         };
         this.boardService
           .postTask(this.id, column.id, newTask)
           .subscribe((response) => {
-            console.log(response);
-            /* const board: IBoardDetail = {
-              id: this.board.id,
-              title: this.board.title,
-              columns: [...this.board.columns.filter((item) => item.id !== id)],
-            };
-            console.log(board);
-            this.store.dispatch(updateBoard({ board })); */
+            this.store.dispatch(
+              updateTask({
+                boardID: this.id,
+                columnID: column.id,
+                task: response,
+              }),
+            );
           });
       }
-      // this.editColumn(result, id);
     });
   }
 }

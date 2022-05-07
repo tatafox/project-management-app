@@ -2,6 +2,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as boardActions from '../actions/board.actions';
 import { BoardState, initialBoardState } from '../state.models';
+import { IBoardDetail } from '../../shared/models/board.model';
 
 const reducer = createReducer(
   initialBoardState,
@@ -29,6 +30,25 @@ const reducer = createReducer(
       if (item.id !== board.id) {
         result.push(item);
       } else {
+        result.push(board);
+      }
+    }
+    return {
+      ...state,
+      boards: result,
+    };
+  }),
+  on(boardActions.updateTask, (state, { boardID, columnID, task }) => {
+    const result = [];
+    for (const item of state.boards) {
+      if (item.id !== boardID) {
+        result.push(item);
+      } else {
+        const board = JSON.parse(JSON.stringify(item)) as IBoardDetail;
+        const currentColumn = board.columns.filter(
+          (col) => col.id === columnID,
+        )[0];
+        currentColumn.tasks.push(task);
         result.push(board);
       }
     }
