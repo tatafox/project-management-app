@@ -1,6 +1,6 @@
 import { createAction, props } from '@ngrx/store';
-import { IBoard, IBoardDetail } from '../../shared/models/board.model';
 import { HttpErrorResponse } from '@angular/common/http';
+import { IBoardDetail } from '../../shared/models/board.model';
 
 export const addBoard = createAction(
   'CREATE BOARD',

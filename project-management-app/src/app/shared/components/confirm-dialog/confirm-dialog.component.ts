@@ -9,6 +9,7 @@ import { IConfirmDialog } from '../../models/general.models';
 })
 export class ConfirmDialogComponent {
   title: string;
+
   message: string;
 
   constructor(

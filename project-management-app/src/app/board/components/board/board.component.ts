@@ -1,18 +1,19 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable prefer-destructuring */
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
-import { MatDialog } from '@angular/material/dialog';
-import { Subscription } from 'rxjs';
+
 import {
-  IBoard,
   IBoardDetail,
   IColumnList,
   ITaskBody,
 } from '../../../shared/models/board.model';
-import { BoardModalComponent } from '../modal/board-modal/board-modal.component';
-import { deleteBoard, updateBoard } from '../../../redux/actions/board.actions';
+import { updateBoard } from '../../../redux/actions/board.actions';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ColumnModalComponent } from '../modal/column-modal/column-modal.component';
@@ -25,7 +26,9 @@ import { TaskModalComponent } from '../modal/task-modal/task-modal.component';
 })
 export class BoardComponent implements OnInit, OnDestroy {
   private id!: string;
+
   private subscription: Subscription[] = [];
+
   public board: IBoardDetail;
 
   constructor(
@@ -65,6 +68,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   private editColumn(title: string, id?: string) {
     const order = this.board.columns.length;
     this.boardService
@@ -87,9 +91,9 @@ export class BoardComponent implements OnInit, OnDestroy {
     console.log(event.target);
     if ((event.target as HTMLElement).tagName === 'SPAN') {
       // -- TO DO ---
-      //edit column
+      // edit column
     } else {
-      //delete column
+      // delete column
       this.deleteColumn(id);
     }
   }
@@ -142,16 +146,16 @@ export class BoardComponent implements OnInit, OnDestroy {
           .postTask(this.id, column.id, newTask)
           .subscribe((response) => {
             console.log(response);
-            /*const board: IBoardDetail = {
+            /* const board: IBoardDetail = {
               id: this.board.id,
               title: this.board.title,
               columns: [...this.board.columns.filter((item) => item.id !== id)],
             };
             console.log(board);
-            this.store.dispatch(updateBoard({ board }));*/
+            this.store.dispatch(updateBoard({ board })); */
           });
       }
-      //this.editColumn(result, id);
+      // this.editColumn(result, id);
     });
   }
 }

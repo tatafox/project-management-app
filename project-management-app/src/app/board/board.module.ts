@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
 import { MainPageComponent } from './pages/main-page/main-page.component';
 import { ErrorPageComponent } from './pages/error-page/error-page.component';
 import { MaterialModule } from '../material/material.module';
@@ -10,10 +12,10 @@ import { BoardModalComponent } from './components/modal/board-modal/board-modal.
 import { ColumnModalComponent } from './components/modal/column-modal/column-modal.component';
 import { TaskModalComponent } from './components/modal/task-modal/task-modal.component';
 import { TaskItemComponent } from './components/board/task-item/task-item.component';
-import { BoardsListComponent } from './components/boards-list/boards-list.component';
-import { HttpClientModule } from '@angular/common/http';
+import { ProtectAuthPagesGuard } from '../auth/services/mainGuard/protect-auth-pages.guard';
+import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-guard.guard';
 import { SharedModule } from '../shared/shared.module';
-import { FormsModule } from '@angular/forms';
+import { BoardsListComponent } from './components/boards-list/boards-list.component';
 
 @NgModule({
   declarations: [
@@ -37,5 +39,6 @@ import { FormsModule } from '@angular/forms';
     BoardRoutingModule,
   ],
   exports: [],
+  providers: [ProtectAuthPagesGuard, CheckLoginGuardGuard, MaterialModule],
 })
 export class BoardModule {}

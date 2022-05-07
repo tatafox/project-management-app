@@ -1,4 +1,4 @@
-import { IBoardDetail, IColumn, ITask } from '../shared/models/board.model';
+import { IBoardDetail } from '../shared/models/board.model';
 
 export interface BoardState {
   boards: IBoardDetail[];

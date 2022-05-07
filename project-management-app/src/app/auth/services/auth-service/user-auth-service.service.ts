@@ -1,13 +1,13 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // eslint-disable-next-line object-curly-newline
-import { catchError, map, Observable, Subject, tap } from 'rxjs';
+import { catchError, Observable, Subject, tap } from 'rxjs';
 import {
   IUserSignIn,
   IUserSignUp,
   IUser,
 } from 'src/app/shared/models/user-models';
-import { IBoardDetail } from '../../../shared/models/board.model';
+import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,26 +20,37 @@ export class UserAuthServiceService {
   private token: string = 'signup';
 
   public user: IUser;
-  public user$ = new Subject<IUser>();
 
-  constructor(private http: HttpClient) {}
+  public statusError$ = new Subject<string>();
+
+  public userObj = new Subject<IUser>();
+
+  constructor(
+    private http: HttpClient,
+    private localStorService: LocalStorageService,
+  ) {}
 
   postDataUser(user: IUserSignUp): Observable<any> {
-    return this.http
-      .post(`${this.URL}/signup`, user)
-      .pipe(tap((data: any) => data));
+    return this.http.post(`${this.URL}/signup`, user).pipe(
+      tap((data: any) => console.log(data)),
+      catchError((err) => {
+        this.errorMessage = err.message;
+        this.statusError$.next(this.errorMessage);
+        return [];
+      }),
+    );
   }
 
   signInUser(user: IUserSignIn): Observable<any> {
     return this.http.post(`${this.URL}/signin`, user).pipe(
       tap((data: any) => {
         localStorage.setItem('token', data.token);
-        this.setToken(data.token);
       }),
     );
   }
 
-  fetchRegistration(user: IUserSignUp) {
+  fetchRegistration(user: any): Observable<any> {
+    this.localStorService.removeLocalStorage('id', 'token');
     this.postDataUser(user).subscribe(
       (responce) => {
         this.user = { ...responce };
@@ -48,55 +59,17 @@ export class UserAuthServiceService {
           password: user.password,
         };
         this.signInUser(userSignIn).subscribe(
-          (responce) => {
-            this.user.token = responce.token;
-            this.user$.next(this.user);
+          (dataToken) => {
+            this.user.token = dataToken.token;
+            localStorage.setItem('id', this.user.id);
+            this.userObj.next(this.user);
           },
-          (error) => {
-            return error;
-          },
+          (error) => error,
         );
         return responce;
       },
-      (error) => {
-        return error;
-      },
+      (error) => error,
     );
-  }
-
-  setToken(token: string) {
-    this.token = token;
-  }
-
-  getToken(): string {
-    return this.token;
-  }
-
-  logout() {
-    this.setToken('');
-    localStorage.clear();
-  }
-
-  /*------*/
-  getUsers(): Observable<any> {
-    const httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type': 'application/json',
-        authorization: `Bearer ${this.token}`,
-      }),
-    };
-    console.log(httpOptions);
-    return this.http.get(`${this.URL}/users`, httpOptions).pipe(
-      map((data: any) => {
-        const usersList = data;
-        console.log(usersList);
-        return usersList;
-      }),
-      catchError((err) => {
-        console.log(err);
-        this.errorMessage = err.message;
-        return [];
-      }),
-    );
+    return this.userObj;
   }
 }

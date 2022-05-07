@@ -1,15 +1,15 @@
+/* eslint-disable no-restricted-syntax */
 import { createReducer, on, Action } from '@ngrx/store';
 import * as boardActions from '../actions/board.actions';
 import { BoardState, initialBoardState } from '../state.models';
 
 const reducer = createReducer(
   initialBoardState,
-  on(boardActions.addBoard, (state, { board }) => {
-    return { ...state, boards: [...state.boards, board] };
-  }),
-  on(boardActions.setBoardsList, (state, { boards }) => {
-    return { ...state, boards };
-  }),
+  on(boardActions.addBoard, (state, { board }) => ({
+    ...state,
+    boards: [...state.boards, board],
+  })),
+  on(boardActions.setBoardsList, (state, { boards }) => ({ ...state, boards })),
   on(boardActions.deleteBoard, (state, { id }) => {
     const result = [];
     for (const board of state.boards) {
@@ -37,13 +37,9 @@ const reducer = createReducer(
       boards: result,
     };
   }),
-  on(boardActions.addError, (state, { error }) => {
-    return { ...state, error };
-  }),
+  on(boardActions.addError, (state, { error }) => ({ ...state, error })),
   // @ts-ignore
-  on(boardActions.clearError, (state, { error }) => {
-    return { ...state, error };
-  }),
+  on(boardActions.clearError, (state, { error }) => ({ ...state, error })),
 );
 
 export function boardReducer(state: BoardState, action: Action): BoardState {

@@ -16,11 +16,16 @@ import {
   providedIn: 'root',
 })
 export class BoardService {
-  public userToken =
-    'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mMjgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-DfryVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
+  // public userToken =
+  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mM
+  // jgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-Dfr
+  // yVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
+
+  public userToken = localStorage.getItem('token') || '{}';
+
   private httpOptions = {
     headers: new HttpHeaders({
-      authorization: 'Bearer ' + this.userToken,
+      authorization: `Bearer ${this.userToken}`,
     }),
   };
 
@@ -33,7 +38,7 @@ export class BoardService {
   constructor(private http: HttpClient) {}
 
   private getBoardsList(): Observable<any> {
-    return this.http.get(`/api/boards`, this.httpOptions).pipe(
+    return this.http.get('/api/boards', this.httpOptions).pipe(
       // @ts-ignore
       map((data: IBoard[]) => {
         console.log(data);
@@ -56,7 +61,7 @@ export class BoardService {
 
   public postBoard(title: object): Observable<IBoard> {
     return this.http
-      .post(`/api/boards`, title, this.httpOptions)
+      .post('/api/boards', title, this.httpOptions)
       .pipe(map((responce: any) => responce));
   }
 
@@ -78,8 +83,8 @@ export class BoardService {
     order: number,
   ): Observable<IColumn> {
     const body = {
-      title: title,
-      order: order,
+      title,
+      order,
     };
     return this.http
       .post(`/api/boards/${id}/columns`, body, this.httpOptions)

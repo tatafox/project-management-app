@@ -1,0 +1,9 @@
+<section class="success-message"
+  style="min-width: 20rem; border-radius:1rem; border: 1px solid yellow; padding: 1rem; background-color: bisque; text-align: center;">
+  <h2 mat-dialog-title>{{messageTitle}}</h2>
+  <mat-dialog-content>{{messageDescribe}}
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Ok</button>
+  </mat-dialog-actions>
+</section>

@@ -1,20 +1,20 @@
+/* eslint-disable no-return-assign */
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 import {
-  addBoard,
   addError,
   clearError,
   deleteBoard,
   setBoardsList,
 } from '../../../redux/actions/board.actions';
-import { Store } from '@ngrx/store';
 import { AppState } from '../../../redux/state.models';
 import { BoardService } from '../../services/board.service';
-import { Observable, Subscription } from 'rxjs';
 import { IBoard, IBoardDetail } from '../../../shared/models/board.model';
-import { MatDialog } from '@angular/material/dialog';
 import { IConfirmDialog } from '../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-boards-list',
@@ -23,6 +23,7 @@ import { Router } from '@angular/router';
 })
 export class BoardsListComponent implements OnInit, OnDestroy {
   private subscription: Subscription[] = [];
+
   public boardsList: IBoardDetail[];
 
   constructor(
@@ -41,7 +42,7 @@ export class BoardsListComponent implements OnInit, OnDestroy {
     this.boardService.fetchBoardsList();
     this.subscription.push(
       this.boardService.boardList$.subscribe((boards) => {
-        //сохраняем в стор список бордов и убираем ошибку (на случай если она  была до)
+        // сохраняем в стор список бордов и убираем ошибку (на случай если она  была до)
         this.store.dispatch(setBoardsList({ boards }));
         const error = null;
         this.store.dispatch(clearError({ error }));

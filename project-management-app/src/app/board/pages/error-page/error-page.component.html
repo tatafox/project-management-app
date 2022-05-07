@@ -2,14 +2,14 @@
   <div class="wrapper">
     <div class="error-box">
       <div class="error-box__content">
-          <div class="error-img">
-            <img src="../../../../assets/icons/cat.png">
-          </div>
+        <div class="error-img">
+          <img src="../../../../assets/icons/cat.png">
+        </div>
         <div class="error-box__text">
           <p>Something went wrong...</p>
           <p>The cat does not find anything here</p>
-          <button class="error-box__btn-home" (click)="goHome()" mat-raised-button color="accent">
-            Go home
+          <button class="error-box__btn-home" mat-icon-button (click)="goToMain()">
+            <mat-icon class="error-box__icon-home">home</mat-icon>
           </button>
         </div>
       </div>

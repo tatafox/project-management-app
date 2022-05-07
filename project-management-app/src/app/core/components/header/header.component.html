@@ -12,14 +12,15 @@
           <button class="header-content__btn_btn btn btn_dark" mat-flat-button color="accent" (click)="onCreateBoard()">Create new board</button>
         </div>
       </div>
-      <div class="header-menu">
+      <div class="header-menu" *ngIf="userName">
         <button mat-button [matMenuTriggerFor]="menu">
-          Profile
+          {{userName}}
           <img class="header-content__menu_icon" src="../../../../assets/icons/icon.svg" alt="user icon">
         </button>
         <mat-menu #menu="matMenu">
-          <button mat-menu-item>edit profile</button>
-          <button mat-menu-item>logout</button>
+          <button mat-menu-item (click)="editUser()">edit profile</button>
+          <button mat-menu-item (click)="logout()">exit profile</button>
+          <button mat-menu-item (click)="deleteUser()">delete profile</button>
         </mat-menu>
       </div>
     </div>
