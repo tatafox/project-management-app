@@ -9,7 +9,8 @@
           </mat-form-field>
         </div>
         <div class="header-content__btn">
-          <button class="header-content__btn_btn btn btn_dark" mat-flat-button color="accent" (click)="onCreateBoard()">Create new board</button>
+          <button i18n=" title btn | The tittle of button" class="header-content__btn_btn btn btn_dark" mat-flat-button
+            color="accent" (click)="onCreateBoard()">Create new board</button>
         </div>
       </div>
       <div class="header-menu" *ngIf="userName">
@@ -23,6 +24,12 @@
           <button mat-menu-item (click)="deleteUser()">delete profile</button>
         </mat-menu>
       </div>
+      <ul class="translate">
+        <li *ngFor="let locale of localeList">
+          <a href="/{{locale.code}}">{{locale.label}}</a>
+        </li>
+      </ul>
+
     </div>
   </div>
 </header>

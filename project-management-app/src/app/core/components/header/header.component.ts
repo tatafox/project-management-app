@@ -22,9 +22,9 @@ import { BoardService } from '../../../board/services/board.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  dialogRef: MatDialogRef<PopupDeleteComponent>;
+  private dialogRef: MatDialogRef<PopupDeleteComponent>;
 
-  title: string;
+  public title: string;
 
   public userName: string;
 
@@ -35,6 +35,11 @@ export class HeaderComponent implements OnInit {
   public id: string = '';
 
   public href: string = '';
+
+  public localeList = [
+    { code: 'en-US', label: 'English' },
+    { code: 'ru-Ru', label: 'Русский' },
+  ];
 
   constructor(
     private localSt: LocalStorageService,
