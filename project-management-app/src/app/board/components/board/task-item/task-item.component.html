@@ -1,7 +1,7 @@
-<div class="task-item__wrapper">
+<div class="task-item__wrapper" (click)="onTaskEdit($event)">
   <span class="mat-title">{{task.title}}</span>
   <span class="mat-subheading-1">{{task.description}}</span>
-  <span class="mat-h5">{{task.userId}}</span>
+  <span class="mat-h5">{{login}}</span>
   <button mat-button (click)="onDeleteTask()">
     <mat-icon>delete</mat-icon>
   </button>

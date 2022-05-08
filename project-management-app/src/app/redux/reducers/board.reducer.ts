@@ -3,6 +3,7 @@ import { createReducer, on, Action } from '@ngrx/store';
 import * as boardActions from '../actions/board.actions';
 import { BoardState, initialBoardState } from '../state.models';
 import { IBoardDetail, ITask } from '../../shared/models/board.model';
+import { map } from 'rxjs';
 
 const reducer = createReducer(
   initialBoardState,
@@ -10,7 +11,17 @@ const reducer = createReducer(
     ...state,
     boards: [...state.boards, board],
   })),
-  on(boardActions.setBoardsList, (state, { boards }) => ({ ...state, boards })),
+  on(boardActions.setBoardsList, (state, { boards }) => {
+    const newBoards = JSON.parse(JSON.stringify(boards)) as IBoardDetail[];
+    newBoards.forEach((board) => {
+      board.columns.sort((a, b) => a.order - b.order);
+      board.columns.forEach((column) =>
+        column.tasks.sort((a, b) => a.order - b.order),
+      );
+      return board;
+    });
+    return { ...state, boards: newBoards };
+  }),
   on(boardActions.deleteBoard, (state, { id }) => {
     const result = [];
     for (const board of state.boards) {
@@ -38,7 +49,7 @@ const reducer = createReducer(
       boards: result,
     };
   }),
-  on(boardActions.updateTask, (state, { boardID, columnID, task }) => {
+  on(boardActions.updateTask, (state, { boardID, columnID, taskID, task }) => {
     const result = [];
     for (const item of state.boards) {
       if (item.id !== boardID) {
@@ -48,7 +59,19 @@ const reducer = createReducer(
         const currentColumn = board.columns.filter(
           (col) => col.id === columnID,
         )[0];
-        currentColumn.tasks.push(task);
+        if (!taskID) {
+          currentColumn.tasks.push(task);
+        } else {
+          const taskList: ITask[] = [];
+          currentColumn.tasks.forEach((item) => {
+            if (!!item && item.id !== taskID) taskList.push(item);
+          });
+          taskList.push(task);
+          taskList.sort((a, b) => a.order - b.order);
+          console.log(taskList);
+          currentColumn.tasks = taskList;
+        }
+        console.log(board, currentColumn.tasks);
         result.push(board);
       }
     }
@@ -57,14 +80,14 @@ const reducer = createReducer(
       boards: result,
     };
   }),
-  on(boardActions.deleteTask, (state, { boardID, columnID, taskID }) => {
+  on(boardActions.deleteTask, (state, { boardID, columnID, taskDeleteID }) => {
     state.boards.forEach((board) => {
       if (board.id === boardID) {
         board.columns.forEach((column) => {
           if (column.id === columnID) {
             const task: ITask[] = [];
             column.tasks.forEach((item) => {
-              if (!!item && item.id !== taskID) task.push(item);
+              if (!!item && item.id !== taskDeleteID) task.push(item);
             });
             column.tasks = task;
           }

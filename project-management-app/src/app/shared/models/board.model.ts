@@ -32,6 +32,15 @@ export interface ITask {
   columnId: string;
 }
 
+export interface IUpdateTask {
+  title: string;
+  order: number;
+  description: string;
+  userId: string;
+  boardId: string;
+  columnId: string;
+}
+
 export interface ITaskBody {
   title: string;
   order: number;
@@ -42,4 +51,5 @@ export interface ITaskBody {
 export interface TaskDialogData {
   title: string;
   description: string;
+  editTask?: boolean;
 }

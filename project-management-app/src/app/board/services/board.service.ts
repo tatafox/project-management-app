@@ -10,6 +10,7 @@ import {
   IBoardDetail,
   IColumn,
   ITask,
+  IUpdateTask,
   ITaskBody,
 } from '../../shared/models/board.model';
 
@@ -102,6 +103,19 @@ export class BoardService {
       .post(
         `/api/boards/${idBoard}/columns/${idColumn}/tasks`,
         taskBody,
+        this.httpOptions,
+      )
+      .pipe(map((responce: any) => responce));
+  }
+
+  public updateTask(
+    updateTask: IUpdateTask,
+    taskId: string,
+  ): Observable<ITask> {
+    return this.http
+      .put(
+        `/api/boards/${updateTask.boardId}/columns/${updateTask.columnId}/tasks/${taskId}`,
+        updateTask,
         this.httpOptions,
       )
       .pipe(map((responce: any) => responce));

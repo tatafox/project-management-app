@@ -24,12 +24,12 @@ export const updateBoard = createAction(
 
 export const updateTask = createAction(
   'UPDATE TASK',
-  props<{ boardID: string; columnID: string; task: ITask }>(),
+  props<{ boardID: string; columnID: string; taskID?: string; task: ITask }>(),
 );
 
 export const deleteTask = createAction(
   'UPDATE TASK',
-  props<{ boardID: string; columnID: string; taskID: string }>(),
+  props<{ boardID: string; columnID: string; taskDeleteID: string }>(),
 );
 
 export const addError = createAction(
