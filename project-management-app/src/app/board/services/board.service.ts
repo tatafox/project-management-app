@@ -107,6 +107,19 @@ export class BoardService {
       .pipe(map((responce: any) => responce));
   }
 
+  public deleteTask(
+    idBoard: string,
+    idColumn: string,
+    idTask: string,
+  ): Observable<ITask> {
+    return this.http
+      .delete(
+        `/api/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`,
+        this.httpOptions,
+      )
+      .pipe(map((responce: any) => responce));
+  }
+
   public fetchBoardsList() {
     return this.getBoardsList().subscribe((response) => {
       // @ts-ignore

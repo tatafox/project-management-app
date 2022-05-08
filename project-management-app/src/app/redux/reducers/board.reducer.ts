@@ -2,7 +2,7 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as boardActions from '../actions/board.actions';
 import { BoardState, initialBoardState } from '../state.models';
-import { IBoardDetail } from '../../shared/models/board.model';
+import { IBoardDetail, ITask } from '../../shared/models/board.model';
 
 const reducer = createReducer(
   initialBoardState,
@@ -55,6 +55,25 @@ const reducer = createReducer(
     return {
       ...state,
       boards: result,
+    };
+  }),
+  on(boardActions.deleteTask, (state, { boardID, columnID, taskID }) => {
+    state.boards.forEach((board) => {
+      if (board.id === boardID) {
+        board.columns.forEach((column) => {
+          if (column.id === columnID) {
+            const task: ITask[] = [];
+            column.tasks.forEach((item) => {
+              if (!!item && item.id !== taskID) task.push(item);
+            });
+            column.tasks = task;
+          }
+        });
+      }
+    });
+    return {
+      ...state,
+      boards: state.boards,
     };
   }),
   on(boardActions.addError, (state, { error }) => ({ ...state, error })),

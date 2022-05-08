@@ -21,7 +21,7 @@
           </div>
         </li>
         <li class="task-item" *ngFor="let task of column.tasks">
-          <app-task-item [task]="task"></app-task-item>
+          <app-task-item [task]="task" [columnId]="column.id" [boardId]="board.id"></app-task-item>
         </li>
       </ul>
     </div>

@@ -27,6 +27,11 @@ export const updateTask = createAction(
   props<{ boardID: string; columnID: string; task: ITask }>(),
 );
 
+export const deleteTask = createAction(
+  'UPDATE TASK',
+  props<{ boardID: string; columnID: string; taskID: string }>(),
+);
+
 export const addError = createAction(
   'ADD ERROR',
   props<{ error: HttpErrorResponse }>(),
