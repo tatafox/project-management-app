@@ -12,6 +12,7 @@ import {
   ITask,
   IUpdateTask,
   ITaskBody,
+  IColumnList,
 } from '../../shared/models/board.model';
 
 @Injectable({
@@ -85,6 +86,23 @@ export class BoardService {
     };
     return this.http
       .post(`/api/boards/${id}/columns`, body, this.httpOptions)
+      .pipe(map((responce: any) => responce));
+  }
+
+  public updateColumn(
+    idBoard: string,
+    newColumn: IColumnList,
+  ): Observable<IColumn> {
+    const updateColumnBody = {
+      title: newColumn.title,
+      order: newColumn.order,
+    };
+    return this.http
+      .put(
+        `/api/boards/${idBoard}/columns/${newColumn.id}`,
+        updateColumnBody,
+        this.httpOptions,
+      )
       .pipe(map((responce: any) => responce));
   }
 

@@ -2,7 +2,11 @@
 import { createReducer, on, Action } from '@ngrx/store';
 import * as boardActions from '../actions/board.actions';
 import { BoardState, initialBoardState } from '../state.models';
-import { IBoardDetail, ITask } from '../../shared/models/board.model';
+import {
+  IBoardDetail,
+  IColumnList,
+  ITask,
+} from '../../shared/models/board.model';
 import { map } from 'rxjs';
 
 const reducer = createReducer(
@@ -44,6 +48,52 @@ const reducer = createReducer(
         result.push(board);
       }
     }
+    return {
+      ...state,
+      boards: result,
+    };
+  }),
+  on(boardActions.deleteColumn, (state, { boardID, columnDeleteID }) => {
+    const result: IBoardDetail[] = [];
+    state.boards.forEach((board) => {
+      if (board.id === boardID) {
+        const boardUpdate = JSON.parse(JSON.stringify(board)) as IBoardDetail;
+        const newColumns: IColumnList[] = [];
+        boardUpdate.columns.forEach((column) => {
+          if (column.id !== columnDeleteID) {
+            newColumns.push(column);
+          }
+        });
+        boardUpdate.columns = newColumns;
+        result.push(boardUpdate);
+      } else {
+        result.push(board);
+      }
+    });
+    return {
+      ...state,
+      boards: result,
+    };
+  }),
+  on(boardActions.updateColumn, (state, { boardID, columnUpdate }) => {
+    const result: IBoardDetail[] = [];
+    state.boards.forEach((board) => {
+      if (board.id === boardID) {
+        const boardUpdate = JSON.parse(JSON.stringify(board)) as IBoardDetail;
+        const newColumns: IColumnList[] = [];
+        boardUpdate.columns.forEach((column) => {
+          if (column.id !== columnUpdate.id) {
+            newColumns.push(column);
+          } else {
+            newColumns.push(columnUpdate);
+          }
+        });
+        boardUpdate.columns = newColumns;
+        result.push(boardUpdate);
+      } else {
+        result.push(board);
+      }
+    });
     return {
       ...state,
       boards: result,

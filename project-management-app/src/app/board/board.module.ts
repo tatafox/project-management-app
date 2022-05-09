@@ -16,6 +16,7 @@ import { ProtectAuthPagesGuard } from '../auth/services/mainGuard/protect-auth-p
 import { CheckLoginGuardGuard } from '../auth/services/loginGuard/check-login-guard.guard';
 import { SharedModule } from '../shared/shared.module';
 import { BoardsListComponent } from './components/boards-list/boards-list.component';
+import { ColumnItemComponent } from './components/board/column-item/column-item.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { BoardsListComponent } from './components/boards-list/boards-list.compon
     ColumnModalComponent,
     TaskModalComponent,
     BoardsListComponent,
+    ColumnItemComponent,
   ],
   imports: [
     CommonModule,

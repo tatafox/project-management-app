@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable prefer-destructuring */
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
@@ -14,8 +14,6 @@ import {
   ITaskBody,
 } from '../../../shared/models/board.model';
 import { updateBoard, updateTask } from '../../../redux/actions/board.actions';
-import { IConfirmDialog } from '../../../shared/models/general.models';
-import { ConfirmDialogComponent } from '../../../shared/components/confirm-dialog/confirm-dialog.component';
 import { ColumnModalComponent } from '../modal/column-modal/column-modal.component';
 import { TaskModalComponent } from '../modal/task-modal/task-modal.component';
 
@@ -24,7 +22,7 @@ import { TaskModalComponent } from '../modal/task-modal/task-modal.component';
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
 })
-export class BoardComponent implements OnInit, OnDestroy {
+export class BoardComponent implements OnDestroy {
   private id!: string;
 
   private subscription: Subscription[] = [];
@@ -37,9 +35,7 @@ export class BoardComponent implements OnInit, OnDestroy {
     private store: Store<AppState>,
     private readonly boardService: BoardService,
     public dialog: MatDialog,
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.id = this.route.snapshot.params['id'];
     this.subscription.push(
       this.store
@@ -57,19 +53,19 @@ export class BoardComponent implements OnInit, OnDestroy {
     this.subscription.forEach((subscribe) => subscribe.unsubscribe());
   }
 
-  public onEditColumn(id?: string) {
+  public onNewColumn() {
     const dialogRef = this.dialog.open(ColumnModalComponent, {
       width: '450px',
       data: '',
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      if (result) this.editColumn(result, id);
+      if (result) this.addColumn(result);
     });
   }
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  private editColumn(title: string, id?: string) {
+  private addColumn(title: string) {
     const order = this.board.columns.length;
     this.boardService
       .postColumn(this.board.id, title, order)
@@ -85,42 +81,6 @@ export class BoardComponent implements OnInit, OnDestroy {
         };
         this.store.dispatch(updateBoard({ board }));
       });
-  }
-
-  onColumnClick(event: MouseEvent, id: string) {
-    if ((event.target as HTMLElement).tagName === 'SPAN') {
-      // -- TO DO ---
-      // edit column
-    } else {
-      // delete column
-      this.deleteColumn(id);
-    }
-  }
-
-  deleteColumn(id: string) {
-    const dialogData: IConfirmDialog = {
-      title: 'Delete column',
-      message: 'When you delete column, you also delete tasks. Are you sure?',
-    };
-
-    const dialogRef = this.dialog.open(ConfirmDialogComponent, {
-      maxWidth: '400px',
-      data: dialogData,
-    });
-
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.boardService.deleteColumn(this.id, id).subscribe((response) => {
-          const board: IBoardDetail = {
-            id: this.board.id,
-            title: this.board.title,
-            columns: [...this.board.columns.filter((item) => item.id !== id)],
-          };
-          console.log(board);
-          this.store.dispatch(updateBoard({ board }));
-        });
-      }
-    });
   }
 
   onAddTask(column: IColumnList) {

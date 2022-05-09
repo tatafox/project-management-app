@@ -7,12 +7,7 @@
   </div>
   <div class="column-list">
     <div class="column-item" *ngFor="let column of board.columns">
-      <div class="column-item__wrapper" (click)="onColumnClick($event, column.id)">
-        <span class="column-item__title">{{column.title}}</span>
-        <button mat-button>
-            <mat-icon>delete</mat-icon>
-        </button>
-      </div>
+    <app-column-item [column]="column" [boardId]="board.id"></app-column-item>
       <ul class="task-list">
         <li class="task-item" (click)="onAddTask(column)">
           <div class="task-item__wrapper">
@@ -26,7 +21,7 @@
       </ul>
     </div>
     <div class="column-item">
-      <button mat-button class="add-column" (click)="onEditColumn()">
+      <button mat-button class="add-column" (click)="onNewColumn()">
         <div class="column-item__wrapper">
           <span>Add new column</span>
           <mat-icon>add_circle</mat-icon>

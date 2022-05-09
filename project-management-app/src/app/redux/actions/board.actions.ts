@@ -1,6 +1,10 @@
 import { createAction, props } from '@ngrx/store';
 import { HttpErrorResponse } from '@angular/common/http';
-import { IBoardDetail, ITask } from '../../shared/models/board.model';
+import {
+  IBoardDetail,
+  IColumnList,
+  ITask,
+} from '../../shared/models/board.model';
 
 export const addBoard = createAction(
   'CREATE BOARD',
@@ -22,13 +26,23 @@ export const updateBoard = createAction(
   props<{ board: IBoardDetail }>(),
 );
 
+export const deleteColumn = createAction(
+  'DELETE COLUMN',
+  props<{ boardID: string; columnDeleteID: string }>(),
+);
+
+export const updateColumn = createAction(
+  'UPDATE COLUMN',
+  props<{ boardID: string; columnUpdate: IColumnList }>(),
+);
+
 export const updateTask = createAction(
   'UPDATE TASK',
   props<{ boardID: string; columnID: string; taskID?: string; task: ITask }>(),
 );
 
 export const deleteTask = createAction(
-  'UPDATE TASK',
+  'DELETE TASK',
   props<{ boardID: string; columnID: string; taskDeleteID: string }>(),
 );
 
