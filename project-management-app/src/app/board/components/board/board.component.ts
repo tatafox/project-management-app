@@ -124,22 +124,23 @@ export class BoardComponent implements OnInit, OnDestroy {
   }
 
   onAddTask(column: IColumnList) {
+    const userID: string = localStorage.getItem('id') || '';
+
     const dialogRef = this.dialog.open(TaskModalComponent, {
       width: '450px',
       data: {
         title: '',
         description: '',
+        userId: userID,
       },
     });
-
     dialogRef.afterClosed().subscribe((result) => {
-      const userID: string = localStorage.getItem('id') || '';
       if (result) {
         const newTask: ITaskBody = {
           title: result.title,
           order: column.tasks.length,
           description: result.description,
-          userId: userID,
+          userId: result.userID,
         };
         this.boardService
           .postTask(this.id, column.id, newTask)

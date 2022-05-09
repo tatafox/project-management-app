@@ -52,4 +52,5 @@ export interface TaskDialogData {
   title: string;
   description: string;
   editTask?: boolean;
+  userId: string;
 }

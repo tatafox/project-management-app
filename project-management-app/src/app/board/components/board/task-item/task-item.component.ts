@@ -84,16 +84,16 @@ export class TaskItemComponent {
           title: this.task.title,
           description: this.task.description,
           editTask: true,
+          userId: this.task.userId,
         },
       });
-
       dialogRef.afterClosed().subscribe((result) => {
         if (result) {
           const upTask: IUpdateTask = {
             title: result.title,
             order: this.task.order,
             description: result.description,
-            userId: this.task.userId,
+            userId: result.userId,
             columnId: this.columnId,
             boardId: this.boardId,
           };
