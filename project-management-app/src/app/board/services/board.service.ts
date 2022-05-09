@@ -9,18 +9,16 @@ import {
   IBoard,
   IBoardDetail,
   IColumn,
+  ITask,
+  IUpdateTask,
   ITaskBody,
+  IColumnList,
 } from '../../shared/models/board.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class BoardService {
-  // public userToken =
-  //   'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOiI0MGExMTFiZC0wMWU5LTQ0NzktOTE2Yi1mM
-  // jgzOTMzZDk5NzciLCJsb2dpbiI6ImtsZXBhIiwiaWF0IjoxNjUxMDY4MzMyfQ.bgk4-Dfr
-  // yVzaLLmzojWPwm55a2gtFeaqM0Qb4xgCrC0';
-
   public userToken = localStorage.getItem('token') || '{}';
 
   private httpOptions = {
@@ -91,6 +89,23 @@ export class BoardService {
       .pipe(map((responce: any) => responce));
   }
 
+  public updateColumn(
+    idBoard: string,
+    newColumn: IColumnList,
+  ): Observable<IColumn> {
+    const updateColumnBody = {
+      title: newColumn.title,
+      order: newColumn.order,
+    };
+    return this.http
+      .put(
+        `/api/boards/${idBoard}/columns/${newColumn.id}`,
+        updateColumnBody,
+        this.httpOptions,
+      )
+      .pipe(map((responce: any) => responce));
+  }
+
   public deleteColumn(idBoard: string, idColumn: string): Observable<IColumn> {
     return this.http
       .delete(`/api/boards/${idBoard}/columns/${idColumn}`, this.httpOptions)
@@ -101,11 +116,37 @@ export class BoardService {
     idBoard: string,
     idColumn: string,
     taskBody: ITaskBody,
-  ): Observable<IColumn> {
+  ): Observable<ITask> {
     return this.http
       .post(
         `/api/boards/${idBoard}/columns/${idColumn}/tasks`,
         taskBody,
+        this.httpOptions,
+      )
+      .pipe(map((responce: any) => responce));
+  }
+
+  public updateTask(
+    updateTask: IUpdateTask,
+    taskId: string,
+  ): Observable<ITask> {
+    return this.http
+      .put(
+        `/api/boards/${updateTask.boardId}/columns/${updateTask.columnId}/tasks/${taskId}`,
+        updateTask,
+        this.httpOptions,
+      )
+      .pipe(map((responce: any) => responce));
+  }
+
+  public deleteTask(
+    idBoard: string,
+    idColumn: string,
+    idTask: string,
+  ): Observable<ITask> {
+    return this.http
+      .delete(
+        `/api/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`,
         this.httpOptions,
       )
       .pipe(map((responce: any) => responce));

@@ -1,5 +1,5 @@
 <h1 mat-dialog-title>
-  Add new task
+  {{ data.editTask === true ? 'Edit' : 'Add new' }} task
 </h1>
 
 <div mat-dialog-content>
@@ -13,9 +13,21 @@
     <mat-label>Description</mat-label>
     <input matInput [(ngModel)]="data.description">
   </mat-form-field>
+  <h4>Please, select user</h4>
+  <mat-form-field appearance="fill">
+    <mat-label>User</mat-label>
+    <mat-select [(ngModel)]="data.userId" name="food">
+      <mat-option *ngFor="let user of userList" [value]="user.id">
+        {{user.login}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
 </div>
 
 <div class="button-wrapper" mat-dialog-actions>
   <button mat-flat-button color="accent" (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary"  [mat-dialog-close]="data">Add</button>
+  <button mat-raised-button color="primary"  [mat-dialog-close]="data">
+    {{ data.editTask === true ? 'Edit' : 'Add' }}
+  </button>
 </div>
