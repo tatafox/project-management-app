@@ -1,17 +1,17 @@
 <div class="wrapper">
   <div class="board-title">
     <span class="mat-headline">{{board.title}}</span>
-    <a routerLink="" mat-raised-button color="accent">
+    <a routerLink="" mat-raised-button color="accent" i18n="link to board-list">
       Go to board list
     </a>
   </div>
   <div class="column-list">
     <div class="column-item" *ngFor="let column of board.columns">
-    <app-column-item [column]="column" [boardId]="board.id"></app-column-item>
+      <app-column-item [column]="column" [boardId]="board.id"></app-column-item>
       <ul class="task-list">
         <li class="task-item" (click)="onAddTask(column)">
           <div class="task-item__wrapper">
-            <span>Add new task</span>
+            <span i18n="instruction add task">Add new task</span>
             <mat-icon>add_circle</mat-icon>
           </div>
         </li>
@@ -23,7 +23,7 @@
     <div class="column-item">
       <button mat-button class="add-column" (click)="onNewColumn()">
         <div class="column-item__wrapper">
-          <span>Add new column</span>
+          <span i18n="instruction add column">Add new column</span>
           <mat-icon>add_circle</mat-icon>
         </div>
       </button>

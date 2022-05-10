@@ -1,70 +1,80 @@
 <div class="signup-page section">
   <div class="wrapper">
     <div class="auth-box">
-      <button class="auth-box__btn" (click)="adminPage()" mat-raised-button color="000000" type="submit">Home</button>
+      <button class="auth-box__btn" (click)="adminPage()" mat-raised-button color="000000" type="submit"
+        i18n="title btn | The tittle of button">Home</button>
       <div class="signup-box">
         <form class="signup-form" [formGroup]="formSignUp" (ngSubmit)="submitNewUser()">
-          <h2 class="signup-box__title">{{titles.headTitle}}</h2>
-          <p class="signup-box__info">{{titles.describe}}</p>
+          <h2 class="signup-box__title" i18n="title sign-form | The main title">{{titles.headTitle}}</h2>
+          <p class="signup-box__info" i18n="info sign-form | The instructions for form">{{titles.describe}}</p>
           <mat-form-field appearance="outline" color="accent">
-            <mat-label>{{titles.name}}</mat-label>
+            <mat-label i18n="title name | The tittle of input">{{titles.name}}</mat-label>
             <input matInput required formControlName="name">
-            <mat-error *ngIf="formSignUp.controls['name'].hasError('required')">
+            <mat-error *ngIf="formSignUp.controls['name'].hasError('required')"
+              i18n="description error name | The description error for forms">
               Please, enter your name
             </mat-error>
-            <mat-error *ngIf="formSignUp.controls['name'].errors?.['minlength']">
+            <mat-error *ngIf="formSignUp.controls['name'].errors?.['minlength']"
+              i18n="description2 error name| The description error for forms">
               Your name must have min 2 elements
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" color="accent">
-            <mat-label>{{titles.login}}</mat-label>
+            <mat-label i18n="title login | The tittle of input">{{titles.login}}</mat-label>
             <input matInput required formControlName="login">
-            <mat-error *ngIf="formSignUp.controls['login'].errors?.['required']">Please, enter your login</mat-error>
-            <mat-error *ngIf="formSignUp.controls['login'].errors?.['minlength']">
+            <mat-error *ngIf="formSignUp.controls['login'].errors?.['required']"
+              i18n="description error login | The description error for forms">Please, enter your login</mat-error>
+            <mat-error *ngIf="formSignUp.controls['login'].errors?.['minlength']"
+              i18n="description2 error login | The description error for forms">
               Your login must have min 4 elements
             </mat-error>
           </mat-form-field>
           <mat-form-field appearance="outline" color="accent">
-            <mat-label>{{titles.password}}</mat-label>
+            <mat-label i18n="title password | The tittle of input">{{titles.password}}</mat-label>
             <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
               pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
               autocomplete="on">
             <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">{{hide ?
               'visibility_off' :
               'visibility'}}</mat-icon>
-            <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']">Please, enter a password</mat-error>
-            <mat-error *ngIf="formSignUp.controls['password'].invalid">
+            <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']"
+              i18n="description error password | The description error for forms">Please, enter a password</mat-error>
+            <mat-error *ngIf="formSignUp.controls['password'].invalid"
+              i18n="description2 error password | The description error for forms">
               You password must have lower
               case, upper case, symbols
               and
               numbers
             </mat-error>
           </mat-form-field>
-          <!-- <mat-form-field appearance="outline" color="accent">
-          <mat-label>{{titles.repeat}}</mat-label>
-          <input matInput formControlName="password" required type="password"
-            [type]="hidePassword ? 'password' : 'text'"
-            pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
-            autocomplete="on">
-          <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hidePassword = !hidePassword">
-            {{hidePassword
-            ? 'visibility_off' :
-            'visibility'}}</mat-icon>
-          <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']">Please, enter a password</mat-error>
-          <mat-error *ngIf="formSignUp.controls['password'].invalid">
-            You password must have lower
-            case, upper case, symbols
-            and
-            numbers
-          </mat-error>
-        </mat-form-field> -->
+          <mat-form-field appearance="outline" color="accent">
+            <mat-label i18n="title password second | The tittle of input">{{titles.repeat}}</mat-label>
+            <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
+              pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
+              autocomplete="on">
+            <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">
+              {{hide
+              ? 'visibility_off' :
+              'visibility'}}</mat-icon>
+            <mat-error *ngIf="formSignUp.controls['password'].errors?.['required']"
+              i18n="description error password | The description error for forms">Please, enter a password</mat-error>
+            <mat-error *ngIf="formSignUp.controls['password'].invalid"
+              i18n="description2 error password | The description error for forms">
+              You password must have lower
+              case, upper case, symbols
+              and
+              numbers
+            </mat-error>
+          </mat-form-field>
           <button class=" signup-form__btn" mat-raised-button color="accent" type="submit"
-            [disabled]="!formSignUp.valid">{{titles.submit}}</button>
+            [disabled]="!formSignUp.valid"
+            i18n="title btn submit signup | The tittle of button">{{titles.submit}}</button>
         </form>
       </div>
       <div class="auth-box__button-box">
-        <p class="auth-box__title">Have an account?</p>
-        <button class="auth-box__btn" (click)="login()" mat-raised-button color="000000" type="submit">Login</button>
+        <p class="auth-box__title" i18n="question signup-form | The instruction without account">Have an account?</p>
+        <button class="auth-box__btn" (click)="login()" mat-raised-button color="000000" type="submit"
+          i18n="title btn login| The tittle of button">Login</button>
       </div>
     </div>
   </div>

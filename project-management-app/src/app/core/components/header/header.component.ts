@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable object-shorthand */
 /* eslint-disable operator-linebreak */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -35,6 +36,7 @@ export class HeaderComponent implements OnInit {
   public id: string = '';
 
   public href: string = '';
+
   @ViewChild('header') header: ElementRef;
 
   public localeList = [

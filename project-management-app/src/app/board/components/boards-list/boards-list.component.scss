@@ -26,3 +26,9 @@ li {
     background: $primary-color-opacity5;
   }
 }
+
+.boards-list {
+  &__btn-del {
+    width: 2rem;
+  }
+}

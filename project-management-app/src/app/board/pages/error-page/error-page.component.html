@@ -3,12 +3,13 @@
     <div class="error-box">
       <div class="error-box__content">
         <div class="error-img">
-          <img src="../../../../assets/icons/cat.png">
+          <img src="assets/icons/cat.png">
         </div>
         <div class="error-box__text">
-          <p>Something went wrong...</p>
-          <p>The cat does not find anything here</p>
-          <button class="error-box__btn-home" (click)="goToMain()" mat-raised-button color="accent">
+          <p i18n="title page| The tittle of error-page">Something went wrong...</p>
+          <p i18n="describe error-page| The describe of error-page">The cat does not find anything here</p>
+          <button class="error-box__btn-home" (click)="goToMain()" mat-raised-button color="accent"
+            i18n="title btn | The tittle of button">
             Go home
           </button>
         </div>

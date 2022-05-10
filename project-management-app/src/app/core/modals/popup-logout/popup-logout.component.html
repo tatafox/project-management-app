@@ -1,9 +1,10 @@
 <section class="logout-message"
   style="min-width: 20rem; border-radius:1rem; border: 1px solid yellow; padding: 1rem; background-color: bisque; text-align: center;">
-  <h2 mat-dialog-title>Enter</h2>
-  <mat-dialog-content>Сome back soon
+  <h2 mat-dialog-title i18n="title popup user logout | The tittle of popup">Enter</h2>
+  <mat-dialog-content i18n="instruction user logout | description of the situation">Сome back soon
   </mat-dialog-content>
   <mat-dialog-actions align="end">
-    <button mat-button [mat-dialog-close]="true" cdkFocusInitial>enter</button>
+    <button mat-button [mat-dialog-close]="true" cdkFocusInitial
+      i18n="title btn exit | The title of btn user logout">enter</button>
   </mat-dialog-actions>
 </section>

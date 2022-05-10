@@ -1,12 +1,12 @@
-<h1 mat-dialog-title>
+<h1 mat-dialog-title i18n="title delete tasks" style="color: rgb(216, 51, 51); text-align:center">
   {{title}}
 </h1>
 
 <div mat-dialog-content>
-  <p>{{message}}</p>
+  <p i18n="description delete tasks">{{message}}</p>
 </div>
 
 <div class="button-wrapper" mat-dialog-actions>
-  <button mat-flat-button color="accent" (click)="onDismiss()">No</button>
-  <button mat-raised-button color="primary" (click)="onConfirm()">Yes</button>
+  <button mat-flat-button color="accent" (click)="onDismiss()" i18n="title btn delete tasks no">No</button>
+  <button mat-raised-button color="primary" (click)="onConfirm()" i18n="title btn delete tasks yes">Yes</button>
 </div>
