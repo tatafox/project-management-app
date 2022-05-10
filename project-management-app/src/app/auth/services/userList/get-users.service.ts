@@ -15,13 +15,18 @@ export class GetUsersService {
 
   private userInfo: IUser;
 
-  public userList = new Subject<IGetUser[]>();
+  public userList: IGetUser[];
 
   public id: any;
 
   public statusError$ = new Subject<any>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient) {
+    this.token = localStorage.getItem('token');
+    if (this.token) {
+      this.getUserList().subscribe((list) => (this.userList = list));
+    }
+  }
 
   getUser(): Observable<any> {
     this.id = localStorage.getItem('id');
@@ -56,8 +61,7 @@ export class GetUsersService {
     };
     return this.http.get(`${this.URL}/users`, httpOptions).pipe(
       map((data: any) => {
-        this.userList = data;
-        return this.userList;
+        return data;
       }),
     );
   }

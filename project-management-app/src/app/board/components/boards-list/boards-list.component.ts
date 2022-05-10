@@ -61,7 +61,10 @@ export class BoardsListComponent implements OnInit, OnDestroy {
   }
 
   onBoardDetail(board: IBoard, event: MouseEvent) {
-    if ((event.target as HTMLElement).tagName !== 'BUTTON') {
+    if (
+      (event.target as HTMLElement).tagName !== 'BUTTON' &&
+      !(event.target as HTMLElement).closest('button')
+    ) {
       this.router.navigate(['main', 'board', board.id]);
     }
   }
