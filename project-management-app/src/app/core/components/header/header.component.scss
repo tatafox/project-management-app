@@ -5,7 +5,10 @@
   padding: 0.5rem;
   background: $primary-color;
   position: sticky;
+  width: 100vw;
   top: 0;
+  z-index: 10;
+  transition: 0.3s;
 }
 
 .header-box {

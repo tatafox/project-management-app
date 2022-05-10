@@ -22,7 +22,10 @@ export class GetUsersService {
   public statusError$ = new Subject<any>();
 
   constructor(private http: HttpClient) {
-    this.getUserList().subscribe((list) => (this.userList = list));
+    this.token = localStorage.getItem('token');
+    if (this.token) {
+      this.getUserList().subscribe((list) => (this.userList = list));
+    }
   }
 
   getUser(): Observable<any> {
