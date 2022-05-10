@@ -38,7 +38,7 @@ export class HeaderComponent implements OnInit {
 
   public localeList = [
     { code: 'en-US', label: 'English' },
-    { code: 'ru-Ru', label: 'Русский' },
+    { code: 'ru', label: 'Русский' },
   ];
 
   constructor(

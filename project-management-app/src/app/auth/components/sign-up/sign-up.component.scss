@@ -1,4 +1,4 @@
-@import './../../../../styles.scss';
+@import './../../../../SCSS/themes/variables.scss';
 
 .signup-page {
 display: flex;
@@ -68,7 +68,7 @@ padding:  50px 0 0 0;
   gap: 1rem;
 
   &__btn {
-    align-self: end;
+    align-self: flex-end;
     margin-top: 1rem;
     border-radius: 0.5rem;
     background-color: $accent-color;
