@@ -118,10 +118,8 @@ const reducer = createReducer(
           });
           taskList.push(task);
           taskList.sort((a, b) => a.order - b.order);
-          console.log(taskList);
           currentColumn.tasks = taskList;
         }
-        console.log(board, currentColumn.tasks);
         result.push(board);
       }
     }

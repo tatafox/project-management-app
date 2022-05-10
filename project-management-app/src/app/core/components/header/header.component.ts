@@ -1,6 +1,6 @@
 /* eslint-disable object-shorthand */
 /* eslint-disable operator-linebreak */
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserEditService } from 'src/app/auth/services/user-edit/user-edit.service';
@@ -35,6 +35,7 @@ export class HeaderComponent implements OnInit {
   public id: string = '';
 
   public href: string = '';
+  @ViewChild('header') header: ElementRef;
 
   constructor(
     private localSt: LocalStorageService,
@@ -51,6 +52,14 @@ export class HeaderComponent implements OnInit {
       this.user = userInfo;
       this.userName = this.user.name;
     });
+    window.onscroll = () => {
+      const header = this.header.nativeElement;
+      if (window.pageYOffset > 0) {
+        header.style.background = '#FFA000';
+      } else {
+        header.style.background = '#FFC107';
+      }
+    };
   }
 
   openLogoutPopup() {
@@ -67,9 +76,9 @@ export class HeaderComponent implements OnInit {
       if (result) {
         // do confirmation actions
         const token = localStorage.getItem('token') || '{}';
-        this.editService.deleteUser(this.user.id, token).subscribe((data) => {
-          console.log(data);
-        });
+        this.editService
+          .deleteUser(this.user.id, token)
+          .subscribe((data) => {});
         this.localSt.removeLocalStorage('id', 'token');
         this.userName = '';
         this.router.navigate(['/admin']);
@@ -98,7 +107,6 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((result) => {
       this.title = result;
-      console.log(this.title);
       this.addBoard(this.title);
     });
   }
@@ -111,7 +119,6 @@ export class HeaderComponent implements OnInit {
         columns: [],
       };
       this.store.dispatch(addBoard({ board }));
-      console.log(response, board);
     });
   }
 }

@@ -36,10 +36,12 @@ export class BoardService {
   constructor(private http: HttpClient) {}
 
   private getBoardsList(): Observable<any> {
+    if (!this.userToken) {
+      this.userToken = localStorage.getItem('token') || '{}';
+    }
     return this.http.get('/api/boards', this.httpOptions).pipe(
       // @ts-ignore
       map((data: IBoard[]) => {
-        console.log(data);
         return data;
       }),
       catchError((err) => {
@@ -153,13 +155,14 @@ export class BoardService {
   }
 
   public fetchBoardsList() {
+    if (!this.userToken) {
+      this.userToken = localStorage.getItem('token') || '{}';
+    }
     return this.getBoardsList().subscribe((response) => {
       // @ts-ignore
       const boardsList = response.map((boards) => this.getBoardById(boards.id));
-      console.log(boardsList);
       // @ts-ignore
       forkJoin(boardsList).subscribe((data: IBoardDetail[]) => {
-        console.log(data);
         this.boardList$.next(data);
       });
       return response;
