@@ -1,4 +1,4 @@
-<div class="auth-page section">
+<div class="admin-page section">
   <div class="wrapper">
     <div class="buttons">
       <button class="buttons__btn" (click)="signUp()" mat-raised-button color="000000" type="submit"
@@ -7,12 +7,42 @@
       <button class="buttons__btn" (click)="login()" mat-raised-button color="000000" type="submit"
         i18n="title btn | The tittle of button">Login</button>
     </div>
-    <h2 class="title" i18n="tittle | The tittle of app">Hello! Welcome to Project-Management-App!</h2>
-    <div class="describe">
-      <h3 i18n="tittle | The title of first page">The info the team</h3>
-      <p i18n="text | The description of team">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium vel
-        inventore saepe, in autem, quibusdam
-        placeat, quod facere modi iure omnis aut quas! Incidunt, quam? Iusto est ipsam excepturi libero.</p>
+    <p class="admin-page__title" i18n="welcome message app| The tittle of app">Hello!</p>
+    <p class="admin-page__title" i18n="welcome message  | The tittle of app"> Welcome to</p>
+    <h1 class="admin-page__main-title">Project-Management-App!</h1>
+    <P class="admin-page__info" i18n="describe message app| The tittle of app">This application is the analogue of
+      the popular application for
+      keeping records of tasks and the working areas
+      with users</P>
+    <div class="content">
+      <h3 class="admin-page__title-team" i18n="tittle team | The title of first page">The info the team</h3>
+      <p class="admin-page__info" i18n="info team | The title of first page" class="admin-page__info"
+        i18n="text | The description of team">We
+        are the students of RS School </p>
+      <p class="admin-page__info" i18n="info course | The title of first page">Course: <span
+          class="admin-page__info-angular">Angular</span></p>
+      <ul class="developers-list">
+        <li class="developers-list__item">
+          <a class="developers-list__link" href="https://github.com/tatafox" target="_blank">Tatafox</a>
+          <h3 class="admin-page__title-dev" i18n="info team lead | The title of first page">team lead</h3>
+          <p class="admin-page__info" i18n="describe team lead | The title of first page">Created dash board in Trello ,
+            separated the tasks,
+            worked out the execution plan, worked with the design. Work with creation of boards, tasks. Implemented the
+            main page and page with boards
+          </p>
+        </li>
+        <li class="developers-list__item">
+          <a class="developers-list__link" href="https://github.com/shaustruk" target="_blank">Katsiaryna</a>
+          <h3 class="admin-page__title-dev" i18n="info team member | The title of first page"
+            i18n="info team member | The title of first page">team
+            member</h3>
+          <p class="admin-page__info" i18n="describe team member | The title of first page">Work with user registration
+            and authorization, worked
+            with forms. Implemented the welcome page, admin page,
+            localization.
+          </p>
+        </li>
+      </ul>
     </div>
   </div>
 </div>
