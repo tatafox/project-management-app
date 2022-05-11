@@ -1,7 +1,65 @@
 @import './../../../../SCSS/themes/variables.scss';
-.auth-page {
+
+.admin-page {
   display: flex;
   flex-direction: column;
+
+  &__title{
+    font-weight: 900;
+    font-size: 2rem;
+
+  }
+
+  &__main-title {
+    margin: 2rem 0;
+    font-size: 3rem;
+    font-weight: 900;
+    color: $primary-color;
+  }
+
+  &__info,
+  &__title-team {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  &__сourse-box {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+
+  }
+
+  &__info-angular {
+    color: red;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+
+  &__title-team,
+  &__title-dev {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+}
+
+.developers-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__link {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $primary-color;
+  }
 }
 
 .wrapper {
@@ -24,14 +82,10 @@
   }
 }
 
-.describe {
+.content {
   display: flex;
   flex-direction: column;
-align-items: center;
+  align-items: center;
 }
 
-.title {
-  font-size: 3rem;
-  font-weight: 900;
-}
 
