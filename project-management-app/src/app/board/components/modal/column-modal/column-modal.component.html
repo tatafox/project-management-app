@@ -1,16 +1,16 @@
-<h1 mat-dialog-title>
+<h1 mat-dialog-title i18n="title popup column | The tittle of popup">
   Add new column
 </h1>
-
 <div mat-dialog-content>
-  <p>Enter column title</p>
+  <p i18n="instruction popup add column | description of the situation">Enter column title</p>
   <mat-form-field appearance="fill">
-    <mat-label>Title</mat-label>
+    <mat-label i18n="label input add column | The title of input">Title</mat-label>
     <input matInput [(ngModel)]="title">
   </mat-form-field>
 </div>
-
 <div class="button-wrapper" mat-dialog-actions>
-  <button mat-flat-button color="accent" (click)="onCancel()">Cancel</button>
-  <button mat-raised-button color="primary"  [mat-dialog-close]="title">Add</button>
+  <button mat-flat-button color="accent" (click)="onCancel()"
+    i18n="title btn add column false | The title of btn add board">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="title"
+    i18n="title btn add column true | The title of btn add board">Add</button>
 </div>

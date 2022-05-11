@@ -24,6 +24,7 @@ export class GetUsersService {
   constructor(private http: HttpClient) {
     this.token = localStorage.getItem('token');
     if (this.token) {
+      // eslint-disable-next-line no-return-assign
       this.getUserList().subscribe((list) => (this.userList = list));
     }
   }
@@ -59,11 +60,9 @@ export class GetUsersService {
         authorization: `Bearer ${this.token}`,
       }),
     };
-    return this.http.get(`${this.URL}/users`, httpOptions).pipe(
-      map((data: any) => {
-        return data;
-      }),
-    );
+    return this.http
+      .get(`${this.URL}/users`, httpOptions)
+      .pipe(map((data: any) => data));
   }
 
   sendToken(token: string) {

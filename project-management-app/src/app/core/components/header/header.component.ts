@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /* eslint-disable object-shorthand */
 /* eslint-disable operator-linebreak */
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -22,9 +23,9 @@ import { BoardService } from '../../../board/services/board.service';
   styleUrls: ['./header.component.scss'],
 })
 export class HeaderComponent implements OnInit {
-  dialogRef: MatDialogRef<PopupDeleteComponent>;
+  private dialogRef: MatDialogRef<PopupDeleteComponent>;
 
-  title: string;
+  public title: string;
 
   public userName: string;
 
@@ -35,7 +36,13 @@ export class HeaderComponent implements OnInit {
   public id: string = '';
 
   public href: string = '';
+
   @ViewChild('header') header: ElementRef;
+
+  public localeList = [
+    { code: 'en-US', label: 'English' },
+    { code: 'ru', label: 'Русский' },
+  ];
 
   constructor(
     private localSt: LocalStorageService,
