@@ -431,32 +431,95 @@
         <note priority="1" from="description"> The tittle of button</note>
         <note priority="1" from="meaning">title btn </note>
       </trans-unit>
-      <trans-unit id="9168028367829823413" datatype="html">
-        <source>Hello! Welcome to Project-Management-App!</source>
+      <trans-unit id="4755591273689102392" datatype="html">
+        <source>Hello!</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
           <context context-type="linenumber">10</context>
         </context-group>
         <note priority="1" from="description"> The tittle of app</note>
-        <note priority="1" from="meaning">tittle </note>
+        <note priority="1" from="meaning">welcome message app</note>
       </trans-unit>
-      <trans-unit id="7475019607738005153" datatype="html">
+      <trans-unit id="4312766545772710002" datatype="html">
+        <source> Welcome to</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">11</context>
+        </context-group>
+        <note priority="1" from="description"> The tittle of app</note>
+        <note priority="1" from="meaning">welcome message  </note>
+      </trans-unit>
+      <trans-unit id="3845183848722441733" datatype="html">
+        <source>This application is the analogue of the popular application for keeping records of tasks and the working areas with users</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">13,16</context>
+        </context-group>
+        <note priority="1" from="description"> The tittle of app</note>
+        <note priority="1" from="meaning">describe message app</note>
+      </trans-unit>
+      <trans-unit id="9063985356721521935" datatype="html">
         <source>The info the team</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
-          <context context-type="linenumber">12</context>
+          <context context-type="linenumber">18</context>
         </context-group>
         <note priority="1" from="description"> The title of first page</note>
-        <note priority="1" from="meaning">tittle </note>
+        <note priority="1" from="meaning">tittle team </note>
       </trans-unit>
-      <trans-unit id="4969512141721333472" datatype="html">
-        <source>Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium vel inventore saepe, in autem, quibusdam placeat, quod facere modi iure omnis aut quas! Incidunt, quam? Iusto est ipsam excepturi libero.</source>
+      <trans-unit id="5904514391878074412" datatype="html">
+        <source>We are the students of RS School </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
-          <context context-type="linenumber">13,15</context>
+          <context context-type="linenumber">20,21</context>
         </context-group>
-        <note priority="1" from="description"> The description of team</note>
-        <note priority="1" from="meaning">text </note>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">info team </note>
+      </trans-unit>
+      <trans-unit id="377593418336710770" datatype="html">
+        <source>Course: </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">23</context>
+        </context-group>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">info course </note>
+      </trans-unit>
+      <trans-unit id="8472665303537321471" datatype="html">
+        <source>team lead</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">29</context>
+        </context-group>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">info team lead </note>
+      </trans-unit>
+      <trans-unit id="430360703597179980" datatype="html">
+        <source>Created dash board in Trello , separated the tasks, worked out the execution plan, worked with the design. Work with creation of boards, tasks. Implemented the main page and page with boards </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">30,34</context>
+        </context-group>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">describe team lead </note>
+      </trans-unit>
+      <trans-unit id="4910198625628653343" datatype="html">
+        <source>team member</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">39,40</context>
+        </context-group>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">info team member </note>
+      </trans-unit>
+      <trans-unit id="4899842760747053272" datatype="html">
+        <source>Work with user registration and authorization, worked with forms. Implemented the welcome page, admin page, localization. </source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/auth/pages/admin-page/admin-page.component.html</context>
+          <context context-type="linenumber">41,45</context>
+        </context-group>
+        <note priority="1" from="description"> The title of first page</note>
+        <note priority="1" from="meaning">describe team member </note>
       </trans-unit>
       <trans-unit id="2681070985177345133" datatype="html">
         <source> Go to board list </source>
