@@ -3,7 +3,6 @@
 .login-page {
   display: flex;
   flex-direction: column;
-  padding: 50px 0;
 }
 
 .wrapper {
@@ -74,3 +73,5 @@
     color: $primary-color;
   }
 }
+
+@media screen and (max-width: 600px) {}

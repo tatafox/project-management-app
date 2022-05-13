@@ -1,7 +1,7 @@
 @import "../../../../SCSS/themes/variables.scss";
 
 .header {
-  height: 120px;
+  height: 15vh;
   padding: 0.5rem;
   background: $primary-color;
   position: sticky;
@@ -19,9 +19,9 @@
   height: 100%;
 }
 
-mat-form-field {
-  margin-top: 20px;
-}
+// mat-form-field {
+//   margin-top: 20px;
+// }
 
 .header-content{
   display: flex;
@@ -53,4 +53,79 @@ mat-form-field {
   .example-full-width {
     width: 100%;
   }
+
 }
+
+.translate-link  {
+  color: aliceblue;
+}
+
+
+@media screen and (max-width: 800px) {
+  .header-box {
+  gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
+  .wrapper {
+    padding: 0 1rem;
+  }
+
+  .header {
+    height: 160px;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    &__btb_btn {
+    align-self: center;
+    width: 5rem;
+    }
+ }
+
+ .header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+}
+
+ .translate {
+   gap: 1rem;
+   order: -1;
+ }
+}
+
+@media screen and  (max-width: 440px) {
+  .header-menu {
+    order: 0;
+  }
+
+  .header-box {
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+
+  .header {
+    height: 180px;
+  }
+
+  .translate {
+    display: flex;
+    flex-direction: row;
+  }
+}
+

@@ -1,8 +1,8 @@
 @import "../../../../SCSS/themes/variables.scss";
 
 .footer {
-  background-color: $accent-color;
   padding: 20px 0;
+  background-color: $accent-color;
 }
 
 .footer-content {
@@ -30,11 +30,21 @@
   flex-direction: row;
   gap: 1.5rem;
 
-  &__link{
+  &__link {
     color: white;
 
     &:hover {
       opacity: .6;
     }
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .footer {
+    padding: 0;
+  }
+  .footer-content {
+    flex-direction: column;
   }
 }

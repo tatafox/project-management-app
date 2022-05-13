@@ -32,3 +32,21 @@ li {
     width: 2rem;
   }
 }
+
+@media screen and (max-width: 600px) {
+
+  .main-page {
+    margin: 0 auto;
+  }
+
+  .mat-headline {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .boards-list__item {
+    padding: 0.5rem 0.5rem;
+  }
+
+}
+

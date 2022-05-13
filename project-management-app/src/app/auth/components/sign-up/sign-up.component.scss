@@ -3,7 +3,6 @@
 .signup-page {
 display: flex;
 gap: 1rem;
-padding:  50px 0 0 0;
 }
 
 .auth-box {
@@ -75,3 +74,7 @@ padding:  50px 0 0 0;
     color: $primary-color;
   }
 }
+
+@media screen and (max-width: 600px) {}
+
+
