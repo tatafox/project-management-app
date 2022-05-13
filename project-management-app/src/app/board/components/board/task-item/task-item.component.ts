@@ -1,13 +1,14 @@
-import { Component, Input } from '@angular/core';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import { Component, Input, OnInit } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { MatDialog } from '@angular/material/dialog';
 import {
   ITask,
   ITaskBody,
   IUpdateTask,
 } from '../../../../shared/models/board.model';
-import { Store } from '@ngrx/store';
 import { AppState } from '../../../../redux/state.models';
 import { BoardService } from '../../../services/board.service';
-import { MatDialog } from '@angular/material/dialog';
 import { IConfirmDialog } from '../../../../shared/models/general.models';
 import { ConfirmDialogComponent } from '../../../../shared/components/confirm-dialog/confirm-dialog.component';
 import {
@@ -23,9 +24,11 @@ import { TaskModalComponent } from '../../modal/task-modal/task-modal.component'
   templateUrl: './task-item.component.html',
   styleUrls: ['./task-item.component.scss'],
 })
-export class TaskItemComponent {
+export class TaskItemComponent implements OnInit {
   @Input() public task!: ITask;
+
   @Input() public columnId!: string;
+
   @Input() public boardId!: string;
 
   public login: string = '';
@@ -39,6 +42,7 @@ export class TaskItemComponent {
 
   ngOnInit() {
     if (this.task) {
+      console.log(this.task);
       this.getService.userList.forEach((user) => {
         if (user.id === this.task.userId) this.login = user.login;
       });

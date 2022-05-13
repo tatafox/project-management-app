@@ -19,9 +19,9 @@
   height: 100%;
 }
 
-mat-form-field {
-  margin-top: 20px;
-}
+// mat-form-field {
+//   margin-top: 20px;
+// }
 
 .header-content{
   display: flex;
@@ -53,4 +53,56 @@ mat-form-field {
   .example-full-width {
     width: 100%;
   }
+}
+
+@media screen and (max-width: 600px) {
+  .wrapper {
+    padding: 0 1rem;
+  }
+
+  .header-content {
+    display: flex;
+    justify-content: center;
+    gap: 0;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+
+    &__btb_btn {
+    align-self: center;
+    width: 5rem;
+    }
+ }
+
+ .header-box {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 3rem;
+  height: 100%;
+}
+
+ .translate {
+   gap: 1rem;
+   order: -1;
+ }
+}
+
+@media screen and (max-width: 320px) {
+
+  .header-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.translate {
+  display: flex;
+  flex-direction: row;
+}
+
+.header {
+  height: 155px;
+}
 }

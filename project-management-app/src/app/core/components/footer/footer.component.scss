@@ -38,3 +38,13 @@
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+
+  .footer {
+    padding: 0;
+  }
+  .footer-content {
+    flex-direction: column;
+  }
+}
