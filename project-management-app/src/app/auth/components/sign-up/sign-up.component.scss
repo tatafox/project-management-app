@@ -75,3 +75,11 @@ padding:  50px 0 0 0;
     color: $primary-color;
   }
 }
+
+@media screen and (max-width: 600px) {
+
+  .signup-page {
+    padding: 0;
+  }
+}
+

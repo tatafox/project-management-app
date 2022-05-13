@@ -7,7 +7,6 @@
   &__title{
     font-weight: 900;
     font-size: 2rem;
-
   }
 
   &__main-title {
@@ -28,7 +27,6 @@
     display: flex;
     flex-direction: row;
     gap: 0.5rem;
-
   }
 
   &__info-angular {
@@ -88,4 +86,40 @@
   align-items: center;
 }
 
+@media screen and (max-width: 600px) {
 
+  .wrapper {
+    padding: 0 1rem;
+  }
+
+  .buttons {
+    padding: 1rem 0;
+    margin: 0 auto;
+  }
+
+  .admin-page {
+    &__main-title {
+      margin: 0;
+      font-size: 1.5rem;
+   }
+
+   &__title{
+     font-size: 1.5rem;
+  }
+
+  &__info,
+  &__title-team {
+    font-size: 14px;
+  }
+
+  &__info-angular {
+    font-size: 1rem;
+   }
+
+  &__title-team,
+  &__title-dev {
+    font-size: 1rem;
+  }
+
+}
+}

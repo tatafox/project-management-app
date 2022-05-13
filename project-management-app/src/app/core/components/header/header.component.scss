@@ -53,9 +53,21 @@
   .example-full-width {
     width: 100%;
   }
+
 }
 
-@media screen and (max-width: 600px) {
+.translate-link  {
+  color: aliceblue;
+}
+
+
+@media screen and (max-width: 800px) {
+  .header-box {
+  gap: 2rem;
+  }
+}
+
+@media screen and (max-width: 620px) {
   .wrapper {
     padding: 0 1rem;
   }
@@ -79,7 +91,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 3rem;
   height: 100%;
 }
 
@@ -89,20 +100,28 @@
  }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and  (max-width: 440px) {
+  .header-menu {
+    order: 0;
+  }
 
   .header-box {
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .mat-form-field-wrapper {
+    padding: 0;
+    margin: 0;
+  }
+
+  .header {
+    height: 180px;
+  }
+
+  .translate {
+    display: flex;
+    flex-direction: row;
+  }
 }
 
-.translate {
-  display: flex;
-  flex-direction: row;
-}
-
-.header {
-  height: 155px;
-}
-}
