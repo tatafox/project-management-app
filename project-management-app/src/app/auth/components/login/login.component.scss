@@ -3,7 +3,6 @@
 .login-page {
   display: flex;
   flex-direction: column;
-  padding: 50px 0;
 }
 
 .wrapper {
@@ -75,9 +74,4 @@
   }
 }
 
-@media screen and (max-width: 600px) {
-
-  .login-page {
-    padding: 0;
-  }
-}
+@media screen and (max-width: 600px) {}

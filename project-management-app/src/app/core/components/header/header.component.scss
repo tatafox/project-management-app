@@ -1,7 +1,7 @@
 @import "../../../../SCSS/themes/variables.scss";
 
 .header {
-  height: 120px;
+  height: 15vh;
   padding: 0.5rem;
   background: $primary-color;
   position: sticky;
@@ -70,6 +70,10 @@
 @media screen and (max-width: 620px) {
   .wrapper {
     padding: 0 1rem;
+  }
+
+  .header {
+    height: 160px;
   }
 
   .header-content {

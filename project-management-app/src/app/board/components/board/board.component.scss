@@ -1,23 +1,27 @@
+@import "../../../../SCSS/themes/variables.scss";
 .wrapper {
   padding-top: 20px;
 }
 
 .board-title {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  height: 35px;
   margin-bottom: 20px;
 }
 
 .column-list {
   display: flex;
+  flex-direction: column;
   gap: 25px;
 }
 
 .column-item {
-  width: 25%;
-  height: calc(100vh - 265px);
+  // width: 25%;
+  // height: calc(100vh - 265px);
   overflow-y: scroll;
+  background-color: #ffa00029;
+  border-radius: 00.5rem;
 
   &__wrapper {
     width: 100%;
@@ -65,7 +69,27 @@
   }
 }
 
+.mat-headline {
+  color: $primary-color;
+}
+
 button.add-column {
   width: 100%;
   padding: 5px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .column-list {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .board-title {
+    flex-direction: column;
+  }
+
+  .mat-headline {
+    margin: 1rem 0;
+  }
 }
