@@ -6,6 +6,7 @@ import {
   IUser,
   IUserSignUp,
 } from 'src/app/shared/models/user-models';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +22,14 @@ export class UserEditService {
 
   public statusError$ = new Subject<any>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
+
+  private showToastError(errorText: string) {
+    this.toastr.error(errorText, 'Error', {
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
+    });
+  }
 
   deleteUser(id: string, token: string): Observable<any> {
     const httpOptions = {
@@ -33,6 +41,7 @@ export class UserEditService {
     return this.http.delete(`${this.URL}/users/${id}`, httpOptions).pipe(
       map((data: any) => data),
       catchError((err) => {
+        this.showToastError(err.message);
         this.statusError$.next(err);
         return [];
       }),
@@ -52,6 +61,7 @@ export class UserEditService {
       .pipe(
         map((data: any) => data),
         catchError((err) => {
+          this.showToastError(err.message);
           this.statusError$.next(err);
           return [];
         }),

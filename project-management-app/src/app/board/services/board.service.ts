@@ -14,6 +14,7 @@ import {
   ITaskBody,
   IColumnList,
 } from '../../shared/models/board.model';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +34,7 @@ export class BoardService {
 
   public error$ = new Subject<HttpErrorResponse>();
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private toastr: ToastrService) {}
 
   private getBoardsList(): Observable<any> {
     if (!this.userToken) {
@@ -50,7 +51,7 @@ export class BoardService {
         return data;
       }),
       catchError((err) => {
-        console.log(err);
+        this.showToastError(err.message);
         this.error = err;
         this.error$.next(err);
         return [];
@@ -65,21 +66,41 @@ export class BoardService {
   }
 
   public postBoard(title: object): Observable<IBoard> {
-    return this.http
-      .post('/api/boards', title, this.httpOptions)
-      .pipe(map((responce: any) => responce));
+    return this.http.post('/api/boards', title, this.httpOptions).pipe(
+      map((responce: any) => responce),
+      catchError((err) => {
+        this.showToastError(err.message);
+        this.error = err;
+        this.error$.next(err);
+        return [];
+      }),
+    );
   }
 
   public deleteBoard(id: string): Observable<IBoard> {
-    return this.http
-      .delete(`/api/boards/${id}`, this.httpOptions)
-      .pipe(map((responce: any) => responce));
+    return this.http.delete(`/api/boards/${id}`, this.httpOptions).pipe(
+      map((responce: any) => responce),
+      catchError((err) => {
+        this.showToastError(err.message);
+        this.error = err;
+        this.error$.next(err);
+        return [];
+      }),
+    );
   }
 
   public updateBoard(board: IBoard): Observable<IBoard> {
     return this.http
       .put(`/api/boards/${board.id}`, board.title, this.httpOptions)
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public postColumn(
@@ -93,7 +114,15 @@ export class BoardService {
     };
     return this.http
       .post(`/api/boards/${id}/columns`, body, this.httpOptions)
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public updateColumn(
@@ -110,13 +139,29 @@ export class BoardService {
         updateColumnBody,
         this.httpOptions,
       )
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public deleteColumn(idBoard: string, idColumn: string): Observable<IColumn> {
     return this.http
       .delete(`/api/boards/${idBoard}/columns/${idColumn}`, this.httpOptions)
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public postTask(
@@ -130,7 +175,15 @@ export class BoardService {
         taskBody,
         this.httpOptions,
       )
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public updateTask(
@@ -143,7 +196,15 @@ export class BoardService {
         updateTask,
         this.httpOptions,
       )
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public deleteTask(
@@ -156,7 +217,15 @@ export class BoardService {
         `/api/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`,
         this.httpOptions,
       )
-      .pipe(map((responce: any) => responce));
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public fetchBoardsList() {
@@ -176,6 +245,13 @@ export class BoardService {
         this.boardList$.next(data);
       });
       return response;
+    });
+  }
+
+  private showToastError(errorText: string) {
+    this.toastr.error(errorText, 'Error', {
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
     });
   }
 }

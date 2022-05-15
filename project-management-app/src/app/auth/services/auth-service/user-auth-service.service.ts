@@ -8,6 +8,7 @@ import {
   IUser,
 } from 'src/app/shared/models/user-models';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -28,13 +29,22 @@ export class UserAuthServiceService {
   constructor(
     private http: HttpClient,
     private localStorService: LocalStorageService,
+    private toastr: ToastrService,
   ) {}
+
+  private showToastError(errorText: string) {
+    this.toastr.error(errorText, 'Error', {
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
+    });
+  }
 
   postDataUser(user: IUserSignUp): Observable<any> {
     return this.http.post(`${this.URL}/signup`, user).pipe(
       tap((data: any) => data),
       catchError((err) => {
         this.errorMessage = err.message;
+        this.showToastError(err.message);
         this.statusError$.next(this.errorMessage);
         return [];
       }),
@@ -68,7 +78,10 @@ export class UserAuthServiceService {
         );
         return responce;
       },
-      (error) => error,
+      (error) => {
+        this.showToastError(error.message);
+        return error;
+      },
     );
     return this.userObj;
   }
