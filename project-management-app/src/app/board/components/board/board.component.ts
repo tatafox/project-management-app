@@ -100,7 +100,7 @@ export class BoardComponent implements OnDestroy {
           title: result.title,
           order: column.tasks.length,
           description: result.description,
-          userId: result.userID,
+          userId: result.userId,
         };
         this.boardService
           .postTask(this.id, column.id, newTask)

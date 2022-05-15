@@ -32,7 +32,7 @@ export class UserAuthServiceService {
 
   postDataUser(user: IUserSignUp): Observable<any> {
     return this.http.post(`${this.URL}/signup`, user).pipe(
-      tap((data: any) => console.log(data)),
+      tap((data: any) => data),
       catchError((err) => {
         this.errorMessage = err.message;
         this.statusError$.next(this.errorMessage);

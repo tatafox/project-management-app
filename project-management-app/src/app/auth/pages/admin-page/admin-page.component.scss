@@ -3,6 +3,7 @@
 .admin-page {
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 98px);
 
   &__title{
     font-weight: 900;
@@ -98,6 +99,8 @@
   }
 
   .admin-page {
+    min-height: calc(100vh - 114px);
+
     &__main-title {
       margin: 0;
       font-size: 1.5rem;

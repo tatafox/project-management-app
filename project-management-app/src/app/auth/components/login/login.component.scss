@@ -3,6 +3,7 @@
 .login-page {
   display: flex;
   flex-direction: column;
+  min-height: calc(100vh - 98px);
 }
 
 .wrapper {
@@ -74,4 +75,8 @@
   }
 }
 
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 600px) {
+  .login-page {
+    min-height: calc(100vh - 114px);
+  }
+}

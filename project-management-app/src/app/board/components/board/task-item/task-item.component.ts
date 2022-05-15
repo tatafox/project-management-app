@@ -42,7 +42,6 @@ export class TaskItemComponent implements OnInit {
 
   ngOnInit() {
     if (this.task) {
-      console.log(this.task);
       this.getService.userList.forEach((user) => {
         if (user.id === this.task.userId) this.login = user.login;
       });

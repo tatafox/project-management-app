@@ -5,20 +5,20 @@
 
 .board-title {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   margin-bottom: 20px;
 }
 
 .column-list {
   display: flex;
-  flex-direction: column;
   gap: 25px;
+  overflow-y: scroll;
 }
 
 .column-item {
-  // width: 25%;
-  // height: calc(100vh - 265px);
+  width: 23%;
+  flex-shrink: 0;
+  height: calc(100vh - 365px);
   overflow-y: scroll;
   background-color: #ffa00029;
   border-radius: 00.5rem;
@@ -81,8 +81,12 @@ button.add-column {
 
 @media screen and (max-width: 600px) {
   .column-list {
-    flex-direction: column;
     gap: 10px;
+  }
+
+  .column-item {
+    width: 98%;
+    height: calc(100vh - 440px);
   }
 
   .board-title {

@@ -19,7 +19,7 @@ import {
   providedIn: 'root',
 })
 export class BoardService {
-  public userToken = localStorage.getItem('token') || '{}';
+  public userToken = localStorage.getItem('token') || '';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -37,7 +37,12 @@ export class BoardService {
 
   private getBoardsList(): Observable<any> {
     if (!this.userToken) {
-      this.userToken = localStorage.getItem('token') || '{}';
+      this.userToken = localStorage.getItem('token') || '';
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          authorization: `Bearer ${this.userToken}`,
+        }),
+      };
     }
     return this.http.get('/api/boards', this.httpOptions).pipe(
       // @ts-ignore
@@ -156,7 +161,12 @@ export class BoardService {
 
   public fetchBoardsList() {
     if (!this.userToken) {
-      this.userToken = localStorage.getItem('token') || '{}';
+      this.userToken = localStorage.getItem('token') || '';
+      this.httpOptions = {
+        headers: new HttpHeaders({
+          authorization: `Bearer ${this.userToken}`,
+        }),
+      };
     }
     return this.getBoardsList().subscribe((response) => {
       // @ts-ignore
