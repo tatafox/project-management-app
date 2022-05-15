@@ -129,22 +129,27 @@ const reducer = createReducer(
     };
   }),
   on(boardActions.deleteTask, (state, { boardID, columnID, taskDeleteID }) => {
+    const result: IBoardDetail[] = [];
     state.boards.forEach((board) => {
-      if (board.id === boardID) {
-        board.columns.forEach((column) => {
-          if (column.id === columnID) {
-            const task: ITask[] = [];
-            column.tasks.forEach((item) => {
-              if (!!item && item.id !== taskDeleteID) task.push(item);
-            });
-            column.tasks = task;
-          }
+      if (board.id !== boardID) {
+        result.push(board);
+      } else {
+        const currentBoard = JSON.parse(JSON.stringify(board)) as IBoardDetail;
+        const currentColumn = currentBoard.columns.filter(
+          (col) => col.id === columnID,
+        )[0];
+        const taskList: ITask[] = [];
+        currentColumn.tasks.forEach((item) => {
+          if (!!item && item.id !== taskDeleteID) taskList.push(item);
         });
+        taskList.sort((a, b) => a.order - b.order);
+        currentColumn.tasks = taskList;
+        result.push(currentBoard);
       }
     });
     return {
       ...state,
-      boards: state.boards,
+      boards: result,
     };
   }),
   on(boardActions.addError, (state, { error }) => ({ ...state, error })),

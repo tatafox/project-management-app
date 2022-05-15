@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { catchError, map, Observable, Subject } from 'rxjs';
 import { IGetUser, IUser } from 'src/app/shared/models/user-models';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable({
   providedIn: 'root',
@@ -21,12 +22,19 @@ export class GetUsersService {
 
   public statusError$ = new Subject<any>();
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private toastr: ToastrService) {
     this.token = localStorage.getItem('token');
     if (this.token) {
       // eslint-disable-next-line no-return-assign
       this.getUserList().subscribe((list) => (this.userList = list));
     }
+  }
+
+  private showToastError(errorText: string) {
+    this.toastr.error(errorText, 'Error', {
+      timeOut: 3000,
+      positionClass: 'toast-top-center',
+    });
   }
 
   getUser(): Observable<any> {
@@ -45,7 +53,7 @@ export class GetUsersService {
         return this.userInfo;
       }),
       catchError((err) => {
-        console.log(err);
+        this.showToastError(err.message);
         this.statusError$.next(err);
         return [];
       }),

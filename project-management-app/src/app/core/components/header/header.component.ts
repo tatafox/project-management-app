@@ -60,11 +60,13 @@ export class HeaderComponent implements OnInit {
       this.userName = this.user.name;
     });
     window.onscroll = () => {
-      const header = this.header.nativeElement;
-      if (window.pageYOffset > 0) {
-        header.style.background = '#FFA000';
-      } else {
-        header.style.background = '#FFC107';
+      if (this.header) {
+        const header = this.header.nativeElement;
+        if (window.pageYOffset > 0) {
+          header.style.background = '#FFA000';
+        } else {
+          header.style.background = '#FFC107';
+        }
       }
     };
   }

@@ -13,6 +13,7 @@ import { BoardModule } from './board/board.module';
 import { MaterialModule } from './material/material.module';
 import { AuthModule } from './auth/auth.module';
 import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confirm-dialog.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,6 +30,7 @@ import { ConfirmDialogComponent } from './shared/components/confirm-dialog/confi
     StoreDevtoolsModule.instrument({ maxAge: 25 }),
     HttpClientModule,
     AuthModule,
+    ToastrModule.forRoot(),
   ],
   providers: [],
   entryComponents: [ConfirmDialogComponent],

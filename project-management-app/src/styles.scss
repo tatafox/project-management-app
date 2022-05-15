@@ -2,6 +2,11 @@
 @import "./SCSS/global.scss";
 @import "./SCSS/null.scss";
 @import "./SCSS/themes/variables";
+// regular style toast
+/*
+@import '~ngx-toastr/toastr';
+@import '~ngx-toastr/toastr-bs4-alert';
+*/
 /* You can add global styles to this file, and also import other style files */
 
 html, body { height: 100%; }
