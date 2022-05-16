@@ -1,8 +1,9 @@
 @import './../../../../SCSS/themes/variables.scss';
 
 .signup-page {
-display: flex;
-gap: 1rem;
+  display: flex;
+  gap: 1rem;
+  min-height: calc(100vh - 98px);
 }
 
 .auth-box {
@@ -75,6 +76,10 @@ gap: 1rem;
   }
 }
 
-@media screen and (max-width: 600px) {}
+@media screen and (max-width: 600px) {
+  .signup-page {
+    min-height: calc(100vh - 114px);
+  }
+}
 
 
