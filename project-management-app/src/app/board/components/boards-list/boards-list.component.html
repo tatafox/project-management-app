@@ -4,8 +4,11 @@
   </h2>
   <ul class="boards-list" *ngFor="let board of boardsList">
     <li class="boards-list__item" (click)="onBoardDetail(board, $event)">
-      <span>{{board.title}}</span>
-      <button style="background-color: rgb(214, 39, 39); font-size: 14px;" mat-icon-button
+      <div class="board-content">
+        <span class="mat-h1">{{board.title}}</span>
+        <span>{{board.description}}</span>
+      </div>
+      <button style="font-size: 14px;" mat-icon-button
         (click)="onDeleteBoard(board)">
         <mat-icon>delete
         </mat-icon>

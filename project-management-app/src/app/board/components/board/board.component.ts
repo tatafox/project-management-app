@@ -77,6 +77,7 @@ export class BoardComponent implements OnDestroy {
         const board: IBoardDetail = {
           id: this.board.id,
           title: this.board.title,
+          description: this.board.description,
           columns: [...this.board.columns, newColumn],
         };
         this.store.dispatch(updateBoard({ board }));
@@ -98,6 +99,7 @@ export class BoardComponent implements OnDestroy {
       if (result) {
         const newTask: ITaskBody = {
           title: result.title,
+          done: result.done,
           order: column.tasks.length,
           description: result.description,
           userId: result.userId,

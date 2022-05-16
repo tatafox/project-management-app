@@ -8,7 +8,7 @@ import { UserEditService } from 'src/app/auth/services/user-edit/user-edit.servi
 import { GetUsersService } from 'src/app/auth/services/userList/get-users.service';
 import { LocalStorageService } from 'src/app/shared/services/local-stor/local-storage.service';
 import { IUser } from 'src/app/shared/models/user-models';
-import { IBoardDetail } from 'src/app/shared/models/board.model';
+import { IBoardBody, IBoardDetail } from 'src/app/shared/models/board.model';
 import { Store } from '@ngrx/store';
 import { addBoard } from 'src/app/redux/actions/board.actions';
 import { PopupLogoutComponent } from '../../modals/popup-logout/popup-logout.component';
@@ -25,7 +25,10 @@ import { BoardService } from '../../../board/services/board.service';
 export class HeaderComponent implements OnInit {
   private dialogRef: MatDialogRef<PopupDeleteComponent>;
 
-  public title: string;
+  public board: IBoardBody = {
+    title: '',
+    description: '',
+  };
 
   public userName: string;
 
@@ -111,17 +114,17 @@ export class HeaderComponent implements OnInit {
   onCreateBoard(): void {
     const dialogRef = this.dialog.open(BoardModalComponent, {
       width: '450px',
-      data: '',
+      data: this.board,
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-      this.title = result;
-      this.addBoard(this.title);
+      this.board = result;
+      this.addBoard(this.board);
     });
   }
 
-  private addBoard(title: string) {
-    this.boardService.postBoard({ title: title }).subscribe((response) => {
+  private addBoard(newBoard: IBoardBody) {
+    this.boardService.postBoard(newBoard).subscribe((response) => {
       const board: IBoardDetail = {
         ...response,
         // @ts-ignore

@@ -1,5 +1,6 @@
 import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+import { IBoardBody } from '../../../../shared/models/board.model';
 
 @Component({
   selector: 'app-board-modal',
@@ -9,7 +10,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class BoardModalComponent {
   constructor(
     public dialogRef: MatDialogRef<BoardModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public title: string,
+    @Inject(MAT_DIALOG_DATA) public newBoard: IBoardBody,
   ) {}
 
   onCancel(): void {

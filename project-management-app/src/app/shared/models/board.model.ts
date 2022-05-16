@@ -1,11 +1,18 @@
 export interface IBoard {
   id: string;
   title: string;
+  description: string;
+}
+
+export interface IBoardBody {
+  title: string;
+  description: string;
 }
 
 export interface IBoardDetail {
   id: string;
   title: string;
+  description: string;
   columns: IColumnList[];
 }
 
@@ -26,6 +33,7 @@ export interface ITask {
   id: string;
   title: string;
   order: number;
+  done: boolean;
   description: string;
   userId: string;
   boardId: string;
@@ -35,6 +43,7 @@ export interface ITask {
 export interface IUpdateTask {
   title: string;
   order: number;
+  done: boolean;
   description: string;
   userId: string;
   boardId: string;
@@ -43,6 +52,7 @@ export interface IUpdateTask {
 
 export interface ITaskBody {
   title: string;
+  done: boolean;
   order: number;
   description: string;
   userId: string;
@@ -51,6 +61,7 @@ export interface ITaskBody {
 export interface TaskDialogData {
   title: string;
   description: string;
+  done: boolean;
   editTask?: boolean;
   userId: string;
 }
