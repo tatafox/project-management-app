@@ -13,6 +13,7 @@ import {
   IUpdateTask,
   ITaskBody,
   IColumnList,
+  IBoardBody,
 } from '../../shared/models/board.model';
 import { ToastrService } from 'ngx-toastr';
 
@@ -65,8 +66,8 @@ export class BoardService {
       .pipe(map((responce: any) => responce));
   }
 
-  public postBoard(title: object): Observable<IBoard> {
-    return this.http.post('/api/boards', title, this.httpOptions).pipe(
+  public postBoard(boardBody: IBoardBody): Observable<IBoard> {
+    return this.http.post('/api/boards', boardBody, this.httpOptions).pipe(
       map((responce: any) => responce),
       catchError((err) => {
         this.showToastError(err.message);
@@ -90,8 +91,12 @@ export class BoardService {
   }
 
   public updateBoard(board: IBoard): Observable<IBoard> {
+    const boardBody: IBoardBody = {
+      title: board.title,
+      description: board.description,
+    };
     return this.http
-      .put(`/api/boards/${board.id}`, board.title, this.httpOptions)
+      .put(`/api/boards/${board.id}`, boardBody, this.httpOptions)
       .pipe(
         map((responce: any) => responce),
         catchError((err) => {

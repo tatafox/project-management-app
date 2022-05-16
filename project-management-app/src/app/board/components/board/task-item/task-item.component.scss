@@ -5,10 +5,22 @@
   border-radius: 5px;
   padding: 10px;
   cursor: pointer;
+  position: relative;
 }
 
 button {
   display: flex;
   justify-content: flex-end;
   justify-items: flex-end;
+}
+
+.done-wrapper {
+  display: flex;
+  align-items: center;
+  width: 20px;
+  height: 20px;
+  border: 1px solid #333333;
+  position: absolute;
+  top: 15px;
+  right: 15px;
 }

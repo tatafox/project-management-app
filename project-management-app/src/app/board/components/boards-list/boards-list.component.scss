@@ -22,9 +22,18 @@ li {
   border-bottom: 1px solid $ligt-gray;
   cursor: pointer;
 
+  .mat-h1 {
+    font-weight: bold;
+  }
+
   &:hover {
     background: $primary-color-opacity5;
   }
+}
+
+.board-content {
+  display: flex;
+  flex-direction: column;
 }
 
 .boards-list {

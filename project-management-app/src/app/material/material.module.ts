@@ -11,6 +11,7 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatSelectModule } from '@angular/material/select';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const modules = [
   MatInputModule,
@@ -24,6 +25,7 @@ const modules = [
   MatMenuModule,
   MatDialogModule,
   MatSelectModule,
+  MatCheckboxModule,
 ];
 
 @NgModule({

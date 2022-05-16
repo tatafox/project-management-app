@@ -85,6 +85,7 @@ export class TaskItemComponent implements OnInit {
         width: '450px',
         data: {
           title: this.task.title,
+          done: this.task.done,
           description: this.task.description,
           editTask: true,
           userId: this.task.userId,
@@ -95,6 +96,7 @@ export class TaskItemComponent implements OnInit {
           const upTask: IUpdateTask = {
             title: result.title,
             order: this.task.order,
+            done: result.done,
             description: result.description,
             userId: result.userId,
             columnId: this.columnId,
