@@ -1,0 +1,12 @@
+<section class="logout-message"
+  style="max-width: 20rem; border-radius:1rem; border: 1px solid yellow; padding: 1rem; background-color: bisque; text-align: center;">
+  <h2 mat-dialog-title i18n="title popup user delete | The tittle of popup">Delete Account</h2>
+  <mat-dialog-content i18n="instruction user delete | description of the situation">{{confirmMessage}}
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button mat-dialog-close (click)="dialogRef.close(false)"
+      i18n="title btn delete false | The title of btn user delete">Cancel</button>
+    <button mat-button style="background-color: crimson; color: aliceblue;" (click)="dialogRef.close(true)"
+      cdkFocusInitial i18n="title btn delete true | The title of btn user delete">Delete</button>
+  </mat-dialog-actions>
+</section>

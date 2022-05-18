@@ -1,0 +1,127 @@
+@import './../../../../SCSS/themes/variables.scss';
+
+.admin-page {
+  display: flex;
+  flex-direction: column;
+  min-height: calc(100vh - 98px);
+
+  &__title{
+    font-weight: 900;
+    font-size: 2rem;
+  }
+
+  &__main-title {
+    margin: 2rem 0;
+    font-size: 3rem;
+    font-weight: 900;
+    color: $primary-color;
+  }
+
+  &__info,
+  &__title-team {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-size: 1.5rem;
+  }
+
+  &__сourse-box {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+  }
+
+  &__info-angular {
+    color: red;
+    font-size: 2rem;
+    font-weight: 900;
+  }
+
+  &__title-team,
+  &__title-dev {
+    font-size: 1.5rem;
+    font-weight: 900;
+  }
+}
+
+.developers-list {
+  display: flex;
+  flex-direction: column;
+
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__link {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: $primary-color;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+}
+
+.buttons {
+  display: flex;
+  margin-left: auto;
+  gap: 1rem;
+  margin-bottom: 2rem;
+
+  &__btn{
+    border-radius: 0.5rem;
+    background-color: $accent-color;
+    color: $primary-color;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 600px) {
+
+  .wrapper {
+    padding: 0 1rem;
+  }
+
+  .buttons {
+    padding: 1rem 0;
+    margin: 0 auto;
+  }
+
+  .admin-page {
+    min-height: calc(100vh - 114px);
+
+    &__main-title {
+      margin: 0;
+      font-size: 1.5rem;
+   }
+
+   &__title{
+     font-size: 1.5rem;
+  }
+
+  &__info,
+  &__title-team {
+    font-size: 14px;
+  }
+
+  &__info-angular {
+    font-size: 1rem;
+   }
+
+  &__title-team,
+  &__title-dev {
+    font-size: 1rem;
+  }
+}
+}

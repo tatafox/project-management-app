@@ -1,0 +1,61 @@
+@import './../../../../SCSS/themes/variables.scss';
+
+.main-page {
+  margin: 50px auto;
+}
+
+button {
+  background: none;
+}
+
+mat-icon {
+  pointer-events: none;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 20px;
+  font-weight: 300;
+  padding: 25px 20px;
+  border-bottom: 1px solid $ligt-gray;
+  cursor: pointer;
+
+  .mat-h1 {
+    font-weight: bold;
+  }
+
+  &:hover {
+    background: $primary-color-opacity5;
+  }
+}
+
+.board-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.boards-list {
+  &__btn-del {
+    width: 2rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .main-page {
+    margin: 0 auto;
+  }
+
+  .mat-headline {
+    font-size: 1.5rem;
+    text-align: center;
+  }
+
+  .boards-list__item {
+    padding: 0.5rem 0.5rem;
+  }
+
+}
+

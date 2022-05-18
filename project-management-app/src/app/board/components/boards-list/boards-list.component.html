@@ -1,0 +1,18 @@
+<div class="main-page">
+  <h2 class="mat-headline" i18n="title number boards | The info about number of boards">Number of boards:
+    <span>{{boardsList.length}}</span>
+  </h2>
+  <ul class="boards-list" *ngFor="let board of boardsList">
+    <li class="boards-list__item" (click)="onBoardDetail(board, $event)">
+      <div class="board-content">
+        <span class="mat-h1">{{board.title}}</span>
+        <span>{{board.description}}</span>
+      </div>
+      <button style="font-size: 14px;" mat-icon-button
+        (click)="onDeleteBoard(board)">
+        <mat-icon>delete
+        </mat-icon>
+      </button>
+    </li>
+  </ul>
+</div>

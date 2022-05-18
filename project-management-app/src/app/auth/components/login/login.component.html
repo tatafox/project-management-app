@@ -1,0 +1,51 @@
+<div class="login-page section">
+  <div class="wrapper">
+    <div class="login-box">
+      <button class="login-box__btn" (click)="adminPage()" mat-raised-button color="000000" type="submit"
+        i18n="title btn | The tittle of button">Home</button>
+      <div class="login-content">
+        <p class="login-box__info" i18n="info login-form | The instructions for form">{{titles.describe}}</p>
+        <form class="login-form" [formGroup]="formLogIn" (ngSubmit)="logInUser()">
+          <h2 class="login-box__title" i18n="title login-form | The main title">{{titles.headTitle}}</h2>
+          <mat-form-field appearance="fill">
+            <mat-label i18n="title login | The tittle of input">{{titles.login}}</mat-label>
+            <input matInput required formControlName="login">
+            <mat-error *ngIf="formLogIn.controls['login'].errors?.['required']"
+              i18n="description error login| The description error for forms">Please, enter your login</mat-error>
+            <mat-error *ngIf="formLogIn.controls['login'].errors?.['minlength']"
+              i18n="description2 error login| The description error for forms">
+              Your login must have min 4 elements
+            </mat-error>
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label i18n="title password | The tittle of input">{{titles.password}}</mat-label>
+            <input matInput formControlName="password" required type="password" [type]="hide ? 'password' : 'text'"
+              pattern="^(?=.*[A-Z].*[A-Z])(?=.*[!@#$&* .,])(?=.*[0-9].*[0-9])(?=.*[a-z].*[a-z].*[a-z]).{8,}$"
+              autocomplete="on" i18n="title password | The tittle of input">
+            <mat-icon style="width: 0em;margin-left: -1.5rem;" matSuffix (click)="hide = !hide">{{hide ?
+              'visibility_off'
+              :
+              'visibility' }}</mat-icon>
+            <mat-error *ngIf="formLogIn.controls['password'].errors?.['required']"
+              i18n="description error password | The description error for forms">Please, enter a password</mat-error>
+            <mat-error *ngIf="formLogIn.controls['password'].invalid"
+              i18n="description error password2 | The description error for forms">
+              You password must have lower
+              case, upper case, symbols
+              and
+              numbers
+            </mat-error>
+          </mat-form-field>
+          <button class=" login-form__btn" mat-raised-button color="000000" type="submit" [disabled]="!formLogIn.valid"
+            i18n="title btn submit login | The tittle of button">{{titles.submit}}</button>
+        </form>
+      </div>
+      <div class="login-box__button-box">
+        <p class="login-box__title" i18n="question login-form | The instruction without account">No account?</p>
+        <button class="login-box__btn" (click)="signup()" mat-raised-button color="000000" type="submit"
+          i18n="title btn sign | The tittle of button">Sign
+          up</button>
+      </div>
+    </div>
+  </div>
+</div>

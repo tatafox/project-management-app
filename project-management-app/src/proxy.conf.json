@@ -1,0 +1,11 @@
+{
+  "/api": {
+    "target": "https://whispering-woodland-45814.herokuapp.com/",
+    "secure": false,
+    "changeOrigin": true,
+    "logLevel": "debug",
+    "pathRewrite": {
+      "^/api": ""
+    }
+  }
+}

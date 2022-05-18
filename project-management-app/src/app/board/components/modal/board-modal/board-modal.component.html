@@ -1,0 +1,26 @@
+<h1 mat-dialog-title i18n="title popup add board | The tittle of popup">
+  Add new board
+</h1>
+
+<div mat-dialog-content>
+  <p i18n="instruction popup add board | description of the situation">Enter board title</p>
+  <mat-form-field appearance="fill">
+    <mat-label i18n="label input add board | The title of input">Title</mat-label>
+    <input matInput [(ngModel)]="newBoard.title">
+  </mat-form-field>
+</div>
+
+<div mat-dialog-content>
+  <p i18n="instruction popup add board | description of the situation">Enter board description</p>
+  <mat-form-field appearance="fill">
+    <mat-label i18n="label input add board | The title of input">Sescription</mat-label>
+    <input matInput [(ngModel)]="newBoard.description">
+  </mat-form-field>
+</div>
+
+<div class="button-wrapper" mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="onCancel()"
+    i18n="title btn add board false | The title of btn add board">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="newBoard"
+    i18n="title btn add board true | The title of btn add board">Add</button>
+</div>

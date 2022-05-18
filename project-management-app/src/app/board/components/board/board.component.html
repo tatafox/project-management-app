@@ -1,0 +1,33 @@
+<div class="wrapper">
+  <div class="board-title">
+    <span class="mat-headline">{{board.title}}</span>
+    <a routerLink="" mat-raised-button color="accent" i18n="link to board-list"
+      style="max-width: 300px; order: -1; margin-bottom: 0.5rem;">
+      Go to board list
+    </a>
+  </div>
+  <div class="column-list">
+    <div class="column-item" *ngFor="let column of board.columns">
+      <app-column-item [column]="column" [boardId]="board.id"></app-column-item>
+      <ul class="task-list">
+        <li class="task-item" (click)="onAddTask(column)">
+          <div class="task-item__wrapper">
+            <span i18n="instruction add task">Add new task</span>
+            <mat-icon>add_circle</mat-icon>
+          </div>
+        </li>
+        <li class="task-item" *ngFor="let task of column.tasks">
+          <app-task-item [task]="task" [columnId]="column.id" [boardId]="board.id"></app-task-item>
+        </li>
+      </ul>
+    </div>
+    <div class="column-item">
+      <button mat-button class="add-column" (click)="onNewColumn()">
+        <div class="column-item__wrapper">
+          <span i18n="instruction add column">Add new column</span>
+          <mat-icon>add_circle</mat-icon>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

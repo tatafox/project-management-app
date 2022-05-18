@@ -1,0 +1,50 @@
+@import "../../../../SCSS/themes/variables.scss";
+
+.footer {
+  padding: 20px 0;
+  background-color: $accent-color;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  margin: 0;
+
+  &__item{
+    color: white;
+
+    &_icon {
+      img {
+        width: auto;
+        height: 30px;
+      }
+    }
+  }
+}
+
+.list-dev {
+  display: flex;
+  flex-direction: row;
+  gap: 1.5rem;
+
+  &__link {
+    color: white;
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+
+  .footer {
+    padding: 0;
+  }
+  .footer-content {
+    flex-direction: column;
+  }
+}

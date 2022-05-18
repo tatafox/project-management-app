@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+
+html,
+body {
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+  font-size: 10px;
+  color: #212121;
+}
+
+.wrapper {
+  max-width: 1200px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 1rem 1rem;
+}
+
+button.mat-flat-button {
+  &.btn_dark {
+    &:hover {
+      background: #000000;
+    }
+  }
+}

@@ -1,0 +1,85 @@
+@import './../../../../SCSS/themes/variables.scss';
+
+.signup-page {
+  display: flex;
+  gap: 1rem;
+  min-height: calc(100vh - 98px);
+}
+
+.auth-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+
+  &__button-box {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    align-items: center;
+  }
+
+  &__btn{
+    color: #ffffff;
+    background-color: $accent-color;
+  }
+
+  &__title {
+    text-align: center;
+    align-self: center;
+    color: #FFC107;
+  }
+}
+
+.wrapper {
+  display: flex;
+  flex: 1 1 auto;
+  justify-content: center;
+  align-items: center;
+}
+
+.signup-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: start;
+  max-width: 30rem;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  box-shadow: 0 3px 5px -1px #0003, 0 6px 10px #00000024, 0 1px 18px #0000001f;
+  border-right: 10px solid $primary-color;
+  border-bottom: 9px solid #d19f08;
+  border-radius: 1rem;
+
+   &__title {
+    margin: 0;
+    font-size: 1.5rem;
+    color: $warn-color;
+  }
+
+  &__info {
+    margin: 0;
+  }
+}
+
+.signup-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+
+  &__btn {
+    align-self: flex-end;
+    margin-top: 1rem;
+    border-radius: 0.5rem;
+    background-color: $accent-color;
+    color: $primary-color;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .signup-page {
+    min-height: calc(100vh - 114px);
+  }
+}
+
+

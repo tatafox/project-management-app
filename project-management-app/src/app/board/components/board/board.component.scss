@@ -1,0 +1,99 @@
+@import "../../../../SCSS/themes/variables.scss";
+.wrapper {
+  padding-top: 20px;
+}
+
+.board-title {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.column-list {
+  display: flex;
+  gap: 25px;
+  overflow-y: scroll;
+}
+
+.column-item {
+  width: 23%;
+  flex-shrink: 0;
+  height: calc(100vh - 365px);
+  overflow-y: scroll;
+  background-color: #ffa00029;
+  border-radius: 00.5rem;
+
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    padding: 0 5px;
+    gap: 5px;
+    border-bottom: 1px solid #b7b7b7;
+    margin-bottom: 15px;
+
+    span {
+      align-self: flex-end;
+      cursor: pointer;
+    }
+
+    &:last-child {
+      flex-basis: 10%;
+    }
+  }
+
+  mat-icon {
+    margin-top: 5px;
+  }
+}
+
+.task-list {
+  padding: 0 10px;
+}
+
+.task-item {
+  margin: 20px 0;
+  &__wrapper {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 5px;
+    gap: 5px;
+    cursor: pointer;
+
+    &:hover {
+      border-radius: 5px;
+      background: #ffdb8d;
+    }
+  }
+}
+
+.mat-headline {
+  color: $primary-color;
+}
+
+button.add-column {
+  width: 100%;
+  padding: 5px;
+}
+
+
+@media screen and (max-width: 600px) {
+  .column-list {
+    gap: 10px;
+  }
+
+  .column-item {
+    width: 98%;
+    height: calc(100vh - 440px);
+  }
+
+  .board-title {
+    flex-direction: column;
+  }
+
+  .mat-headline {
+    margin: 1rem 0;
+  }
+}

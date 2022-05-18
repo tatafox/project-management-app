@@ -1,0 +1,35 @@
+<h1 mat-dialog-title i18n="title popup edit-task true | The tittle of popup">
+  {{ data.editTask === true ? 'Edit' : 'Add new' }} task
+</h1>
+
+<div mat-dialog-content>
+  <p i18n="instruction popup enter-task | description of the situation">Enter task title</p>
+  <mat-form-field appearance="fill">
+    <mat-label i18n="label input enter-task | The title of input">Title</mat-label>
+    <input matInput [(ngModel)]="data.title">
+  </mat-form-field>
+  <p i18n="info popup enter-task-enter-description | description of the situation">Enter task description</p>
+  <mat-form-field appearance="fill">
+    <mat-label i18n="label popup enter-task-description | description of the situation">Description</mat-label>
+    <input matInput [(ngModel)]="data.description">
+  </mat-form-field>
+  <h4 i18n="instruction popup enter-task-enter-description | description of the situation">Please, select user</h4>
+  <mat-form-field appearance="fill">
+    <mat-label i18n="label popup enter-task-user | description of the situation">User</mat-label>
+    <mat-select [(ngModel)]="data.userId" name="food">
+      <mat-option *ngFor="let user of userList" [value]="user.id">
+        {{user.login}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+  <mat-checkbox [(ngModel)]="data.done">Done</mat-checkbox>
+</div>
+
+<div class="button-wrapper" mat-dialog-actions>
+  <button mat-flat-button color="accent" (click)="onCancel()"
+    i18n="title btn task-modal false | The title of btn task-modal">Cancel</button>
+  <button mat-raised-button color="primary" [mat-dialog-close]="data"
+    i18n="title btn task-modal add | The title of btn task-modal">
+    {{ data.editTask === true ? 'Edit' : 'Add' }}
+  </button>
+</div>
