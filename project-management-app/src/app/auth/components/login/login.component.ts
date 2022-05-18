@@ -99,7 +99,6 @@ export class LoginComponent implements OnInit {
             });
           },
           (err) => {
-            console.log('User was not founded!');
             this.openPopupError();
             this.errorMessage = err.message;
           },

@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class UserAuthServiceService {
-  private URL = '/api';
+  private URL = 'https://whispering-woodland-45814.herokuapp.com';
 
   private errorMessage = '';
 

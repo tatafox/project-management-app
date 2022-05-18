@@ -51,7 +51,6 @@ export class BoardsListComponent implements OnInit, OnDestroy {
     this.subscription.push(
       this.boardService.error$.subscribe((error) => {
         this.store.dispatch(addError({ error }));
-        console.log(error);
       }),
     );
   }

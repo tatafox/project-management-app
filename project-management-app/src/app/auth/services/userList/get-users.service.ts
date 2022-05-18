@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class GetUsersService {
-  private URL = '/api';
+  private URL = 'https://whispering-woodland-45814.herokuapp.com';
 
   public token: any;
 
@@ -68,9 +68,12 @@ export class GetUsersService {
         authorization: `Bearer ${this.token}`,
       }),
     };
-    return this.http
-      .get(`${this.URL}/users`, httpOptions)
-      .pipe(map((data: any) => data));
+    return this.http.get(`${this.URL}/users`, httpOptions).pipe(
+      map((data: any) => {
+        this.userList = data;
+        return data;
+      }),
+    );
   }
 
   sendToken(token: string) {
