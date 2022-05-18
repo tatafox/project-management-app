@@ -1115,6 +1115,26 @@
         <note priority="1" from="description"> The title of first page</note>
         <note priority="1" from="meaning">describe team member </note>
       </trans-unit>
+       <trans-unit id="5371268066684625688" datatype="html">
+        <source>Sescription</source>
+        <target>Описание</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description"> The title of input</note>
+        <note priority="1" from="meaning">label input add board </note>
+      </trans-unit>
+      <trans-unit id="5052865944988585985" datatype="html">
+        <source>Enter board description</source>
+        <target>Введите описание борды</target>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description"> description of the situation</note>
+        <note priority="1" from="meaning">instruction popup add board </note>
+      </trans-unit>
      </body>
   </file>
 </xliff>

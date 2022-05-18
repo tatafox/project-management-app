@@ -12,7 +12,7 @@ import { ToastrService } from 'ngx-toastr';
   providedIn: 'root',
 })
 export class UserEditService {
-  private URL = '/api';
+  private URL = 'https://whispering-woodland-45814.herokuapp.com';
 
   public token: any;
 

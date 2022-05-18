@@ -314,7 +314,7 @@
         <source>Maybe you could change info<x id="LINE_BREAK" ctype="lb" equiv-text="&lt;br&gt;"/>or sign up? </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/auth/components/modals/user-is-exist/user-is-exist.component.html</context>
-          <context context-type="linenumber">4,5</context>
+          <context context-type="linenumber">4,6</context>
         </context-group>
         <note priority="1" from="description"> description of the situation</note>
         <note priority="1" from="meaning">instruction </note>
@@ -525,7 +525,7 @@
         <source> Go to board list </source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
-          <context context-type="linenumber">4,6</context>
+          <context context-type="linenumber">5,7</context>
         </context-group>
         <note priority="1" from="description">link to board-list</note>
       </trans-unit>
@@ -533,7 +533,7 @@
         <source>Add new task</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
-          <context context-type="linenumber">14</context>
+          <context context-type="linenumber">15</context>
         </context-group>
         <note priority="1" from="description">instruction add task</note>
       </trans-unit>
@@ -541,7 +541,7 @@
         <source>Add new column</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/board/components/board/board.component.html</context>
-          <context context-type="linenumber">26</context>
+          <context context-type="linenumber">27</context>
         </context-group>
         <note priority="1" from="description">instruction add column</note>
       </trans-unit>
@@ -582,11 +582,29 @@
         <note priority="1" from="description"> The title of input</note>
         <note priority="1" from="meaning">label input add board </note>
       </trans-unit>
+      <trans-unit id="5052865944988585985" datatype="html">
+        <source>Enter board description</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
+          <context context-type="linenumber">14</context>
+        </context-group>
+        <note priority="1" from="description"> description of the situation</note>
+        <note priority="1" from="meaning">instruction popup add board </note>
+      </trans-unit>
+      <trans-unit id="5371268066684625688" datatype="html">
+        <source>Sescription</source>
+        <context-group purpose="location">
+          <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
+          <context context-type="linenumber">16</context>
+        </context-group>
+        <note priority="1" from="description"> The title of input</note>
+        <note priority="1" from="meaning">label input add board </note>
+      </trans-unit>
       <trans-unit id="3723070656364203280" datatype="html">
         <source>Cancel</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
-          <context context-type="linenumber">15</context>
+          <context context-type="linenumber">23</context>
         </context-group>
         <note priority="1" from="description"> The title of btn add board</note>
         <note priority="1" from="meaning">title btn add board false </note>
@@ -595,7 +613,7 @@
         <source>Add</source>
         <context-group purpose="location">
           <context context-type="sourcefile">src/app/board/components/modal/board-modal/board-modal.component.html</context>
-          <context context-type="linenumber">17</context>
+          <context context-type="linenumber">25</context>
         </context-group>
         <note priority="1" from="description"> The title of btn add board</note>
         <note priority="1" from="meaning">title btn add board true </note>

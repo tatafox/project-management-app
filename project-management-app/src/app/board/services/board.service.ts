@@ -22,6 +22,7 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class BoardService {
   public userToken = localStorage.getItem('token') || '';
+  private URL = 'https://whispering-woodland-45814.herokuapp.com';
 
   private httpOptions = {
     headers: new HttpHeaders({
@@ -46,7 +47,7 @@ export class BoardService {
         }),
       };
     }
-    return this.http.get('/api/boards', this.httpOptions).pipe(
+    return this.http.get(`${this.URL}/boards`, this.httpOptions).pipe(
       // @ts-ignore
       map((data: IBoard[]) => {
         return data;
@@ -62,24 +63,26 @@ export class BoardService {
 
   public getBoardById(id: string): Observable<IBoardDetail> {
     return this.http
-      .get(`/api/boards/${id}`, this.httpOptions)
+      .get(`${this.URL}/boards/${id}`, this.httpOptions)
       .pipe(map((responce: any) => responce));
   }
 
   public postBoard(boardBody: IBoardBody): Observable<IBoard> {
-    return this.http.post('/api/boards', boardBody, this.httpOptions).pipe(
-      map((responce: any) => responce),
-      catchError((err) => {
-        this.showToastError(err.message);
-        this.error = err;
-        this.error$.next(err);
-        return [];
-      }),
-    );
+    return this.http
+      .post(`${this.URL}/boards`, boardBody, this.httpOptions)
+      .pipe(
+        map((responce: any) => responce),
+        catchError((err) => {
+          this.showToastError(err.message);
+          this.error = err;
+          this.error$.next(err);
+          return [];
+        }),
+      );
   }
 
   public deleteBoard(id: string): Observable<IBoard> {
-    return this.http.delete(`/api/boards/${id}`, this.httpOptions).pipe(
+    return this.http.delete(`${this.URL}/boards/${id}`, this.httpOptions).pipe(
       map((responce: any) => responce),
       catchError((err) => {
         this.showToastError(err.message);
@@ -96,7 +99,7 @@ export class BoardService {
       description: board.description,
     };
     return this.http
-      .put(`/api/boards/${board.id}`, boardBody, this.httpOptions)
+      .put(`${this.URL}/boards/${board.id}`, boardBody, this.httpOptions)
       .pipe(
         map((responce: any) => responce),
         catchError((err) => {
@@ -118,7 +121,7 @@ export class BoardService {
       order,
     };
     return this.http
-      .post(`/api/boards/${id}/columns`, body, this.httpOptions)
+      .post(`${this.URL}/boards/${id}/columns`, body, this.httpOptions)
       .pipe(
         map((responce: any) => responce),
         catchError((err) => {
@@ -140,7 +143,7 @@ export class BoardService {
     };
     return this.http
       .put(
-        `/api/boards/${idBoard}/columns/${newColumn.id}`,
+        `${this.URL}/boards/${idBoard}/columns/${newColumn.id}`,
         updateColumnBody,
         this.httpOptions,
       )
@@ -157,7 +160,10 @@ export class BoardService {
 
   public deleteColumn(idBoard: string, idColumn: string): Observable<IColumn> {
     return this.http
-      .delete(`/api/boards/${idBoard}/columns/${idColumn}`, this.httpOptions)
+      .delete(
+        `${this.URL}/boards/${idBoard}/columns/${idColumn}`,
+        this.httpOptions,
+      )
       .pipe(
         map((responce: any) => responce),
         catchError((err) => {
@@ -176,7 +182,7 @@ export class BoardService {
   ): Observable<ITask> {
     return this.http
       .post(
-        `/api/boards/${idBoard}/columns/${idColumn}/tasks`,
+        `${this.URL}/boards/${idBoard}/columns/${idColumn}/tasks`,
         taskBody,
         this.httpOptions,
       )
@@ -197,7 +203,7 @@ export class BoardService {
   ): Observable<ITask> {
     return this.http
       .put(
-        `/api/boards/${updateTask.boardId}/columns/${updateTask.columnId}/tasks/${taskId}`,
+        `${this.URL}/boards/${updateTask.boardId}/columns/${updateTask.columnId}/tasks/${taskId}`,
         updateTask,
         this.httpOptions,
       )
@@ -219,7 +225,7 @@ export class BoardService {
   ): Observable<ITask> {
     return this.http
       .delete(
-        `/api/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`,
+        `${this.URL}/boards/${idBoard}/columns/${idColumn}/tasks/${idTask}`,
         this.httpOptions,
       )
       .pipe(

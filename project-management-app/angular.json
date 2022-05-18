@@ -17,14 +17,14 @@
       "sourceRoot": "src",
       "prefix": "app",
       "i18n": {
-        "sourceLocale":"en-US",
-        "locales": {"ru":"src/locales/messages.ru.xlf"}
-      },
-      "architect": {
+          "sourceLocale":"en-US",
+          "locales": {"ru":"src/locales/messages.ru.xlf"}
+        },
+        "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/project-management-app",
+            "outputPath": "dist/",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -32,7 +32,9 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              "src/proxy.conf.json",
+              "src/_redirects"
             ],
             "styles": [
               "src/styles.scss",
@@ -80,7 +82,7 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
             "proxyConfig": "src/proxy.conf.json",
-            "browserTarget": "project-management-app:build"
+            "browserTarget": "i18n-angular-demo:build:production"
             },
           "configurations": {
             "production": {
@@ -103,7 +105,7 @@
             "browserTarget": "project-management-app:build"
           }
       },
-              "test": {
+          "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
             "main": "src/test.ts",
@@ -114,6 +116,7 @@
             "assets": [
               "src/favicon.ico",
               "src/assets"
+
             ],
             "styles": [
               "src/styles.scss"

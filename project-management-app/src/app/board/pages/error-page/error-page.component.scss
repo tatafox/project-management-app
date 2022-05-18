@@ -1,3 +1,10 @@
+.error-page {
+  min-height: calc(100vh - 98px);
+  @media screen and (max-width: 600px) {
+    min-height: calc(100vh - 114px);
+  }
+}
+
 .wrapper {
   display: flex;
   flex-direction: column;

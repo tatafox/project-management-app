@@ -84,7 +84,6 @@ export class EditComponent implements OnInit {
         this.loginCurrent = this.user.login;
       });
     } else {
-      console.log('You have to login/signup');
       this.openPopup();
       this.localStorSErvice.removeLocalStorage('id', 'token');
       this.router.navigate(['/admin']);

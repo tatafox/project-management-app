@@ -94,7 +94,6 @@ export class SignUpComponent implements OnInit {
             this.router.navigate(['/main']);
           });
     this.authService.statusError$.subscribe(() => {
-      console.log('User login already exists!');
       this.openPopup();
       setTimeout(() => {
         window.location.reload();
